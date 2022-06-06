@@ -42,6 +42,7 @@ static void	valid_map_characters(char **map, char *valid_char)
 void	validate_map(char **map)
 {
 	valid_map_characters(map, "10NWESD ");
+	//valid_prop_count(map, "");
 	all_rows_begin_check(map, "1 ");
 	// check_required_chars(map, "10NWESD");
 	matrix_neighbour_check(map, "0NWESD");

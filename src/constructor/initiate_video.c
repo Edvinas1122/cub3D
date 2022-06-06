@@ -1,4 +1,4 @@
-#include "cube3d.h"
+#include "constructor.h"
 
 static int	fillmatrix(t_args *mlx)
 {
@@ -11,9 +11,9 @@ static int	fillmatrix(t_args *mlx)
 	{
 		while (++col < mlx->img_size)
 		{
-            (mlx->img_matrix)[row][col][0] = (char)255;
-            (mlx->img_matrix)[row][col][1] = (char)255;
-            (mlx->img_matrix)[row][col][2] = (char)255;
+            (mlx->img_matrix)[row][col][0] = (char)0;
+            (mlx->img_matrix)[row][col][1] = (char)0;
+            (mlx->img_matrix)[row][col][2] = (char)0;
             (mlx->img_matrix)[row][col][3] = 0;
 		}
 		col = -1;
@@ -47,19 +47,14 @@ static char	***creatematrix(char *img, int img_size, int img_sl)
 	return (ppptr);
 }
 
-t_video	*createwindow(int argc, char *argv[])
+t_video	*set_video_window(t_mlx *mlx)
 {
-    argc++;
-    (void) argv;
-	t_args	*x;
+	t_video	*video;
 
-	x = malloc(sizeof(t_args));
-	x->img_size = 500;
-	x->mlx_ptr = mlx_init();
-	x->img_ptr = mlx_new_image(x->mlx_ptr, x->img_size, x->img_size);
-	x->win_ptr = mlx_new_window(x->mlx_ptr, x->img_size, x->img_size, "cube3d");
-	x->img = mlx_get_data_addr(x->img_ptr, &x->img_bp, &x->img_sl, &x->img_e);
-	x->img_matrix = creatematrix(x->img, x->img_size, x->img_sl);
-	fillmatrix(x);
-	return (x);
+	video = malloc(sizeof(t_video));
+	video->img_ptr = mlx_new_image(mlx->ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	video->img = mlx_get_data_addr(video->img_ptr, &video->img_bp, &video->img_sl, &video->img_e);
+	video->img_matrix = creatematrix(video->img, SCREEN_WIDTH, SCREEN_HEIGHT);
+	fillmatrix(video);
+	return (video);
 }

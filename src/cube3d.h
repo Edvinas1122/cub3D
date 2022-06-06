@@ -10,13 +10,21 @@
 # include "constructor/constructor.h"
 # include "utils/utils.h"
 
-typedef struct	s_position
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+
+/*
+	X Y for positions & vectors
+*/
+typedef struct	s_vect
 {
 	int	x;
 	int	y;
-}	t_position;
+}	t_vect;
 
-/* Color */
+/*
+	Color RGB T?
+*/
 typedef	struct	s_color
 {
 	char	r;
@@ -25,9 +33,10 @@ typedef	struct	s_color
 	char	t;
 }	t_color;
 
-/* Contains color matrix map of textures 
+/* 
+	Contains color matrix map of textures 
 	member of a t_map struct
-	*/
+*/
 typedef struct	s_textures
 {
 	t_color	**north;
@@ -37,7 +46,9 @@ typedef struct	s_textures
 
 }	t_textures;
 
-/* Contais 3D world enviromet data */
+/*
+	Contais 3D world enviromet data
+*/
 typedef struct	s_map
 {
 	char		**bit_map;
@@ -46,40 +57,51 @@ typedef struct	s_map
 	t_color		floor;
 }	t_map;
 
-/* Player position in a world data */
+/*
+	Player position in a world data
+*/
 typedef struct	s_player
 {
-	t_position	pos;
-	
+	t_vect	pos;
+	t_vect	vect;
 }	t_player;
 
-/*Video render data*/
+/*
+	Video render data
+*/
 typedef struct	s_video
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
 	void	*img_ptr;
 	char	*img;
 	char	***img_matrix;
 	int		img_bp;
 	int		img_sl;
 	int		img_e;
-	int		img_size;
 }	t_video;
 
-/* Main data stack segment*/
+typedef struct s_mlx
+{
+	void	*ptr;
+	void	*win;
+}	t_mlx;
+
+/*
+	Main data stack segment
+*/
 typedef struct	s_data
 {
-	t_video		*args;
 	t_player	player;
 	t_map		map;
-	t_video		video;
+	t_mlx		*mlx;
+	t_video		*video;
+
 }	t_data;
 
 int	main(int argc, char **argv);
-t_video	*createwindow(int argc, char **argv);
 
-/*Hooks*/
+/*
+	Hooks
+*/
 int	mhook(int button, int x, int y, void *param);
 int	khook(int key, void *param);
 
