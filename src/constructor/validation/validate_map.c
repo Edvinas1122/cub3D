@@ -3,9 +3,7 @@
 static void	all_rows_begin_check(char **map, char *valid_char)
 {
 	int	i;
-	int	i2;
 
-	i = 0;
 	i = 0;
 	while (map[i])
 	{
@@ -25,9 +23,9 @@ static void	valid_map_characters(char **map, char *valid_char)
 	int i2;
 
 	i = 0;
-	i2 = 0;
 	while (map[i])
 	{
+		i2 = 0;
 		while (map[i][i2++])
 		{
 			compare_to_str(map[i][i2++], valid_char);

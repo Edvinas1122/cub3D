@@ -1,4 +1,4 @@
-# include "utils.h"
+#include "utils.h"
 
 static char	*read_line(int fd)
 {
@@ -19,27 +19,28 @@ static char	*read_line(int fd)
 			break;
 		}
 		tmp = ft_strjoin(buf, c);
-		free(buf)
+		free(buf);
 		free(c);
 		buf = tmp;
 	}
 	if (!ct)
-		return (NULL)
+		return (NULL);
 	return(buf);
 }
 
-/* 
-	Opens file by name or path/name and returns a list 
+/*
+	Opens file by name or path/name and returns a list
 	address to a copied file on an allocated memory segment in
 	RAM in a list structure, delimited by newline
- */
-t_list	**file_to_heap(char **name)
+*/
+t_list	**file_to_heap(char *name)
 {
 	t_list	**file;
 	char	*row;
+	int		fd;
 
-	list = malloc(sizeof(t_list *));
-	fd = open(argv[1], O_RDONLY);
+	file = malloc(sizeof(t_list *));
+	fd = open(name, O_RDONLY);
 	if (!fd)
 		exit(0);
 	row = read_line(fd);

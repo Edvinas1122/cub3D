@@ -1,23 +1,5 @@
 #include "validation.h"
 
-static void	list_to_array_offset(t_list *lst, int i)
-{
-	t_list	*node;
-	char	**arr;
-	int		i2;
-
-	i2 = 0;
-	while (i--)
-		node = node->next;
-	arr = malloc(sizeof(char *) * (ft_lstsize(node) + 1));
-	while (node->next)
-	{
-		arr[i2] = node->content;
-		node = node->next;
-	}
-	return(arr)
-}
-
 static void	validate_colors(t_list **file, t_map_c *tmp)
 {
 	t_list	*node;
@@ -63,6 +45,8 @@ static void	validate_texture_names(t_list **file, t_map_c *tmp)
 
 /* 
 	Validates cub file for defined standart
+	Returns temporary pointers for capturing
+	specific variable values
 */
 t_map_c	validate_cub_file(t_list **file)
 {
@@ -71,6 +55,6 @@ t_map_c	validate_cub_file(t_list **file)
 	validate_texture_names(file, &tmp);
 	validate_colors(file, &tmp);
 	tmp.map = list_to_array_offset(*file, 7);
-	validate_map(tmp->map);
+	validate_map(tmp.map);
 	return(tmp);
 }

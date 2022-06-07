@@ -4,11 +4,19 @@
 # include "../cube3d.h"
 # include "validation/validation.h"
 
+typedef struct	s_vect		t_vect;
+typedef	struct	s_color		t_color;
+typedef struct	s_data		t_data;
+typedef struct	s_map		t_map;
+typedef struct	s_textures	t_textures;
+typedef struct	s_video		t_video;
+typedef struct	s_mlx		t_mlx;
+
 /* Struct initiator */
-void		constructor(s_data **data, char **argv);
+void		constructor(t_data *data, char **argv);
 
 /* Member in constructor */
-t_map		**open_cub_file(char **argv);
+t_map		open_cub_file(char *file_name);
 t_textures	open_texture_xmp(t_list **file);
 t_video		*set_video_window(t_mlx *mlx);
 

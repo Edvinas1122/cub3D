@@ -5,6 +5,7 @@ static t_vect	set_player_vector(char **bit_map, char *directions)
 	char	*c;
 	t_vect	dir;
 
+	ft_bzero(&dir, sizeof(t_vect));
 	c = find_char(bit_map, directions);
 	if (*c == 'N')
 	{
@@ -41,7 +42,10 @@ static t_player	set_player(char **bit_map)
 	return (player);
 }
 
-static t_mlx	*start_window(char **argv)
+/* 
+	Starts windowing procedure;
+*/
+static t_mlx	*start_window(void)
 {
 	t_mlx	*mlx;
 

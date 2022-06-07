@@ -28,8 +28,8 @@ int	main(int argc, char **argv)
 	constructor(&data, argv);
 	mlx_put_image_to_window(data.mlx->ptr, data.mlx->win, data.video->img_ptr, 0, 0);
 	// mlx_hook(data.mlx->win, 17, 0L, close_win, x);
-	mlx_key_hook(data.mlx->win, khook, x);
-	mlx_mouse_hook(data.mlx->win, mhook, x);
+	mlx_key_hook(data.mlx->win, khook, &data.mlx);
+	mlx_mouse_hook(data.mlx->win, mhook, &data.mlx);
 	mlx_loop(data.mlx->ptr);
 	return (0);
 }

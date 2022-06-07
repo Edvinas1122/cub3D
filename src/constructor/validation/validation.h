@@ -3,7 +3,16 @@
 
 # include "../constructor.h"
 
-/* Temporary data, relarted to a validation process */
+typedef	struct	s_color		t_color;
+typedef struct	s_data		t_data;
+typedef struct	s_map		t_map;
+typedef struct	s_textures	t_textures;
+typedef struct	s_video		t_video;
+typedef struct	s_mlx		t_mlx;
+
+/*
+	Temporary data, relarted to a validation process
+*/
 typedef struct	s_map_c
 {
 	t_list	**file;
@@ -17,12 +26,16 @@ typedef struct	s_map_c
 
 }	t_map_c;
 
-void	validate_cub_file(t_list **file);
+t_map_c	validate_cub_file(t_list **file);
 
-/* validate_cub_file members */
-t_map_c	validate_map(char **map);
+/*
+	validate_cub_file members
+*/
+void	validate_map(char **map);
 
-/* validate_map members */
+/*
+	validate_map members
+*/
 void	matrix_neighbour_check(char **map, char *victims);
 
 #endif

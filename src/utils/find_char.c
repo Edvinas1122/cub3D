@@ -32,14 +32,16 @@ t_vect	find_char_cordinates(char **map, char *c)
 		{
 			pos.x = x;
 			pos.y = y;
-		}
 			return (pos);
+		}
 		y++;
 	}
-	return();
+	pos.x = 0;
+	pos.y = 0;
+	return(pos); // no error return
 }
 
-static char	*find_char_in_row(char *row, char *c)
+static char	*find_char_in_row_add(char *row, char *c)
 {
 	int	i;
 
@@ -47,7 +49,7 @@ static char	*find_char_in_row(char *row, char *c)
 	while (row[i])
 	{
 		if (compare_to_str2(row[i], c))
-			return (row[i]);
+			return (&row[i]);
 		i++;
 	}
 	return (NULL);
@@ -60,12 +62,12 @@ static char	*find_char_in_row(char *row, char *c)
 char	*find_char(char **map, char *c)
 {
 	int		i;
-	char	address;
+	char	*address;
 
 	i = 0;
 	while (map[i])
 	{
-		address = find_char_in_row(map[i], c);
+		address = find_char_in_row_add(map[i], c);
 		if (address)
 			return(address);
 		i++;

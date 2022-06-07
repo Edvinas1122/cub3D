@@ -14,6 +14,7 @@ char	**list_to_array_offset(t_list *lst, int i)
 	char	*str;
 	int		i2;
 
+	node = lst;
 	i2 = 0;
 	while (i--)
 		node = node->next;

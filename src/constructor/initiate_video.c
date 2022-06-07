@@ -1,20 +1,20 @@
 #include "constructor.h"
 
-static int	fillmatrix(t_args *mlx)
+static int	fillmatrix(t_video *video)
 {
 	int		row;
 	int		col;
 
 	row = -1;
 	col = -1;
-	while (++row < mlx->img_size)
+	while (++row < SCREEN_WIDTH)
 	{
-		while (++col < mlx->img_size)
+		while (++col < SCREEN_HEIGHT)
 		{
-            (mlx->img_matrix)[row][col][0] = (char)0;
-            (mlx->img_matrix)[row][col][1] = (char)0;
-            (mlx->img_matrix)[row][col][2] = (char)0;
-            (mlx->img_matrix)[row][col][3] = 0;
+            (video->img_matrix)[row][col][0] = (char)0;
+            (video->img_matrix)[row][col][1] = (char)0;
+            (video->img_matrix)[row][col][2] = (char)0;
+            (video->img_matrix)[row][col][3] = 0;
 		}
 		col = -1;
 	}

@@ -1,12 +1,13 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# include "libs/mlx/mlx.h"
-# include "libs/libft/libft.h"
-# include <stdio.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
+//# include "libs/mlx/mlx.h"
+# include <mlx.h>
+# include "libs/libft/libft.h"
 # include "constructor/constructor.h"
 # include "utils/utils.h"
 
@@ -79,6 +80,9 @@ typedef struct	s_video
 	int		img_e;
 }	t_video;
 
+/*
+	MLX Windowing library
+*/
 typedef struct s_mlx
 {
 	void	*ptr;
@@ -90,8 +94,8 @@ typedef struct s_mlx
 */
 typedef struct	s_data
 {
-	t_player	player;
 	t_map		map;
+	t_player	player;
 	t_mlx		*mlx;
 	t_video		*video;
 

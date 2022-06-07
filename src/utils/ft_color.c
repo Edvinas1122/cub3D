@@ -7,9 +7,9 @@
 t_color	string_to_color(char *str)
 {
 	t_color	item;
-	char	*colors;
+	char	**colors;
 
-	colors = ft_split(tmp.ceiling, ",");
+	colors = ft_split(str, ',');
 	item.r = ft_atoi(colors[0]);
 	item.g = ft_atoi(colors[1]);
 	item.b = ft_atoi(colors[2]);

@@ -28,14 +28,14 @@ static t_map	assign_map(t_map_c tmp)
 	Opens .cub file 
 	Returns t_map struct
 */
-t_map	open_cub_file(char *name)
+t_map	open_cub_file(char *file_name)
 {
 	t_map	map;
 	t_map_c tmp;
 
-	validate_file_name(name);
-	tmp.file = file_to_heap(name);
-	tmp = validate_file(tmp.file);
+	validate_file_name(file_name);
+	tmp.file = file_to_heap(file_name);
+	tmp = validate_cub_file(tmp.file);
 	map = assign_map(tmp);
 	return (map);
 }

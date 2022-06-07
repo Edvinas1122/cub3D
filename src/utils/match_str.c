@@ -5,7 +5,7 @@
 	if does not match return 0
 	if matches returns 1
 */
-void	compare_to_str2(char c, char *valid_char)
+int	compare_to_str2(char c, char *valid_char)
 {
 	int	i;
 	int	matching;
