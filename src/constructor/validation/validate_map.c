@@ -26,9 +26,11 @@ static void	valid_map_characters(char **map, char *valid_char)
 	while (map[i])
 	{
 		i2 = 0;
-		while (map[i][i2++])
+		while (map[i][i2])
 		{
-			compare_to_str(map[i][i2++], valid_char);
+			//printf("test\n");
+			compare_to_str(map[i][i2], valid_char);
+			i2++;
 		}
 		i++;
 	}
@@ -40,6 +42,7 @@ static void	valid_map_characters(char **map, char *valid_char)
 void	validate_map(char **map)
 {
 	valid_map_characters(map, "10NWESD ");
+	printf("Map contains valid chars\n");
 	//valid_prop_count(map, "");
 	all_rows_begin_check(map, "1 ");
 	// check_required_chars(map, "10NWESD");

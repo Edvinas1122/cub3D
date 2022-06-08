@@ -16,6 +16,7 @@ int	compare_to_str2(char c, char *valid_char)
 	{
 		if (c == valid_char[i])
 			matching = 1;
+		i++;
 	}
 	return (matching);
 }
@@ -36,6 +37,7 @@ void	compare_to_str(char c, char *valid_char)
 	{
 		if (c == valid_char[i])
 			matching = 1;
+		i++;
 	}
 	if (!matching)
 		exit(0);

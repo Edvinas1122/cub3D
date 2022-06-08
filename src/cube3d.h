@@ -5,10 +5,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-//# include "libs/mlx/mlx.h"
-# include <mlx.h>
+# include "libs/mlx/mlx.h"
+//# include <mlx.h>
+# include <stdio.h>
 # include "libs/libft/libft.h"
 # include "constructor/constructor.h"
+# include "display/display.h"
 # include "utils/utils.h"
 
 # define SCREEN_WIDTH 1280
@@ -24,14 +26,14 @@ typedef struct	s_vect
 }	t_vect;
 
 /*
-	Color RGB T?
+	Color aRGB
 */
 typedef	struct	s_color
 {
+	char	a;
 	char	r;
 	char	g;
 	char	b;
-	char	t;
 }	t_color;
 
 /* 
@@ -67,17 +69,16 @@ typedef struct	s_player
 	t_vect	vect;
 }	t_player;
 
-/*
-	Video render data
+/**
+* @brief video rendering data - mlx image and 
+* @param img pointer to image (image header) - used in mlx_img_put
+* @param img_matrix used to access img_data. 2D array contains 
+					type casted pointers to img_data pixels
 */
 typedef struct	s_video
 {
-	void	*img_ptr;
-	char	*img;
-	char	***img_matrix;
-	int		img_bp;
-	int		img_sl;
-	int		img_e;
+	void	*img;
+	t_color	***img_matrix;
 }	t_video;
 
 /*
@@ -96,8 +97,8 @@ typedef struct	s_data
 {
 	t_map		map;
 	t_player	player;
-	t_mlx		*mlx;
-	t_video		*video;
+	t_mlx		mlx;
+	t_video		video;
 
 }	t_data;
 

@@ -1,60 +1,76 @@
 #include "constructor.h"
 
-static int	fillmatrix(t_video *video)
+static int	fillmatrix(t_color ***img_matrix)
 {
 	int		row;
 	int		col;
 
-	row = -1;
-	col = -1;
-	while (++row < SCREEN_WIDTH)
+	row = 0;
+	while (row < SCREEN_HEIGHT)
 	{
-		while (++col < SCREEN_HEIGHT)
+		col = 0;
+		while (col < SCREEN_WIDTH)
 		{
-            (video->img_matrix)[row][col][0] = (char)0;
-            (video->img_matrix)[row][col][1] = (char)0;
-            (video->img_matrix)[row][col][2] = (char)0;
-            (video->img_matrix)[row][col][3] = 0;
+            (img_matrix)[row][col]->a = (char)0;
+            (img_matrix)[row][col]->r = (char)255;
+            (img_matrix)[row][col]->g = (char)255;
+            (img_matrix)[row][col]->b = (char)255;
+			col++;
 		}
-		col = -1;
+		row++;
 	}
 	return (0);
 }
 
-static char	***creatematrix(char *img, int img_size, int img_sl)
+/*
+	Links row to img_data row representing address
+	Links row's members with img_data row's members
+*/
+static void	link_to_img_row(t_color **row, char *img_data, int width, int i)
 {
-	int		i;
-	char	*ptr;
-	char	**pptr;
-	char	***ppptr;
+	int	i2;
+	int	offset;
 
-	ptr = img;
-	pptr = malloc(sizeof(char *) * img_size * img_size);
-	i = 0;
-	while (ptr < (img + img_size * img_sl))
+	offset = width * i * 4;
+	i2 = 0;
+	while (i2 < width)
 	{
-		pptr[i++] = ptr;
-		ptr = ptr + 4;
+		row[i2] = (t_color *)&img_data[offset + (i2 * 4)];
+		i2++;
 	}
-	i = 0;
-	ppptr = malloc(img_size * sizeof(char **));
-	i = img_size - 1;
-	while (i >= 0)
-	{
-		ppptr[i--] = pptr;
-		pptr = pptr + img_size;
-	}
-	return (ppptr);
 }
 
-t_video	*set_video_window(t_mlx *mlx)
+/**
+	@brief Create a 2D array or t_color that is dirrectly linked to img_data
+	for array methods of accessing memory of an image -> pixels -> colors
+*/
+static t_color	***create_matrix(char *img_data, int width, int height)
 {
-	t_video	*video;
+	t_color	***array;
+	int		i;
 
-	video = malloc(sizeof(t_video));
-	video->img_ptr = mlx_new_image(mlx->ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	video->img = mlx_get_data_addr(video->img_ptr, &video->img_bp, &video->img_sl, &video->img_e);
-	video->img_matrix = creatematrix(video->img, SCREEN_WIDTH, SCREEN_HEIGHT);
-	fillmatrix(video);
+	i = 0;
+	array = ft_calloc(height + 1, sizeof(t_color **));
+	while (height > i)
+	{
+		array[i] = ft_calloc(width + 1, sizeof(t_color *));
+		link_to_img_row(array[i], img_data, width, i);
+		i++;
+	}
+	return (array);
+}
+
+/*
+	initiates video struct - sets image color to black, puts it on screen
+*/
+t_video	set_video_window(t_mlx mlx)
+{
+	t_video		video;
+	t_tmp_video	tmp;
+
+	video.img = mlx_new_image(mlx.ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	tmp.img_data = mlx_get_data_addr(video.img, &tmp.img_bp, &tmp.img_sl, &tmp.img_e);
+	video.img_matrix = create_matrix(tmp.img_data, SCREEN_WIDTH, SCREEN_HEIGHT);
+	fillmatrix(video.img_matrix);
 	return (video);
 }

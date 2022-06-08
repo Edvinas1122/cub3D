@@ -53,8 +53,12 @@ t_map_c	validate_cub_file(t_list **file)
 	t_map_c	tmp;
 
 	validate_texture_names(file, &tmp);
+	printf("Texture names valid\n");
 	validate_colors(file, &tmp);
-	tmp.map = list_to_array_offset(*file, 7);
+	printf("Color names valid\n");
+	tmp.map = list_to_array_offset(*file, 6);
+	printf("Array of list is valid\n");
 	validate_map(tmp.map);
+	printf("Map valid\n");
 	return(tmp);
 }

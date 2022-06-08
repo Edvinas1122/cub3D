@@ -12,13 +12,28 @@ typedef struct	s_textures	t_textures;
 typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
 
+/**
+	@param img_data pointer to image data - string of color data
+					contains string of (aRGB) * total pixel count
+	@param img_bp	value of bits per pixel
+	@param img_sl	value of width size in bytes
+	@param img_e	true or false endian.. ? (dunno what it is)
+*/
+typedef struct s_tmp_video
+{
+	char	*img_data;
+	int		img_bp;
+	int		img_sl;
+	int		img_e;
+}	t_tmp_video;
+
 /* Struct initiator */
 void		constructor(t_data *data, char **argv);
 
 /* Member in constructor */
 t_map		open_cub_file(char *file_name);
 t_textures	open_texture_xmp(t_list **file);
-t_video		*set_video_window(t_mlx *mlx);
+t_video		set_video_window(t_mlx mlx);
 
 
 #endif

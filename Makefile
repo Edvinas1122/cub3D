@@ -1,5 +1,5 @@
 CC			:= gcc
-CFLAGS		:= -Wall -Werror -Wextra
+CFLAGS		:= -Wall -Werror -Wextra -g
 
 # SRC subdirrectories #
 VALIDATOR_FILES := validate_cub_file.c validate_map.c matrix_neighbour_check.c
@@ -8,6 +8,8 @@ VALIDATOR := $(addprefix validation/,$(VALIDATOR_FILES))
 CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c \
 					$(VALIDATOR) # open_texture_xmp.c
 CONSTRUCTOR := $(addprefix constructor/,$(CONSTRUCTOR_FILES))
+DISPLAY_FILES := display.c
+DISPLAY := $(addprefix display/,$(DISPLAY_FILES))
 UTIL_FILES := file_to_heap.c find_char.c ft_color.c len_func.c \
 				list_to_array.c match_str.c
 UTIL := $(addprefix utils/,$(UTIL_FILES))
@@ -20,8 +22,8 @@ NAME		:= cube3d
 LIBFT		:= $(SRCDIR)libs/libft/libft.a
 
 ifeq ($(shell uname -s),Darwin)
-	LBMLX	:= $(SRCDIR)libs/mlx/libmlx.a
-	LIBS	:= -L /usr/X11/lib -lXext -lX11
+	LBMLX	:= $(SRCDIR)libs/mlx_Darwin/libmlx.a
+	LIBS	:= -Lsrc/libs/mlx_Darwin -framework OpenGL -framework AppKit
 else
 	LBMLX	:= $(SRCDIR)libs/mlx/libmlx_Linux.a
 	LIBS	:= -lXext -lX11 -lm
@@ -44,3 +46,4 @@ clean:
 	rm -f $(NAME)
 
 fclean: clean
+
