@@ -15,7 +15,7 @@ UTIL_FILES := file_to_heap.c find_char.c ft_color.c len_func.c \
 UTIL := $(addprefix utils/,$(UTIL_FILES))
 # SRC subdirrectories #
 
-SRC_FILES	:= cube3d.c key_hooks.c $(CONSTRUCTOR) $(UTIL)
+SRC_FILES	:= cube3d.c key_hooks.c $(CONSTRUCTOR) $(UTIL) $(DISPLAY)
 SRCDIR		:= src/
 SRC			:= $(addprefix $(SRCDIR),$(SRC_FILES))
 NAME		:= cube3d

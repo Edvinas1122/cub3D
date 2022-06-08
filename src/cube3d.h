@@ -6,7 +6,6 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libs/mlx/mlx.h"
-//# include <mlx.h>
 # include <stdio.h>
 # include "libs/libft/libft.h"
 # include "constructor/constructor.h"
@@ -21,19 +20,20 @@
 */
 typedef struct	s_vect
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 }	t_vect;
 
 /*
 	Color aRGB
+	!! keep order of the struct
 */
 typedef	struct	s_color
 {
-	char	a;
-	char	r;
-	char	g;
 	char	b;
+	char	g;
+	char	r;
+	char	a;
 }	t_color;
 
 /* 
