@@ -11,6 +11,8 @@ typedef struct	s_textures	t_textures;
 typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
 
-int	render_display(t_data *data);
+int		render_display(t_data *data);
+void	display_minimap(t_data *data);
+void	cast_cone(t_data *data);
 
 #endif

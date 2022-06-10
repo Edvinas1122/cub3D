@@ -11,13 +11,39 @@ typedef struct	s_textures	t_textures;
 typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
 
-char	**list_to_array_offset(t_list *lst, int i);
+/*
+	String functions
+*/
 void	compare_to_str(char c, char *valid_char);
 int		compare_to_str2(char c, char *valid_char);
-int		*line_lenghts(char **map);
-t_color	string_to_color(char *str);
 t_vect	find_char_cordinates(char **map, char *c);
 char	*find_char(char **map, char *c);
-t_list	**file_to_heap(char *name);
+int		*line_lenghts(char **map);
+
+/*
+	List functions
+*/
+char	**list_to_array_offset(t_list *lst, int i);
+void	delete_list_node(void *lst);
+
+/*
+	Parce functios
+*/
+int		file_to_heap(char *name, t_list ***file);
+
+/*
+	Graphics
+*/
+t_color	string_to_color(char *str);
+t_color	set_color(int a, int r, int g, int b);
+void	pixel_put(t_color ***img_matrix, t_color color, int x, int y);
+
+/*
+	Math functions
+*/
+void	rotate_vector(t_vect *vector, double angle);
+double	vector_length(t_vect *vector);
+double	point_distance(t_vect *v1, t_vect *v2);
+void	normalize_vector(t_vect *vector);
 
 #endif

@@ -35,12 +35,15 @@ static t_vect	set_player_vector(char **bit_map, char *directions)
 
 /* 
 	Initiates t_player struct - sets his position and vector;
+	Multiples bit map coordinate into tile size coordinate
 */
-static t_player	set_player(char **bit_map)
+static t_player	set_player(char **bit_map, int tile_size)
 {
 	t_player	player;
 
 	player.pos = find_char_cordinates(bit_map, "NEWS");
+	player.pos.x = (player.pos.x * tile_size) + (tile_size / 2);
+	player.pos.y = (player.pos.y * tile_size) + (tile_size / 2);
 	player.vect = set_player_vector(bit_map, "NEWS");
 	return (player);
 }
@@ -58,15 +61,28 @@ static t_mlx	start_window(void)
 }
 
 /*
+	Sets additional data like minimap color
+	To avoid additional loops in video render
+*/
+static t_utils set_utils(void)
+{
+	t_utils utils;
+
+	utils.minimap[0] = set_color(0, 40, 40, 40);
+	utils.minimap[1] = set_color(0, 120, 120, 120);
+	utils.minimap[2] = set_color(0, 255, 0, 0);
+	return (utils);
+}
+
+/*
 	Initiates t_data struct and promts a window;
 */
 void	constructor(t_data *data, char **argv)
 {
 	ft_bzero(data, sizeof(t_data));
-	data->map = open_cub_file(argv[1]);
-	printf("Cub_file_open_sucess");
-	data->player = set_player(data->map.bit_map);
+	open_cub_file(argv[1], data);
+	data->player = set_player(data->map.bit_map, TILE_SIZE);
+	data->util = set_utils();
 	data->mlx = start_window();
 	data->video = set_video_window(data->mlx);
-	printf("Window_prompt_called");
 }

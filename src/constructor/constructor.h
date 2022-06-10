@@ -29,9 +29,10 @@ typedef struct s_tmp_video
 
 /* Struct initiator */
 void		constructor(t_data *data, char **argv);
+void		destructor(t_data *data);
 
 /* Member in constructor */
-t_map		open_cub_file(char *file_name);
+void		open_cub_file(char *file_name, t_data *data);
 t_textures	open_texture_xmp(t_list **file);
 t_video		set_video_window(t_mlx mlx);
 

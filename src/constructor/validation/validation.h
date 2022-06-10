@@ -26,7 +26,7 @@ typedef struct	s_map_c
 
 }	t_map_c;
 
-t_map_c	validate_cub_file(t_list **file);
+int	validate_cub_file(t_list **file, t_map_c *tmp);
 
 /*
 	validate_cub_file members

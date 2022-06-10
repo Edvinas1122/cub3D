@@ -5,23 +5,29 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 # include "libs/mlx/mlx.h"
 # include <stdio.h>
 # include "libs/libft/libft.h"
 # include "constructor/constructor.h"
 # include "display/display.h"
+# include "control/control.h"
 # include "utils/utils.h"
 
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
+# define MOVE_DISTANCE 25
+# define MINIMAP_SIZE 10
+# define TILE_SIZE 100
+# define FOV 90
 
 /*
 	X Y for positions & vectors
 */
 typedef struct	s_vect
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_vect;
 
 /*
@@ -35,6 +41,12 @@ typedef	struct	s_color
 	char	r;
 	char	a;
 }	t_color;
+
+typedef struct s_util
+{
+	t_color	minimap[3];
+}	t_utils;
+
 
 /* 
 	Contains color matrix map of textures 
@@ -99,15 +111,9 @@ typedef struct	s_data
 	t_player	player;
 	t_mlx		mlx;
 	t_video		video;
-
+	t_utils		util;
 }	t_data;
 
 int	main(int argc, char **argv);
-
-/*
-	Hooks
-*/
-int	mhook(int button, int x, int y, void *param);
-int	khook(int key, void *param);
 
 #endif

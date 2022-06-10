@@ -1,6 +1,6 @@
 #include "utils.h"
 
-static char	*read_line(int fd)
+static int	read_line(int fd, char **str)
 {
 	char	*c;
 	char	*tmp;
@@ -23,9 +23,8 @@ static char	*read_line(int fd)
 		free(c);
 		buf = tmp;
 	}
-	if (!ct)
-		return (NULL);
-	return (buf);
+	*str = buf;
+	return (ct);
 }
 
 /*
@@ -33,21 +32,26 @@ static char	*read_line(int fd)
 	address to a copied file on an allocated memory segment in
 	RAM in a list structure, delimited by newline
 */
-t_list	**file_to_heap(char *name)
+int	file_to_heap(char *name, t_list ***file)
 {
-	t_list	**file;
 	char	*row;
 	int		fd;
+	int		info;
 
 	fd = open(name, O_RDONLY);
 	if (!fd)
 		exit(0);
-	file = ft_calloc(1, sizeof(t_list *));
-	row = read_line(fd);
-	while (row)
+	*file = ft_calloc(1, sizeof(t_list *));
+	info = 1;
+	while (info)
 	{
-		ft_lstadd_back(file, ft_lstnew(row));
-		row = read_line(fd);
+		info = read_line(fd, &row);
+		if (info == -1)
+		{
+			ft_lstclear(*file, delete_list_node);
+			return (0);
+		}
+		ft_lstadd_back(*file, ft_lstnew(row));
 	}
-	return (file);
+	return (1);
 }
