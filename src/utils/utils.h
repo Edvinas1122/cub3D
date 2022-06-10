@@ -46,4 +46,9 @@ double	vector_length(t_vect *vector);
 double	point_distance(t_vect *v1, t_vect *v2);
 void	normalize_vector(t_vect *vector);
 
+/*
+	Game mechanics
+*/
+int	check_if_wall(t_vect *point, char **bitmap);
+
 #endif

@@ -1,20 +1,5 @@
 #include "display.h"
 
-/*
-	checks if the given point belongs to a wall
-*/
-static int	check_if_wall(t_vect *point, char **bitmap)
-{
-	int x = point->x / 100;
-	int y = point->y / 100;
-
-	if (bitmap[y][x] == '1')
-		return (1);
-	else
-		return (0);
-}
-
-
 static double	intersection_distances(t_vect *pos, t_vect *dir)
 {
 	double	angle;
@@ -86,7 +71,7 @@ static void	draw_ray_3D(t_color ***img, double distance, int x)
 	}
 }
 
-static t_vect	*find_and_draw_intersections(t_data *data, t_vect *dir)
+static t_vect	*find_intersections(t_data *data, t_vect *dir)
 {
 	t_vect	*tmp;
 	double	tmpdist;
@@ -99,7 +84,6 @@ static t_vect	*find_and_draw_intersections(t_data *data, t_vect *dir)
 		tmpdist = intersection_distances(tmp, dir);
 		tmp->x += (tmpdist * dir->x);
 		tmp->y += (tmpdist * dir->y);
-		//my_mlx_pixel_put(&mlx->img, tmp->x, tmp->y, 0x0000FF00);
 		tmp->x += dir->x;
 		tmp->y += dir->y;
 		if (check_if_wall(tmp, data->map.bit_map))
@@ -109,27 +93,29 @@ static t_vect	*find_and_draw_intersections(t_data *data, t_vect *dir)
 }
 
 /*
-	casts lots of rays and calls draw_ray_3D for each
+	Ussing raycast technique draws a display image of "walls" in FOV
+	
 */
-void	cast_cone(t_data *data)
+void	render_fov_view(t_data *data)
 {
-	t_vect		tmpdir;
+	t_vect		ray_dir;
 	t_vect		*impact;
 	double		step;
-	int	i;
+	int			i;
 
 	i = 0;
-	tmpdir.x = data->player.vect.x;
-	tmpdir.y = data->player.vect.y;
+	ray_dir.x = data->player.vect.x;
+	ray_dir.y = data->player.vect.y;
 	step = FOV;
 	step /= SCREEN_WIDTH;
-	rotate_vector(&tmpdir, (-1)*(FOV/2));
+	rotate_vector(&ray_dir, (-1)*(FOV/2));
 	while ((i * step) < FOV)
 	{
-		impact = find_and_draw_intersections(data, &tmpdir);
-		draw_ray_3D(data->video.img_matrix, point_distance(&data->player.pos, impact), i);
+		impact = find_intersections(data, &ray_dir);
+		draw_ray_3D(data->video.img_matrix,
+					point_distance(&data->player.pos, impact), i);
 		free(impact);
-		rotate_vector(&tmpdir, step);
+		rotate_vector(&ray_dir, step);
 		i++;
 	}
 }
