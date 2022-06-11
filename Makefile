@@ -8,7 +8,7 @@ VALIDATOR := $(addprefix validation/,$(VALIDATOR_FILES))
 CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c destructor.c \
 					$(VALIDATOR) # open_texture_xmp.c
 CONSTRUCTOR := $(addprefix constructor/,$(CONSTRUCTOR_FILES))
-DISPLAY_FILES := display.c minimap.c raycast.c
+DISPLAY_FILES := display.c minimap.c raycast.c draw_vertical_line.c intersection_distances.c
 DISPLAY := $(addprefix display/,$(DISPLAY_FILES))
 CONTROL_FILES := key_hooks.c move_player.c rotate_player.c
 CONTROL := $(addprefix control/,$(CONTROL_FILES))

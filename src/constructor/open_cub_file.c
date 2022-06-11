@@ -25,7 +25,7 @@ static t_map	assign_map(t_map_c tmp)
 	map.bit_map = tmp.map;
 	map.ceiling = string_to_color(tmp.ceiling);
 	map.floor = string_to_color(tmp.floor);
-	//map.textur = open_textures_xmp(tmp_file);
+	//map.north = open_textures_xmp(tmp_file);
 	return (map);
 }
 

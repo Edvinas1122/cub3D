@@ -12,23 +12,23 @@ static t_vect	set_player_vector(char **bit_map, char *directions)
 	c = find_char(bit_map, directions);
 	if (*c == 'N')
 	{
-		dir.x = 1;
-		dir.y = 0;
+		dir.x = 0;
+		dir.y = -1;
 	} 
 	else if (*c == 'W')
 	{
-		dir.x = 0;
-		dir.y = -1;
+		dir.x = 1;
+		dir.y = 0;
 	}
 	else if (*c == 'S')
 	{
-		dir.x = -1;
-		dir.y = 0;
+		dir.x = 0;
+		dir.y = 1;
 	}
 	else if (*c == 'E')
 	{
-		dir.x = 0;
-		dir.y = 1;
+		dir.x = -1;
+		dir.y = 0;
 	}
 	return (dir);
 }

@@ -1,76 +1,5 @@
 #include "display.h"
 
-static double	intersection_distances(t_vect *pos, t_vect *dir)
-{
-	double	angle;
-	double	dist_to_vert;
-	double	dist_to_hor;
-	double	vert_factor;
-	double	hor_factor;
-
-	angle = atan2(dir->y*-1, dir->x);
-	if (dir->x >= 0 && dir->y >= 0)
-		angle *= -1;
-	if (dir->x < 0 && dir->y >= 0)
-		angle = ((-1) * M_PI - angle) * (-1);
-	if (dir->x < 0 && dir->y < 0)
-		angle = M_PI - angle;
-
-	if (dir->x >= 0)
-		vert_factor = (100 - ((int)(pos->x)%100));
-	else
-		vert_factor = ((int)(pos->x)%100);
-	if (dir->y >= 0)
-		hor_factor = (100 - ((int)(pos->y)%100));
-	else
-		hor_factor = ((int)(pos->y)%100);
-	
-	dist_to_vert = 100/(cos(angle));
-	dist_to_hor = 100/(cos(M_PI/2 - angle));
-	vert_factor /= 100;
-	hor_factor /= 100;
-	dist_to_vert = fabs(dist_to_vert * vert_factor);
-	dist_to_hor = fabs(dist_to_hor * hor_factor);
-	if (dist_to_vert < dist_to_hor)
-		return (dist_to_vert);
-	else
-		return (dist_to_hor);
-}
-
-static void	draw_ray_3D(t_color ***img, double distance, int x)
-{
-	int	i;
-	t_color	ceilingcolour;
-	t_color	wallcolour;
-	t_color floorcolour;
-	double wallsize;
-
-	ceilingcolour = set_color(0, 20, 20, 80);
-	wallcolour = set_color(0, 100, 100, 100);
-	floorcolour = set_color(0, 20, 80, 20);
-	wallsize = SCREEN_HEIGHT/(distance/100);
-	i = 0;
-	int start;
-	int end;
-	start = ((-1)*wallsize)/2 + SCREEN_HEIGHT/2;
-	if (start < 0)
-		start = 0;
-	end = wallsize/2 + SCREEN_HEIGHT/2;
-	if (end >= SCREEN_HEIGHT)
-		end = SCREEN_HEIGHT - 1;
-	
-	while (i < SCREEN_HEIGHT)
-	{
-		if (i < start)
-			pixel_put(img, ceilingcolour, x, i);
-		else if (i < end)
-			pixel_put(img, wallcolour, x, i);
-		else
-			pixel_put(img, floorcolour, x, i);
-		i++;
-	}
-}
-
 static t_vect	*find_intersections(t_data *data, t_vect *dir)
 {
 	t_vect	*tmp;
@@ -93,29 +22,51 @@ static t_vect	*find_intersections(t_data *data, t_vect *dir)
 }
 
 /*
-	Ussing raycast technique draws a display image of "walls" in FOV
-	
+	Sets next ray
+*/
+static void	set_next_ray(t_data *data, t_raycast *raycast)
+{
+		raycast->target.x += raycast->perp.x;	//find target for next ray
+		raycast->target.y += raycast->perp.y;
+		raycast->ray_dir.x = raycast->target.x - data->player.pos.x;	//adjust direction vector for next ray
+		raycast->ray_dir.y = raycast->target.y - data->player.pos.y;
+		normalize_vector(&raycast->ray_dir);
+}
+
+
+/*
+	Sets variables for first ray
+*/
+static void	raycast_constructor(t_raycast *raycast, t_data *data)
+{
+	raycast->v_line_ct = 0;
+	raycast->ray_dir.x = data->player.vect.x;
+	raycast->ray_dir.y = data->player.vect.y;
+	rotate_vector(&raycast->ray_dir, (-1)*(FOV/2));
+	raycast->target.x = data->player.pos.x + raycast->ray_dir.x * SCREEN_WIDTH/sqrt(2);
+	raycast->target.y = data->player.pos.y + raycast->ray_dir.y * SCREEN_WIDTH/sqrt(2);
+	raycast->perp.x = data->player.vect.x;
+	raycast->perp.y = data->player.vect.y;
+	rotate_vector(&raycast->perp, 90);
+}
+
+/*
+	Ussing raycast technique draws a display image of "walls" "ceiling" "floor" in FOV
+	loop iterates for every vertical line in screen width plane
 */
 void	render_fov_view(t_data *data)
 {
-	t_vect		ray_dir;
-	t_vect		*impact;
-	double		step;
-	int			i;
+	t_raycast	raycast;
 
-	i = 0;
-	ray_dir.x = data->player.vect.x;
-	ray_dir.y = data->player.vect.y;
-	step = FOV;
-	step /= SCREEN_WIDTH;
-	rotate_vector(&ray_dir, (-1)*(FOV/2));
-	while ((i * step) < FOV)
+	raycast_constructor(&raycast, data);
+	while (raycast.v_line_ct < SCREEN_WIDTH)
 	{
-		impact = find_intersections(data, &ray_dir);
-		draw_ray_3D(data->video.img_matrix,
-					point_distance(&data->player.pos, impact), i);
-		free(impact);
-		rotate_vector(&ray_dir, step);
-		i++;
+		raycast.impact = find_intersections(data, &raycast.ray_dir);
+		raycast.distance = point_distance(&data->player.pos, raycast.impact);		//removing fisheye
+		raycast.distance /= 1/(cos(get_angle(&data->player.vect, &raycast.ray_dir) / (180/M_PI)));
+		draw_vertical_line(data, &raycast);
+		free(raycast.impact);
+		set_next_ray(data, &raycast);
+		raycast.v_line_ct++;
 	}
 }

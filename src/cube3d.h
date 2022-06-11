@@ -49,17 +49,14 @@ typedef struct s_util
 
 
 /* 
-	Contains color matrix map of textures 
-	member of a t_map struct
+	texture data
 */
-typedef struct	s_textures
+typedef struct	s_texture
 {
-	t_color	**north;
-	t_color	**south;
-	t_color	**west;
-	t_color	**east;
-
-}	t_textures;
+	t_color	***north;
+	int 	height;
+	int		width;
+}	t_texture;
 
 /*
 	Contais 3D world enviromet data
@@ -67,7 +64,10 @@ typedef struct	s_textures
 typedef struct	s_map
 {
 	char		**bit_map;
-	t_textures	textur;
+	t_texture	north;
+	t_texture	south;
+	t_texture 	west;
+	t_texture	east;
 	t_color		ceiling;
 	t_color		floor;
 }	t_map;
@@ -113,6 +113,48 @@ typedef struct	s_data
 	t_video		video;
 	t_utils		util;
 }	t_data;
+
+typedef struct s_raycast
+{
+	t_vect	ray_dir;
+	t_vect	target;
+	t_vect	perp;
+	t_vect	*impact;
+	double	distance;
+	int		v_line_ct;
+}	t_raycast;
+
+// Konstantin comment here
+/**
+ @param angle -
+ @param dist_to_vert @param dist_to_hor -
+ @param vert_factor @param hor_factor -
+*/
+typedef struct s_intersect
+{
+	double	angle;
+	double	dist_to_vert;
+	double	dist_to_hor;
+	double	vert_factor;
+	double	hor_factor;
+}	t_intersect;
+
+
+/**
+ @param ray_dir vector of current cast direction
+ @param target	e
+ @param impact	position where ray hits a wall
+ @param v_line_ct count of which vertical line we refer
+*/
+typedef struct s_wall
+{
+	int		y;
+	double	size;
+	int		offset;
+	int		start;
+	int		end;
+	t_color color;
+}	t_wall;
 
 int	main(int argc, char **argv);
 

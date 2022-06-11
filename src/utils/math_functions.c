@@ -41,3 +41,26 @@ void	normalize_vector(t_vect *vector)
 		vector->y /= len;
 	}
 }
+
+/*
+	Returns the angle (in degrees) between two vectors
+*/
+double	get_angle(t_vect *vector1, t_vect *vector2)
+{
+	t_vect	tmp1;
+	t_vect	tmp2;
+	double	dtmp;
+	double	angle;
+
+	tmp1.x = vector1->x;
+	tmp2.x = vector2->x;
+	tmp1.y = vector1->y;
+	tmp2.y = vector2->y;
+	normalize_vector(&tmp1);
+	normalize_vector(&tmp2);
+	dtmp = tmp1.x * tmp2.x + tmp1.y*tmp2.y;
+	if (dtmp > 1)	//fix for green line because of double imprecision
+		dtmp = 1;
+	angle = acos(dtmp) * (180/M_PI);
+	return (angle);
+}
