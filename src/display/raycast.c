@@ -17,14 +17,13 @@ static double	intersection_distances(t_vect *pos, t_vect *dir)
 		angle = M_PI - angle;
 
 	if (dir->x >= 0)
-		vert_factor = (100 - ((int)(pos->x)%100));
+		vert_factor = 100 - (pos->x - ((int)(pos->x/100)*100));	//fixed rough edges here, by changing modulo to more precise stuff
 	else
-		vert_factor = ((int)(pos->x)%100);
+		vert_factor = pos->x - ((int)(pos->x/100)*100);
 	if (dir->y >= 0)
-		hor_factor = (100 - ((int)(pos->y)%100));
+		hor_factor = 100 - (pos->y - ((int)(pos->y/100)*100));
 	else
-		hor_factor = ((int)(pos->y)%100);
-	
+		hor_factor = pos->y - ((int)(pos->y/100)*100);
 	dist_to_vert = 100/(cos(angle));
 	dist_to_hor = 100/(cos(M_PI/2 - angle));
 	vert_factor /= 100;
@@ -45,21 +44,22 @@ static void	draw_ray_3D(t_color ***img, double distance, int x)
 	t_color floorcolour;
 	double wallsize;
 
+
 	// printf("RAY #%d with distance %f\n", x, distance);
 	ceilingcolour = set_color(0, 20, 20, 80);
 	wallcolour = set_color(0, 100, 100, 100);
 	floorcolour = set_color(0, 20, 80, 20);
-	wallsize = SCREEN_HEIGHT/(distance/100);
+	wallsize = (double)SCREEN_HEIGHT/(distance/100.0);
 	i = 0;
 	double start;
 	double end;
-	start = ((-1)*wallsize)/2 + (double)SCREEN_HEIGHT/2;
+	start = ((-1)*wallsize)/2 + (double)SCREEN_HEIGHT/2.0;
 	if (start < 0)
 		start = 0;
-	end = wallsize/2 + (double)SCREEN_HEIGHT/2;
+	end = wallsize/2.0 + (double)SCREEN_HEIGHT/2.0;
 	if (end >= (double)SCREEN_HEIGHT)
 		end = (double)SCREEN_HEIGHT - 1;
-	
+	// printf("start %f end %f\n", start, end);
 	while (i < SCREEN_HEIGHT)
 	{
 		if (i < start)
@@ -97,26 +97,66 @@ static t_vect	*find_intersections(t_data *data, t_vect *dir)
 	Ussing raycast technique draws a display image of "walls" in FOV
 	
 */
+// void	old_render_fov_view(t_data *data)
+// {
+// 	t_vect		ray_dir;
+// 	t_vect		*impact;
+// 	double		step;
+// 	int			i;
+// 	t_vect		ray_dir_old;
+// 	double		distance;
+// 	i = 0;
+// 	ray_dir.x = data->player.vect.x;
+// 	ray_dir.y = data->player.vect.y;
+// 	step = FOV;
+// 	step /= SCREEN_WIDTH;
+// 	rotate_vector(&ray_dir, (-1)*(FOV/2));
+// 	while ((i * step) < FOV)
+// 	{
+// 		impact = find_intersections(data, &ray_dir);
+// 		distance = point_distance(&data->player.pos, impact);		//removing fisheye
+// 		distance /= 1/(cos(get_angle(&data->player.vect, &ray_dir) / (180/M_PI)));
+// 		draw_ray_3D(data->video.img_matrix,
+// 					point_distance(&data->player.pos, impact), i);
+// 		free(impact);
+// 		ray_dir_old.x = ray_dir.x;
+// 		ray_dir_old.y = ray_dir.y;
+// 		rotate_vector(&ray_dir, step);
+// 		i++;
+// 	}
+// }
+
 void	render_fov_view(t_data *data)
 {
-	t_vect		ray_dir;
-	t_vect		*impact;
-	double		step;
-	int			i;
-
+	t_vect	ray_dir;
+	t_vect	target;
+	t_vect	perp;
+	t_vect	*impact;
+	int		i;
+	double	distance;
+	// printf("HELLO\n");
 	i = 0;
 	ray_dir.x = data->player.vect.x;
 	ray_dir.y = data->player.vect.y;
-	step = FOV;
-	step /= SCREEN_WIDTH;
 	rotate_vector(&ray_dir, (-1)*(FOV/2));
-	while ((i * step) < FOV)
+	target.x = data->player.pos.x + ray_dir.x * SCREEN_WIDTH/sqrt(2);
+	target.y = data->player.pos.y + ray_dir.y * SCREEN_WIDTH/sqrt(2);
+	perp.x = data->player.vect.x;
+	perp.y = data->player.vect.y;
+	rotate_vector(&perp, 90);
+	while (i < SCREEN_WIDTH)
 	{
 		impact = find_intersections(data, &ray_dir);
-		draw_ray_3D(data->video.img_matrix,
-					point_distance(&data->player.pos, impact), i);
+		distance = point_distance(&data->player.pos, impact);		//removing fisheye
+		distance /= 1/(cos(get_angle(&data->player.vect, &ray_dir) / (180/M_PI)));
+		draw_ray_3D(data->video.img_matrix, distance, i);
 		free(impact);
-		rotate_vector(&ray_dir, step);
+		target.x += perp.x;
+		target.y += perp.y;
+		ray_dir.x = target.x - data->player.pos.x;
+		ray_dir.y = target.y - data->player.pos.y;
+		normalize_vector(&ray_dir);
 		i++;
 	}
+	// printf("%f\n", get_angle(&data->player.vect, &ray_dir));
 }
