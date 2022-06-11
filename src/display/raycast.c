@@ -148,7 +148,9 @@ void	render_fov_view(t_data *data)
 	{
 		impact = find_intersections(data, &ray_dir);
 		distance = point_distance(&data->player.pos, impact);		//removing fisheye
+		// printf("distance1: %f angle %f\n", distance, get_angle(&data->player.vect, &ray_dir));
 		distance /= 1/(cos(get_angle(&data->player.vect, &ray_dir) / (180/M_PI)));
+		// printf("distance2: %f\n", distance);
 		draw_ray_3D(data->video.img_matrix, distance, i);
 		free(impact);
 		target.x += perp.x;
