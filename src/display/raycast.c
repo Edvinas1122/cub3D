@@ -37,36 +37,39 @@ static double	intersection_distances(t_vect *pos, t_vect *dir)
 		return (dist_to_hor);
 }
 
-static void	draw_ray_3D(t_color ***img, double distance, int x)
+/*
+	Draws vertical line into image matrix
+*/
+static void	draw_ray_3D(t_data *data, double distance, int x)
 {
 	int	i;
-	t_color	ceilingcolour;
+	t_color ***img;
 	t_color	wallcolour;
-	t_color floorcolour;
 	double wallsize;
 
-	ceilingcolour = set_color(0, 20, 20, 80);
 	wallcolour = set_color(0, 100, 100, 100);
-	floorcolour = set_color(0, 20, 80, 20);
-	wallsize = SCREEN_HEIGHT/(distance/100);
+	wallsize = SCREEN_HEIGHT/(distance/TILE_SIZE);
 	i = 0;
+
 	int start;
 	int end;
+
 	start = ((-1)*wallsize)/2 + SCREEN_HEIGHT/2;
 	if (start < 0)
 		start = 0;
+
 	end = wallsize/2 + SCREEN_HEIGHT/2;
 	if (end >= SCREEN_HEIGHT)
 		end = SCREEN_HEIGHT - 1;
-	
+
 	while (i < SCREEN_HEIGHT)
 	{
 		if (i < start)
-			pixel_put(img, ceilingcolour, x, i);
+			pixel_put(data->video.img_matrix, data->map.ceiling, x, i);
 		else if (i < end)
-			pixel_put(img, wallcolour, x, i);
+			pixel_put(data->video.img_matrix, wallcolour, x, i);
 		else
-			pixel_put(img, floorcolour, x, i);
+			pixel_put(data->video.img_matrix, data->map.floor, x, i);
 		i++;
 	}
 }
@@ -112,7 +115,7 @@ void	render_fov_view(t_data *data)
 	while ((i * step) < FOV)
 	{
 		impact = find_intersections(data, &ray_dir);
-		draw_ray_3D(data->video.img_matrix,
+		draw_ray_3D(data,
 					point_distance(&data->player.pos, impact), i);
 		free(impact);
 		rotate_vector(&ray_dir, step);
