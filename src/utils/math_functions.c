@@ -41,3 +41,19 @@ void	normalize_vector(t_vect *vector)
 		vector->y /= len;
 	}
 }
+
+double	get_angle(t_vect *vector1, t_vect *vector2)
+{
+	t_vect	tmp1;
+	t_vect	tmp2;
+	double	angle;
+
+	tmp1.x = vector1->x;
+	tmp2.x = vector2->x;
+	tmp1.y = vector1->y;
+	tmp2.y = vector2->y;
+	normalize_vector(&tmp1);
+	normalize_vector(&tmp2);
+	angle = acos(tmp1.x * tmp2.x + tmp1.y * tmp2.y) * (180/M_PI);
+	return (angle);
+}

@@ -45,19 +45,20 @@ static void	draw_ray_3D(t_color ***img, double distance, int x)
 	t_color floorcolour;
 	double wallsize;
 
+	// printf("RAY #%d with distance %f\n", x, distance);
 	ceilingcolour = set_color(0, 20, 20, 80);
 	wallcolour = set_color(0, 100, 100, 100);
 	floorcolour = set_color(0, 20, 80, 20);
 	wallsize = SCREEN_HEIGHT/(distance/100);
 	i = 0;
-	int start;
-	int end;
-	start = ((-1)*wallsize)/2 + SCREEN_HEIGHT/2;
+	double start;
+	double end;
+	start = ((-1)*wallsize)/2 + (double)SCREEN_HEIGHT/2;
 	if (start < 0)
 		start = 0;
-	end = wallsize/2 + SCREEN_HEIGHT/2;
-	if (end >= SCREEN_HEIGHT)
-		end = SCREEN_HEIGHT - 1;
+	end = wallsize/2 + (double)SCREEN_HEIGHT/2;
+	if (end >= (double)SCREEN_HEIGHT)
+		end = (double)SCREEN_HEIGHT - 1;
 	
 	while (i < SCREEN_HEIGHT)
 	{
