@@ -26,9 +26,9 @@ static t_map	assign_map(t_data *data, t_map_c tmp)
 	map.ceiling = string_to_color(tmp.ceiling);
 	map.floor = string_to_color(tmp.floor);
 	map.north = load_texture_files(data, tmp.no);
-	//map.south
-	//map.east
-	//map.west
+	map.south = load_texture_files(data, tmp.so);
+	map.east = load_texture_files(data, tmp.ea);
+	map.west = load_texture_files(data, tmp.we);
 	return (map);
 }
 

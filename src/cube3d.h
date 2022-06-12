@@ -42,9 +42,10 @@ typedef	struct	s_color
 	char	a;
 }	t_color;
 
-typedef struct s_util
+typedef struct s_utils
 {
 	t_color	minimap[3];
+	int		minimap_size;
 }	t_utils;
 
 

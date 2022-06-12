@@ -4,7 +4,7 @@ static void	set_wall_data(t_wall *wall, t_raycast *raycast)
 {
 	wall->offset = 0;
 	wall->color = set_color(0, 100, 100, 100);
-	wall->size = SCREEN_HEIGHT/(raycast->distance/100.0);
+	wall->size = SCREEN_HEIGHT/(raycast->distance/TILE_SIZE);
 	wall->y = 0;
 	wall->start = SCREEN_HEIGHT/2.0 - (wall->size)/2;
 	if (wall->start < 0)

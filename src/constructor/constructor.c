@@ -61,20 +61,6 @@ static t_mlx	start_window(void)
 }
 
 /*
-	Sets additional data like minimap color
-	To avoid additional loops in video render
-*/
-static t_utils set_utils(void)
-{
-	t_utils utils;
-
-	utils.minimap[0] = set_color(0, 40, 40, 40);
-	utils.minimap[1] = set_color(0, 120, 120, 120);
-	utils.minimap[2] = set_color(0, 255, 0, 0);
-	return (utils);
-}
-
-/*
 	Initiates t_data struct and promts a window;
 */
 void	constructor(t_data *data, char **argv)
@@ -84,5 +70,5 @@ void	constructor(t_data *data, char **argv)
 	open_cub_file(argv[1], data);
 	data->video = set_video_window(data->mlx);
 	data->player = set_player(data->map.bit_map, TILE_SIZE);
-	data->util = set_utils();
+	data->util = set_utils(data);
 }

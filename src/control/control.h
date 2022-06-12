@@ -27,4 +27,9 @@ void	move_right(t_data *data);
 void	rotate_player_left(t_data *data);
 void	rotate_player_right(t_data *data);
 
+/*
+	More
+*/
+void	pop_minimap(t_data *data);
+
 #endif

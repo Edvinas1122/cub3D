@@ -11,6 +11,7 @@ typedef struct	s_map		t_map;
 typedef struct	s_texture	t_texture;
 typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
+typedef struct	s_utils		t_utils;
 
 /**
 	@param img_data pointer to image data - string of color data
@@ -35,6 +36,6 @@ void		destructor(t_data *data);
 void		open_cub_file(char *file_name, t_data *data);
 t_video		set_video_window(t_mlx mlx);
 t_texture	load_texture_files(t_data *data, char *filename);
-
+t_utils		set_utils(t_data *data);
 
 #endif

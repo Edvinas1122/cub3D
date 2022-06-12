@@ -11,6 +11,7 @@ typedef struct	s_texture	t_texture;
 typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
 
+
 /*
 	String functions
 */
