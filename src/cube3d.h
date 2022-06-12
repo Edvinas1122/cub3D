@@ -36,10 +36,10 @@ typedef struct	s_vect
 */
 typedef	struct	s_color
 {
-	char	b;
-	char	g;
-	char	r;
-	char	a;
+	unsigned char	b;
+	unsigned char	g;
+	unsigned char	r;
+	unsigned char	a;
 }	t_color;
 
 typedef struct s_utils
