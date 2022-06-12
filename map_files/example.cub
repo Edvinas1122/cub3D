@@ -3,8 +3,8 @@ SO ./map_files/example.xpm
 WE ./map_files/example.xpm
 EA ./map_files/example.xpm
 
-F 220,100,0
-C 225,30,0
+F 64,64,64
+C 0,40,40
 
         1111111111111111111111111
         1000000000110000000000001
