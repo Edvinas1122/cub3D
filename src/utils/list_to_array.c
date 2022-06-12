@@ -30,7 +30,7 @@ char	**list_to_array_offset(t_list *lst, int i)
 	arr = ft_calloc(ft_lstsize(node) + 1, sizeof(char *));
 	while (node)
 	{
-		str = ft_calloc(ft_strlen(node->content), sizeof(char));
+		str = ft_calloc(ft_strlen(node->content) + 1, sizeof(char));
 		str = ft_memcpy(str, node->content, ft_strlen(node->content));
 		arr[i2] = str;
 		i2++;

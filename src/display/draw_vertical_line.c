@@ -17,6 +17,11 @@ static void	set_wall_data(t_wall *wall, t_raycast *raycast)
 		wall->end = SCREEN_HEIGHT - 1;
 }
 
+
+/*
+	Draws wall - samples color for each wall pixel from texture using 
+	sample_texture_pixel object.
+*/
 static void	draw_walls(t_data *data, t_raycast *raycast, t_wall *wall)
 {
 	t_color	color;

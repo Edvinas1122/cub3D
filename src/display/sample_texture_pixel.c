@@ -30,6 +30,6 @@ t_color	sample_texture_pixel(t_data	*data, t_raycast *raycast, t_wall *wall)
 	(void) raycast;
 	(void) wall;
 	//texture_direction(raycast, data->player.pos);
-	x = column_sample_offset(data->map.north.width, raycast);
+	//x = column_sample_offset(data->map.north.width, raycast);
 	return (*(data->map.north.matx[10][10]));
 }
