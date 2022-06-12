@@ -8,7 +8,7 @@ typedef struct	s_vect		t_vect;
 typedef	struct	s_color		t_color;
 typedef struct	s_data		t_data;
 typedef struct	s_map		t_map;
-typedef struct	s_textures	t_textures;
+typedef struct	s_texture	t_texture;
 typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
 
@@ -33,8 +33,8 @@ void		destructor(t_data *data);
 
 /* Member in constructor */
 void		open_cub_file(char *file_name, t_data *data);
-t_textures	open_texture_xmp(t_list **file);
 t_video		set_video_window(t_mlx mlx);
+t_texture	load_texture_files(t_data *data, char *filename);
 
 
 #endif

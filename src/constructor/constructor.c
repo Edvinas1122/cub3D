@@ -80,9 +80,9 @@ static t_utils set_utils(void)
 void	constructor(t_data *data, char **argv)
 {
 	ft_bzero(data, sizeof(t_data));
+	data->mlx = start_window();
 	open_cub_file(argv[1], data);
+	data->video = set_video_window(data->mlx);
 	data->player = set_player(data->map.bit_map, TILE_SIZE);
 	data->util = set_utils();
-	data->mlx = start_window();
-	data->video = set_video_window(data->mlx);
 }
