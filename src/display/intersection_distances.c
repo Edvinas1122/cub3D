@@ -24,7 +24,7 @@ static void find_angle_quadrant(t_intersect *data, t_vect *dir)
 }
 
 // short coment here 
-double	intersection_distances(t_vect *pos, t_vect *dir)
+double	intersection_distances(t_vect *pos, t_vect *dir, t_raycast *raycast)
 {
 	t_intersect	data;
 
@@ -37,7 +37,13 @@ double	intersection_distances(t_vect *pos, t_vect *dir)
 	data.dist_to_vert = fabs(data.dist_to_vert * data.vert_factor);
 	data.dist_to_hor = fabs(data.dist_to_hor * data.hor_factor);
 	if (data.dist_to_vert < data.dist_to_hor)
+	{
+		raycast->plane_dir = 1;
 		return (data.dist_to_vert);
+	}
 	else
+	{
+		raycast->plane_dir = 0;
 		return (data.dist_to_hor);
+	}
 }

@@ -18,7 +18,7 @@ int		render_display(t_data *data);
 void	display_minimap(t_data *data);
 void	render_fov_view(t_data *data);
 void	draw_vertical_line(t_data *data, t_raycast *raycast);
-double	intersection_distances(t_vect *pos, t_vect *dir);
-t_color	sample_texture_pixel(t_data	*data, t_raycast *raycast, t_wall *wall);
+double	intersection_distances(t_vect *pos, t_vect *dir, t_raycast *raycast);
+t_color	sample_texture_pixel(t_data	*data, t_raycast *raycast, t_wall *wall, int i, int offset, int vertical_offset);
 
 #endif

@@ -1,6 +1,6 @@
 #include "display.h"
 
-static t_vect	*find_intersections(t_data *data, t_vect *dir)
+static t_vect	*find_intersections(t_data *data, t_vect *dir, t_raycast *raycast)
 {
 	t_vect	*tmp;
 	double	tmpdist;
@@ -10,7 +10,7 @@ static t_vect	*find_intersections(t_data *data, t_vect *dir)
 	tmp->y = data->player.pos.y;
 	while (42)
 	{
-		tmpdist = intersection_distances(tmp, dir);
+		tmpdist = intersection_distances(tmp, dir, raycast);
 		tmp->x += (tmpdist * dir->x);
 		tmp->y += (tmpdist * dir->y);
 		tmp->x += dir->x;
@@ -61,7 +61,7 @@ void	render_fov_view(t_data *data)
 	raycast_constructor(&raycast, data);
 	while (raycast.v_line_ct < SCREEN_WIDTH)
 	{
-		raycast.impact = find_intersections(data, &raycast.ray_dir);
+		raycast.impact = find_intersections(data, &raycast.ray_dir, &raycast);
 		raycast.distance = point_distance(&data->player.pos, raycast.impact);		//removing fisheye
 		raycast.distance /= 1/(cos(get_angle(&data->player.vect, &raycast.ray_dir) / (180/M_PI)));
 		draw_vertical_line(data, &raycast);
