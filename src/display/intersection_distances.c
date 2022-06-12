@@ -10,6 +10,10 @@ static void	find_factor(t_intersect *data, t_vect *pos, t_vect *dir)
 		data->hor_factor = TILE_SIZE - (pos->y - ((int)(pos->y/TILE_SIZE)*TILE_SIZE));
 	else
 		data->hor_factor = pos->y - ((int)(pos->y/TILE_SIZE)*TILE_SIZE);
+	if (data->vert_factor == 0)
+		data->vert_factor = 1;
+	if (data->hor_factor == 0)
+		data->hor_factor = 1;
 }
 
 static void find_angle_quadrant(t_intersect *data, t_vect *dir)

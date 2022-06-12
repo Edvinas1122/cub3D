@@ -13,8 +13,6 @@ static t_vect	*find_intersections(t_data *data, t_vect *dir, t_raycast *raycast)
 		tmpdist = intersection_distances(tmp, dir, raycast);
 		tmp->x += (tmpdist * dir->x);
 		tmp->y += (tmpdist * dir->y);
-		tmp->x += dir->x;
-		tmp->y += dir->y;
 		if (check_if_wall(tmp, data->map.bit_map))
 			break ;
 	}
