@@ -32,12 +32,20 @@ static int	vertical_offset_cal(t_vect *impact, int texture_width, int plane)
 	return (vertical_offset);
 }
 
-// t_color	dim_color_on_distance(t_color color, int distance)
-// {
-// 	int	factor;
+void	dim_color_on_distance(t_color *color, double distance)
+{
+	double	factor;
 
-// 	factor = 
-// }
+	factor = distance/1000;
+	if (factor > 1)
+		factor = 1;
+	factor = 1 - factor;
+	if (factor < 0.25)
+		factor = 0.25;
+	color->r = color->r * factor;
+	color->g = color->g * factor;
+	color->b = color->b * factor;
+}
 /*
 	Draws wall - samples color for each wall pixel from texture using 
 	sample_texture_pixel object.
@@ -57,6 +65,7 @@ static void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall)
 	while (wall->y < wall->end)
 	{
 		color = sample_texture_pixel(data, raycast, wall, (int)roundf(i * factor), offset, vertical_offset);
+		dim_color_on_distance(&color, raycast->distance);
 		//color = set_color(0, 140, 140, 140);
 		pixel_put(data->video.img_matrix, color, raycast->v_line_ct, wall->y);
 		wall->y++;
