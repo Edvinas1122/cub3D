@@ -7,11 +7,11 @@ static int	validate_colors(t_list **file, t_map_c *tmp)
 	node = (*file)->next->next->next->next->next;
 	if (ft_strncmp(node->content, "F ", 2))
 		return (0);
-	tmp->floor = &(node->content)[3];
+	tmp->floor = &(node->content)[2];
 	node = node->next;
 	if (ft_strncmp(node->content, "C ", 2))
 		return (0);
-	tmp->ceiling = &(node->content)[3];
+	tmp->ceiling = &(node->content)[2];
 	node = node->next;
 	if (ft_strncmp(node->content, "\0\0", 2))
 		return (0);
