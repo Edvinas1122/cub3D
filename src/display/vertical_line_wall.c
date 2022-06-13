@@ -55,13 +55,15 @@ void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall)
 	t_line	line;
 	t_color	color;
 	double	y;
+	double	dimfactor;
 
 	construct_line(&line, data, raycast, wall);
+	dimfactor = get_dim_factor(raycast->distance);
 	y = 0;
 	while (wall->y < wall->end)
 	{
 		color = sample_texture_pixel(line.texture.matx, line, y);
-		color = dim_color(color, get_dim_factor(raycast->distance));
+		color = dim_color(color, dimfactor);
 		pixel_put(data->video.img_matrix, color, raycast->v_line_ct, wall->y);
 		wall->y++;
 		y++;
