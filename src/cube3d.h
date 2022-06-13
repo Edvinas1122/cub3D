@@ -17,7 +17,6 @@
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define MOVE_DISTANCE 25
-# define MINIMAP_SIZE 10
 # define TILE_SIZE 100
 # define FOV 90
 

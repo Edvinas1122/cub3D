@@ -9,16 +9,20 @@ static t_color	sample_texture_pixel(t_color ***texture, t_line line, int y)
 	return (*(texture[y + line.horizontal_offset][line.vertical_offset]));
 }
 
-static int	vertical_offset_cal(t_vect impact, int texture_width, int plane)
+static int	vertical_offset_cal(t_vect impact, int texture_width, int plane, int height)
 {
-	int vertical_offset;
+	double	ratio_factor;
+	int 	vertical_offset;
+
+	height++;
+	ratio_factor = (double)texture_width / TILE_SIZE;
 	if (plane < 3)
 	{
-		vertical_offset = (int)(impact.x) % texture_width;
+		vertical_offset = (int)(impact.x * ratio_factor) % texture_width;
 	}
 	else
 	{
-		vertical_offset = (int)(impact.y) % texture_width;
+		vertical_offset = (int)(impact.y * ratio_factor) % texture_width;
 	}
 	return (vertical_offset);
 }
@@ -27,7 +31,7 @@ static double	get_dim_factor(double distance)
 {
 	double factor;
 
-	factor = distance/1000;
+	factor = (distance / TILE_SIZE) / 10;
 	if (factor > 1)
 		factor = 1;
 	factor = 1 - factor;
@@ -47,7 +51,7 @@ static void	construct_line(t_line *line, t_data *data, t_raycast *raycast, t_wal
 	else if (raycast->cardinal_direction == 4)
 		line->texture = data->map.east;
 	line->strech_factor = (double)(line->texture.height - 1)/wall->size;
-	line->vertical_offset = vertical_offset_cal(raycast->impact, line->texture.width, raycast->cardinal_direction);
+	line->vertical_offset = vertical_offset_cal(raycast->impact, line->texture.width, raycast->cardinal_direction, line->texture.height);
 	line->horizontal_offset = roundf((double)wall->offset * line->strech_factor);
 }
 
