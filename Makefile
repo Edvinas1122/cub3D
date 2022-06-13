@@ -26,8 +26,8 @@ NAME		:= cube3d
 LIBFT		:= $(SRCDIR)libs/libft/libft.a
 
 ifeq ($(shell uname -s),Darwin)
-	LBMLX	:= $(SRCDIR)libs/mlx_Darwin/libmlx.a
-	LIBS	:= -Lsrc/libs/mlx_Darwin -framework OpenGL -framework AppKit
+	LBMLX	:= $(SRCDIR)libs/mlx/libmlx.a
+	LIBS	:= -Lsrc/libs/mlx -framework OpenGL -framework AppKit
 else
 	LBMLX	:= $(SRCDIR)libs/mlx/libmlx_Linux.a
 	LIBS	:= -lXext -lX11 -lm
