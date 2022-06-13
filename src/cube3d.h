@@ -127,7 +127,7 @@ typedef struct s_raycast
 	t_vect	ray_dir;
 	t_vect	target;
 	t_vect	perp;
-	t_vect	*impact;
+	t_vect	impact;
 	double	distance;
 	int		v_line_ct;
 	int		plane_dir;

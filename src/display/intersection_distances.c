@@ -1,19 +1,24 @@
 #include "display.h"
 
-static void	find_factor(t_intersect *data, t_vect *pos, t_vect *dir)
+static void	find_factor(t_intersect *data, t_vect pos, t_vect *dir)
 {
-	if (dir->x >= 0)
-		data->vert_factor = TILE_SIZE - (pos->x - ((int)(pos->x/TILE_SIZE)*TILE_SIZE));
+	double	tmpx;
+	double	tmpy;
+
+	tmpx = fmod(pos.x, (double)TILE_SIZE);
+	tmpy = fmod(pos.y, (double)TILE_SIZE);
+	if (dir->x > 0)
+		data->vert_factor = TILE_SIZE - tmpx;
+	else if (dir->x < 0)
+		data->vert_factor = tmpx + 0.0001;
 	else
-		data->vert_factor = pos->x - ((int)(pos->x/TILE_SIZE)*TILE_SIZE);
-	if (dir->y >= 0)
-		data->hor_factor = TILE_SIZE - (pos->y - ((int)(pos->y/TILE_SIZE)*TILE_SIZE));
+		data->vert_factor = 2e30;
+	if (dir->y > 0)
+		data->hor_factor = TILE_SIZE - tmpy;
+	else if (dir->y < 0)
+		data->hor_factor = tmpy + 0.0001;
 	else
-		data->hor_factor = pos->y - ((int)(pos->y/TILE_SIZE)*TILE_SIZE);
-	if (data->vert_factor == 0)
-		data->vert_factor = 1;
-	if (data->hor_factor == 0)
-		data->hor_factor = 1;
+		data->hor_factor = 2e30;
 }
 
 static void find_angle_quadrant(t_intersect *data, t_vect *dir)
@@ -28,7 +33,7 @@ static void find_angle_quadrant(t_intersect *data, t_vect *dir)
 }
 
 // short coment here 
-double	intersection_distances(t_vect *pos, t_vect *dir, t_raycast *raycast)
+double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast)
 {
 	t_intersect	data;
 

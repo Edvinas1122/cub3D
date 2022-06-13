@@ -6,7 +6,7 @@ static void	move_single_axis(t_data *data)
 
 	destination.x = data->player.pos.x + data->player.vect.x * MOVE_DISTANCE;
 	destination.y = data->player.pos.y;
-	if (!check_if_wall(&destination, data->map.bit_map))
+	if (!check_if_wall(destination, data->map.bit_map))
 	{
 		data->player.pos.x = destination.x;	
 		data->player.pos.y = destination.y;	
@@ -15,7 +15,7 @@ static void	move_single_axis(t_data *data)
 	{
 		destination.x = data->player.pos.x;
 		destination.y = data->player.pos.y + data->player.vect.y * MOVE_DISTANCE;
-		if (!check_if_wall(&destination, data->map.bit_map))
+		if (!check_if_wall(destination, data->map.bit_map))
 		{
 			data->player.pos.x = destination.x;	
 			data->player.pos.y = destination.y;	
@@ -29,7 +29,7 @@ void	move_forward(t_data *data)
 
 	destination.x = data->player.pos.x + data->player.vect.x * MOVE_DISTANCE;
 	destination.y = data->player.pos.y + data->player.vect.y * MOVE_DISTANCE;
-	if (check_if_wall(&destination, data->map.bit_map))
+	if (check_if_wall(destination, data->map.bit_map))
 		move_single_axis(data);
 	else
 	{
@@ -46,7 +46,7 @@ void	move_backwards(t_data *data)
 
 	destination.x = data->player.pos.x - data->player.vect.x * MOVE_DISTANCE;
 	destination.y = data->player.pos.y - data->player.vect.y * MOVE_DISTANCE;
-	if (!check_if_wall(&destination, data->map.bit_map))
+	if (!check_if_wall(destination, data->map.bit_map))
 	{
 		data->player.pos.x = destination.x;
 		data->player.pos.y = destination.y;
@@ -63,7 +63,7 @@ void	move_left(t_data *data)
 	rotate_vector(&tmp, 90);
 	destination.x = data->player.pos.x - tmp.x * MOVE_DISTANCE;
 	destination.y = data->player.pos.y - tmp.y * MOVE_DISTANCE;
-	if (!check_if_wall(&destination, data->map.bit_map))
+	if (!check_if_wall(destination, data->map.bit_map))
 	{
 		data->player.pos.x = destination.x;
 		data->player.pos.y = destination.y;
@@ -80,7 +80,7 @@ void	move_right(t_data *data)
 	rotate_vector(&tmp, -90);
 	destination.x = data->player.pos.x  - tmp.x * MOVE_DISTANCE;
 	destination.y = data->player.pos.y - tmp.y * MOVE_DISTANCE;
-	if (!check_if_wall(&destination, data->map.bit_map))
+	if (!check_if_wall(destination, data->map.bit_map))
 	{
 		data->player.pos.x = destination.x;
 		data->player.pos.y = destination.y;

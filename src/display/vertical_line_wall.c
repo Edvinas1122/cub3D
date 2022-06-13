@@ -9,16 +9,16 @@ static t_color	sample_texture_pixel(t_color ***texture, t_line line, int y)
 	return (*(texture[y + line.horizontal_offset][line.vertical_offset]));
 }
 
-static int	vertical_offset_cal(t_vect *impact, int texture_width, int plane)
+static int	vertical_offset_cal(t_vect impact, int texture_width, int plane)
 {
 	int vertical_offset;
 	if (plane == 0)
 	{
-		vertical_offset = (int)(impact->x) % texture_width;
+		vertical_offset = (int)(impact.x) % texture_width;
 	}
 	else
 	{
-		vertical_offset = (int)(impact->y) % texture_width;
+		vertical_offset = (int)(impact.y) % texture_width;
 	}
 	return (vertical_offset);
 }
