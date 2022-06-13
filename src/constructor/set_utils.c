@@ -8,6 +8,7 @@ static int	set_minimap_scale(t_data *data)
 	int	*arr;
 
 	size_y = 0;
+	size_x = 0;
 	arr = line_lenghts(data->map.bit_map);
 	while (arr[size_y])
 	{
