@@ -18,7 +18,7 @@ static void	set_wall_data(t_wall *wall, t_raycast *raycast)
 
 static double	get_dim_factor(int y)
 {
-	double factor;
+	double	factor;
 	int		delta;
 
 	delta = abs(y - (SCREEN_HEIGHT / 2));
@@ -43,6 +43,16 @@ void	draw_vertical_line(t_data *data, t_raycast *raycast)
 		pixel_put(data->video.img_matrix, dim_color(data->map.ceiling, dimfactor), raycast->v_line_ct, wall.y);
 		wall.y++;
 	}
+	// t_color tmpcol;
+	// tmpcol.a = 0;
+	// tmpcol.r = 120;
+	// tmpcol.g = 0;
+	// tmpcol.b = 0;
+	// while (wall.y < wall.end)
+	// {
+	// 	pixel_put(data->video.img_matrix, tmpcol, raycast->v_line_ct, wall.y);
+	// 	wall.y++;
+	// }
 	draw_wall_line(data, raycast, &wall);
 	while (wall.y < SCREEN_HEIGHT)
 	{

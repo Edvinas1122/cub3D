@@ -47,12 +47,12 @@ double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast)
 	data.dist_to_hor = fabs(data.dist_to_hor * data.hor_factor);
 	if (data.dist_to_vert < data.dist_to_hor)
 	{
-		raycast->plane_dir = 1;
+		raycast->cardinal_direction = 3;
 		return (data.dist_to_vert);
 	}
 	else
 	{
-		raycast->plane_dir = 0;
+		raycast->cardinal_direction = 1;
 		return (data.dist_to_hor);
 	}
 }

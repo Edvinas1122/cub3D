@@ -130,7 +130,7 @@ typedef struct s_raycast
 	t_vect	impact;
 	double	distance;
 	int		v_line_ct;
-	int		plane_dir;
+	int		cardinal_direction;
 }	t_raycast;
 
 // Konstantin comment here

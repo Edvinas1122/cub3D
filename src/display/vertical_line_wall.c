@@ -12,7 +12,7 @@ static t_color	sample_texture_pixel(t_color ***texture, t_line line, int y)
 static int	vertical_offset_cal(t_vect impact, int texture_width, int plane)
 {
 	int vertical_offset;
-	if (plane == 0)
+	if (plane < 3)
 	{
 		vertical_offset = (int)(impact.x) % texture_width;
 	}
@@ -42,7 +42,7 @@ static void	construct_line(t_line *line, t_data *data, t_raycast *raycast, t_wal
 	line->texture = data->map.north;
 	//Based on ray data should select appropriate texture
 	line->strech_factor = (double)data->map.east.height/wall->size;
-	line->vertical_offset = vertical_offset_cal(raycast->impact, line->texture.width, raycast->plane_dir);
+	line->vertical_offset = vertical_offset_cal(raycast->impact, line->texture.width, raycast->cardinal_direction);
 	line->horizontal_offset = roundf((double)wall->offset * line->strech_factor);
 }
 
