@@ -79,6 +79,8 @@ static void	*get_action_function(int keycode)
 		return (&rotate_player_left);
 	if (keycode == 124)
 		return (&rotate_player_right);
+	if (keycode == 48)
+		return (&pop_minimap);
 	return (NULL);
 }
 

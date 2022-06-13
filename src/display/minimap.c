@@ -14,8 +14,8 @@ static void	draw_box(t_color ***img, t_color color, t_vect cord, int size)
 		i2 = 0;
 		while (i2 < size)
 		{
-			pixel_put(img, color, (cord.x * MINIMAP_SIZE) + i, 
-						(cord.y * MINIMAP_SIZE) + i2);
+			pixel_put(img, color, (cord.x * size) + i, 
+						(cord.y * size) + i2);
 			i2++;
 		}
 		i++;
@@ -39,7 +39,7 @@ static void	draw_player(t_color ***img, t_color color, t_player player, int size
 	that is compencated by MINIMAP_SIZE
 	No buffer overstep protection yet
 */
-static void	draw_2d_minimap(t_color ***img, char **bit_map, t_color color[3])
+static void	draw_2d_minimap(t_color ***img, char **bit_map, t_color color[3], int minimap_size)
 {
 	t_vect	cord;
 
@@ -50,9 +50,9 @@ static void	draw_2d_minimap(t_color ***img, char **bit_map, t_color color[3])
 		while (bit_map[(int)cord.y][(int)cord.x])
 		{
 			if (bit_map[(int)cord.y][(int)cord.x] == '1')
-				draw_box(img, color[0], cord, MINIMAP_SIZE);
+				draw_box(img, color[0], cord, minimap_size);
 			else
-				draw_box(img, color[1], cord, MINIMAP_SIZE);
+				draw_box(img, color[1], cord, minimap_size);
 			cord.x++;
 		}
 		cord.y++;
@@ -62,7 +62,7 @@ static void	draw_2d_minimap(t_color ***img, char **bit_map, t_color color[3])
 void	display_minimap(t_data *data)
 {
 	draw_2d_minimap(data->video.img_matrix, data->map.bit_map,
-					data->util.minimap);
+					data->util.minimap, data->util.minimap_size);
 	draw_player(data->video.img_matrix, data->util.minimap[2],
-				data->player, MINIMAP_SIZE / 2);
+				data->player, data->util.minimap_size);
 }

@@ -18,14 +18,18 @@ static int	validate_file_name(char *name)
 	return (1);
 }
 
-static t_map	assign_map(t_map_c tmp)
+static t_map	assign_map(t_data *data, t_map_c tmp)
 {
 	t_map	map;
 
 	map.bit_map = tmp.map;
 	map.ceiling = string_to_color(tmp.ceiling);
 	map.floor = string_to_color(tmp.floor);
-	//map.textur = open_textures_xmp(tmp_file);
+	map.north = load_texture_files(data, tmp.no);
+	map.south = load_texture_files(data, tmp.so);
+	map.east = load_texture_files(data, tmp.ea);
+	map.west = load_texture_files(data, tmp.we);
+
 	return (map);
 }
 
@@ -44,7 +48,8 @@ void	open_cub_file(char *file_name, t_data *data)
 		ft_putstr_fd("File access error\n", 1);
 		destructor(data);
 	}
+	
 	if (!validate_cub_file(tmp.file, &tmp))
 		destructor(data);
-	data->map = assign_map(tmp);
+	data->map = assign_map(data, tmp);
 }

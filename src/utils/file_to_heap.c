@@ -43,6 +43,7 @@ int	file_to_heap(char *name, t_list ***file)
 		exit(0);
 	*file = ft_calloc(1, sizeof(t_list *));
 	info = 1;
+	printf("Reading file: \n\n");
 	while (info)
 	{
 		info = read_line(fd, &row);
@@ -51,6 +52,13 @@ int	file_to_heap(char *name, t_list ***file)
 			ft_lstclear(*file, delete_list_node);
 			return (0);
 		}
+
+		/*Debug print*/
+		ft_putstr_fd(row, 1);
+		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', 1);
+		/*Debug print*/
+
 		ft_lstadd_back(*file, ft_lstnew(row));
 	}
 	return (1);
