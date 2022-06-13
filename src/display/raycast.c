@@ -19,8 +19,6 @@ static t_vect	find_intersections(t_data *data, t_vect *dir, t_raycast *raycast)
 		raycast->cardinal_direction = 2;
 	if (raycast->cardinal_direction == 3 && data->player.pos.x < tmp.x)
 		raycast->cardinal_direction = 4;
-
-
 	return (tmp);
 }
 
