@@ -12,6 +12,7 @@ typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
 
 int		player_action(int keycode, t_data *data);
+int		red_x_win(int keycode, t_data *data);
 
 /*
 	Move player functions
@@ -31,5 +32,5 @@ void	rotate_player_right(t_data *data);
 	More
 */
 void	pop_minimap(t_data *data);
-
+void	close_win(t_data *data);
 #endif

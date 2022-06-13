@@ -1,5 +1,5 @@
 CC			:= gcc
-CFLAGS		:= -Wall -Werror -Wextra -g
+CFLAGS		:= -Wall -Werror -Wextra -g -fsanitize=address
 
 # SRC subdirrectories #
 VALIDATOR_FILES := validate_cub_file.c validate_map.c matrix_neighbour_check.c

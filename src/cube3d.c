@@ -3,7 +3,7 @@
 static void	control_hooks(t_data *data)
 {
 	mlx_hook(data->mlx.win, 2, 0, player_action, data);
-	//mlx_hook(data.mlx->win, 17, 0L, close_win, x);
+	mlx_hook(data->mlx.win, 17, 0L, red_x_win, data);
 	//mlx_key_hook(data.mlx->win, khook, &data.mlx);
 	//mlx_mouse_hook(data.mlx->win, mhook, &data.mlx);
 }

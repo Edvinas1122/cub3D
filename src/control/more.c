@@ -15,3 +15,9 @@ void	pop_minimap(t_data *data)
 		iteration = 0;
 	}
 }
+
+void	close_win(t_data *data)
+{
+	ft_putstr_fd("Exiting program\n", 1);
+	destructor(data);
+}
