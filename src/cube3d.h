@@ -115,6 +115,13 @@ typedef struct	s_data
 	t_utils		util;
 }	t_data;
 
+
+/* 
+	Ussed in diyplay only
+*/
+/*
+	Raycast ray data;
+*/
 typedef struct s_raycast
 {
 	t_vect	ray_dir;
@@ -157,6 +164,18 @@ typedef struct s_wall
 	int		end;
 	t_color color;
 }	t_wall;
+
+typedef struct s_line
+{
+	t_texture	texture;
+	double		strech_factor;
+	int			horizontal_offset;
+	int			vertical_offset;
+}	t_line;
+
+/* 
+	Ussed in diyplay only
+*/
 
 int	main(int argc, char **argv);
 
