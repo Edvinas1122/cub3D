@@ -18,10 +18,10 @@ t_color	set_color(int a, int r, int g, int b)
 {
 	t_color	color;
 
-	color.a = (char)a;
-	color.r = (char)r;
-	color.g = (char)g;
-	color.b = (char)b;
+	color.a = (unsigned char)a;
+	color.r = (unsigned char)r;
+	color.g = (unsigned char)g;
+	color.b = (unsigned char)b;
 	return (color);
 }
 
@@ -43,4 +43,15 @@ t_color	string_to_color(char *str)
 	free(colors[2]);
 	free(colors);
 	return (item);
+}
+
+t_color	dim_color(t_color color, double factor)
+{
+	t_color dimmed;
+
+	dimmed.a = 0;
+	dimmed.r = color.r * factor;
+	dimmed.g = color.g * factor;
+	dimmed.b = color.b * factor;
+	return (dimmed);
 }

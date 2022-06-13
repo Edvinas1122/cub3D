@@ -20,10 +20,10 @@ double	vector_length(t_vect *vector)
 	return (sqrt(vector->x*vector->x + vector->y*vector->y));
 }
 
-double	point_distance(t_vect *v1, t_vect *v2)
+double	point_distance(t_vect v1, t_vect v2)
 {
-	double x = v1->x - v2->x;
-	double y = v1->y - v2->y;
+	double x = v1.x - v2.x;
+	double y = v1.y - v2.y;
 	return (sqrt(x*x+y*y));
 }
 

@@ -19,6 +19,6 @@ void	display_minimap(t_data *data);
 void	render_fov_view(t_data *data);
 void	draw_vertical_line(t_data *data, t_raycast *raycast);
 void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);
-double	intersection_distances(t_vect *pos, t_vect *dir, t_raycast *raycast);
+double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast);
 
 #endif
