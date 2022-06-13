@@ -44,3 +44,14 @@ t_color	string_to_color(char *str)
 	free(colors);
 	return (item);
 }
+
+t_color	dim_color(t_color color, int factor)
+{
+	t_color dimmed;
+
+	dimmed.a = 0;
+	dimmed.r = color.r * factor;
+	dimmed.g = color.g * factor;
+	dimmed.b = color.b * factor;
+	return (dimmed);
+}
