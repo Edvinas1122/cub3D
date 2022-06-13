@@ -61,9 +61,8 @@ int	player_action(int keycode, t_data *data)
 	return (0);
 }
 
-int	red_x_win(int keycode, t_data *data)
+int	red_x_win(t_data *data)
 {
-	keycode++;
 	close_win(data);
 	return (0);
 }

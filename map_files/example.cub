@@ -1,7 +1,7 @@
-NO ./map_files/example.xpm
-SO ./map_files/example.xpm
-WE ./map_files/example.xpm
-EA ./map_files/example.xpm
+NO ./map_files/temple_textures/temple1.xpm
+SO ./map_files/temple_textures/temple2.xpm
+WE ./map_files/temple_textures/temple3.xpm
+EA ./map_files/temple_textures/temple4.xpm
 
 F 64,64,64
 C 0,40,40
