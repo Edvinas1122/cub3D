@@ -38,10 +38,15 @@ static double	get_dim_factor(double distance)
 
 static void	construct_line(t_line *line, t_data *data, t_raycast *raycast, t_wall *wall)
 {
-	//Based on ray data should select appropriate texture
-	line->texture = data->map.north;
-	//Based on ray data should select appropriate texture
-	line->strech_factor = (double)data->map.east.height/wall->size;
+	if (raycast->cardinal_direction == 1)
+		line->texture = data->map.north;
+	else if (raycast->cardinal_direction == 2)
+		line->texture = data->map.south;
+	else if (raycast->cardinal_direction == 3)
+		line->texture = data->map.west;
+	else if (raycast->cardinal_direction == 4)
+		line->texture = data->map.east;
+	line->strech_factor = (double)(line->texture.height - 1)/wall->size;
 	line->vertical_offset = vertical_offset_cal(raycast->impact, line->texture.width, raycast->cardinal_direction);
 	line->horizontal_offset = roundf((double)wall->offset * line->strech_factor);
 }

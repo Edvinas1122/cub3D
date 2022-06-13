@@ -1,5 +1,5 @@
 CC			:= gcc
-CFLAGS		:= -Wall -Werror -Wextra -O3
+CFLAGS		:= -Wall -Werror -Wextra -g
 
 # SRC subdirrectories #
 VALIDATOR_FILES := validate_cub_file.c validate_map.c matrix_neighbour_check.c
