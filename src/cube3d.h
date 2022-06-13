@@ -71,6 +71,7 @@ typedef struct	s_map
 	t_texture	east;
 	t_color		ceiling;
 	t_color		floor;
+	double		z_buffer[1280];
 }	t_map;
 
 /*
@@ -133,11 +134,10 @@ typedef struct s_raycast
 	int		cardinal_direction;
 }	t_raycast;
 
-// Konstantin comment here
 /**
- @param angle -
- @param dist_to_vert @param dist_to_hor -
- @param vert_factor @param hor_factor -
+ @param angle angle between ray and x-axis
+ @param dist_to_vert @param dist_to_hor distance between two intersections
+ @param vert_factor @param hor_factor factor to compensate position
 */
 typedef struct s_intersect
 {
@@ -172,6 +172,14 @@ typedef struct s_line
 	int			horizontal_offset;
 	int			vertical_offset;
 }	t_line;
+
+typedef struct s_sprite
+{
+	t_vect	position;
+	t_color	***img_matrix;
+	double	distance;
+	int		size;
+}	t_sprite;
 
 /* 
 	Ussed in diyplay only
