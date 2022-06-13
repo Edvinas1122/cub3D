@@ -23,9 +23,9 @@ static int	vertical_offset_cal(t_vect impact, int texture_width, int plane)
 	return (vertical_offset);
 }
 
-static void	dim_color_on_distance(t_color *color, double distance)
+static double	get_dim_factor(double distance)
 {
-	double	factor;
+	double factor;
 
 	factor = distance/1000;
 	if (factor > 1)
@@ -33,9 +33,7 @@ static void	dim_color_on_distance(t_color *color, double distance)
 	factor = 1 - factor;
 	if (factor < 0.25)
 		factor = 0.25;
-	color->r = color->r * factor;
-	color->g = color->g * factor;
-	color->b = color->b * factor;
+	return (factor);
 }
 
 static void	construct_line(t_line *line, t_data *data, t_raycast *raycast, t_wall *wall)
@@ -63,7 +61,7 @@ void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall)
 	while (wall->y < wall->end)
 	{
 		color = sample_texture_pixel(line.texture.matx, line, y);
-		dim_color_on_distance(&color, raycast->distance);
+		color = dim_color(color, get_dim_factor(raycast->distance));
 		pixel_put(data->video.img_matrix, color, raycast->v_line_ct, wall->y);
 		wall->y++;
 		y++;

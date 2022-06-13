@@ -45,7 +45,7 @@ t_color	string_to_color(char *str)
 	return (item);
 }
 
-t_color	dim_color(t_color color, int factor)
+t_color	dim_color(t_color color, double factor)
 {
 	t_color dimmed;
 
