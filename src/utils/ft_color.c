@@ -18,10 +18,10 @@ t_color	set_color(int a, int r, int g, int b)
 {
 	t_color	color;
 
-	color.a = (char)a;
-	color.r = (char)r;
-	color.g = (char)g;
-	color.b = (char)b;
+	color.a = (unsigned char)a;
+	color.r = (unsigned char)r;
+	color.g = (unsigned char)g;
+	color.b = (unsigned char)b;
 	return (color);
 }
 
