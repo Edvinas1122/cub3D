@@ -27,6 +27,7 @@ void	move_forward(t_data *data)
 {
 	t_vect	destination;
 
+
 	destination.x = data->player.pos.x + data->player.vect.x * MOVE_DISTANCE;
 	destination.y = data->player.pos.y + data->player.vect.y * MOVE_DISTANCE;
 	if (check_if_wall(destination, data->map.bit_map))
