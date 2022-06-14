@@ -178,7 +178,6 @@ typedef struct s_sprite
 	t_vect	position;
 	t_color	***img_matrix;
 	double	distance;
-	double	apparentdistance;
 	int		size;
 }	t_sprite;
 

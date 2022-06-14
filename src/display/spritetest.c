@@ -81,22 +81,33 @@ void	sprite_test(t_data *data)
 
 	//preparing the testsprites
 	spriteptr = ft_calloc(sizeof(t_sprite *), 5);
-	// printf("%f %f\n", data->player.pos.x, data->player.pos.y);
 	sprites[0] = init_test_sprite(set_color(0, 255, 0, 0), 230.0, 410.0);
 	sprites[1] = init_test_sprite(set_color(0, 0, 255, 0), 350, 310);
 	sprites[2] = init_test_sprite(set_color(0, 0, 0, 255), 700, 110);
 	sprites[3] = init_test_sprite(set_color(0, 255, 255, 0), 225, 810);
 	sprites[4] = init_test_sprite(set_color(0, 255, 0, 255), 563, 213);
 	
-	//calculating the distance to each sprite
+	/*
+		UP UNTIL THIS POINT, EVERYTHING SHOULD HAVE HAPPENED IN THE CONSTRUCTOR OF THE PROGRAM
+	*/
+	/*
+		EVERYTHING BELOW NEEDS TO BE DONE AFTER RENDERING THE WALLS
+		anytime it counts up to 5, we will need to iterate through all sprites
+	*/
+
+	/*
+		calculating the distance to each sprite
+	*/
 	for(int i=0; i < 5; i++){
 		spritevect.x = sprites[i].position.x - data->player.pos.x;
 		spritevect.y = sprites[i].position.y - data->player.pos.y;
 		normalize_vector(&spritevect);
 		sprites[i].distance = point_distance(data->player.pos, sprites[i].position);
 	}
-	//sorting the sprites by distance
-	tmpdbl = 1000000;
+	/*
+		sorting the sprites by distance
+	*/
+	tmpdbl = 2e30;
 	for(int i=0; i < 5; i++)
 		spriteptr[i] = (t_sprite *)next_highest(sprites, &tmpdbl);
 
