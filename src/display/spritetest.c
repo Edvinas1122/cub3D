@@ -1,4 +1,5 @@
 #include "display.h"
+void	draw_the_mother_fucking_sprite(t_data *data, t_sprite sprite);
 
 /*
 	initiating the sprites I'm using for testing
@@ -145,14 +146,11 @@ void	sprite_test(t_data *data)
 			angle += 2*M_PI;
 
 		//find x position of sprite
-		double	spritex_on_screen;
-		spritex_on_screen = angle_to_column(angle, data->player.vect);
-
+		(*spriteptr[i]).on_screen.x = angle_to_column(angle, data->player.vect);
 		//find y position of sprite
-		double spritey_on_screen;
 		(*spriteptr[i]).distance /= 1/(cos(get_angle(&data->player.vect, &spritevect) / (180/M_PI)));
-		spritey_on_screen = (double)TILE_SIZE/(*spriteptr[i]).distance;
-		spritey_on_screen = SCREEN_HEIGHT/2 + (SCREEN_HEIGHT/2 * spritey_on_screen);
+		(*spriteptr[i]).on_screen.y = (double)TILE_SIZE/(*spriteptr[i]).distance;
+		(*spriteptr[i]).on_screen.y = SCREEN_HEIGHT/2 + (SCREEN_HEIGHT/2 * (*spriteptr[i]).on_screen.y);
 
 		/*
 			NOTE: spritex_on_screen/spritey_on_screen is the position of the BOTTOM CENTER point of the sprite
@@ -163,28 +161,34 @@ void	sprite_test(t_data *data)
 					00000
 					00X00
 		*/
-		//draw the motherfucking sprite
-		//sprites that are partially offscreen aren't drawn at all yet
-		if (spritex_on_screen >= 0 && spritex_on_screen < SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
-		{
-			double	scalefactor;
-			int		scaledsize;
 
-			scalefactor = 1 / ((*spriteptr[i]).distance / TILE_SIZE);
-			scaledsize = (int)((*spriteptr[i]).size * scalefactor);
-			int xstart = (int)spritex_on_screen - scaledsize/2;
-			int ystart = (int)spritey_on_screen - scaledsize;
-			for (int x = 0; x < scaledsize; x++)
-			{
-				if  (xstart + x >= 0 && xstart + x < SCREEN_WIDTH && data->map.z_buffer[xstart + x] > (*spriteptr[i]).distance) //checking if wall at this column is closer, and if it's offscreen
-				{
-					for (int j = 0; j < scaledsize; j++)
-						if (ystart + j >= 0 &&ystart + j < SCREEN_HEIGHT)	//checking if y val is offscreen
-							pixel_put(data->video.img_matrix, *(*spriteptr[i]).img_matrix[0][0], xstart + x, ystart + j);
-				}
-			}
-		}
+		//draw the motherfucking sprite
+		//sprites currently aren't drawn if more than half of them would be offscreen to the side
+		if ((*spriteptr[i]).on_screen.x >= 0 && (*spriteptr[i]).on_screen.x < SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
+			draw_the_mother_fucking_sprite(data, (*spriteptr[i]));
 	}
 	for(int i=0; i < 5; i++)
 		free_img_matrix(&sprites[i]);
+}
+
+void	draw_the_mother_fucking_sprite(t_data *data, t_sprite sprite)
+{
+	double	scalefactor;
+	int		scaledsize;
+	int		xstart;
+	int		ystart;
+
+	scalefactor = 1 / (sprite.distance / TILE_SIZE);
+	scaledsize = (int)(sprite.size * scalefactor);
+	xstart = (int)sprite.on_screen.x - scaledsize/2;
+	ystart = (int)sprite.on_screen.y - scaledsize;
+	for (int x = 0; x < scaledsize; x++)
+	{
+		if  (xstart + x >= 0 && xstart + x < SCREEN_WIDTH && data->map.z_buffer[xstart + x] > sprite.distance) //checking if wall at this column is closer, and if it's offscreen
+		{
+			for (int j = 0; j < scaledsize; j++)
+				if (ystart + j >= 0 &&ystart + j < SCREEN_HEIGHT)	//checking if y val is offscreen
+					pixel_put(data->video.img_matrix, *sprite.img_matrix[0][0], xstart + x, ystart + j);
+		}
+	}
 }

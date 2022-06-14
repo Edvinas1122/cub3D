@@ -176,6 +176,7 @@ typedef struct s_line
 typedef struct s_sprite
 {
 	t_vect	position;
+	t_vect	on_screen;
 	t_color	***img_matrix;
 	double	distance;
 	int		size;
