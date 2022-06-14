@@ -100,76 +100,53 @@ void	sprite_test(t_data *data)
 	for(int i=0; i < 5; i++)
 		spriteptr[i] = (t_sprite *)next_highest(sprites, &tmpdbl);
 
-	// for(int i=0; i < 5; i++)
-	// 	printf("DISTANCE pos %d: %f\n", i, (*spriteptr[i]).distance);
 
-	// printf("%f %f\n", data->player.vect.x,data->player.vect.y);
-	//find angle between player vector and sprite angle
-	//dear future me: have fun with this dogshit lmao
-	for(int i=0; i < 5; i++)
+	//draw each sprite
+	for(int i = 0; i < 5; i++)
 	{
-		// printf("%f\n", (*spriteptr[i]).distance);
+		//find sprite direction vector
 		spritevect.x = (*spriteptr[i]).position.x - data->player.pos.x;
 		spritevect.y = (*spriteptr[i]).position.y - data->player.pos.y;
 		normalize_vector(&spritevect);
-		double angle2;
-		angle2 = atan2(spritevect.y, spritevect.x) - atan2(data->player.vect.y, data->player.vect.x);
-		if (angle2 > M_PI)
-			angle2 -= 2*M_PI;
-		else if (angle2 < -M_PI)
-			angle2 += 2*M_PI;
-		double tmpcolumn = angle_to_column(angle2, data->player.vect);
-		// printf("angle: %f\n", angle2*180/M_PI);
-		t_color tmpcolor;
-		tmpcolor.a = 0;
-		tmpcolor.r = 255;
-		tmpcolor.g = 0;
-		tmpcolor.b = 0;
-		double anothertest;
+
+		//find angle between player direction and sprite
+		double angle;
+		angle = atan2(spritevect.y, spritevect.x) - atan2(data->player.vect.y, data->player.vect.x);
+		if (angle > M_PI)
+			angle -= 2*M_PI;
+		else if (angle < -M_PI)
+			angle += 2*M_PI;
+
+		//find x position of sprite
+		double	spritex_on_screen;
+		spritex_on_screen = angle_to_column(angle, data->player.vect);
+
+		//find y position of sprite
+		double spritey_on_screen;
 		(*spriteptr[i]).distance /= 1/(cos(get_angle(&data->player.vect, &spritevect) / (180/M_PI)));
-		anothertest = (double)TILE_SIZE/(*spriteptr[i]).distance;
-		anothertest = SCREEN_HEIGHT/2 + (SCREEN_HEIGHT/2 * anothertest);
-		// printf("%f\n", anothertest);
-		int	xstart = tmpcolumn - 7;
-		int	ystart = (int)anothertest - 7;
-		if (tmpcolumn >= 0 && tmpcolumn < SCREEN_WIDTH && (angle2*180/M_PI) > -90 && (angle2*180/M_PI) < 90)
+		spritey_on_screen = (double)TILE_SIZE/(*spriteptr[i]).distance;
+		spritey_on_screen = SCREEN_HEIGHT/2 + (SCREEN_HEIGHT/2 * spritey_on_screen);
+
+		//draw the motherfucking sprite
+		if (spritex_on_screen >= 0 && spritex_on_screen < SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
 		{
 			double	apparentsize;
 			int		intsize;
 			apparentsize = (*spriteptr[i]).size / ((*spriteptr[i]).distance / TILE_SIZE);
 			intsize = (int)apparentsize;
-			int xstart = tmpcolumn - intsize/2;
-			int ystart = (int)anothertest - intsize;
+			int xstart = spritex_on_screen - intsize/2;
+			int ystart = (int)spritey_on_screen - intsize;
 			for (int x = 0; x < intsize; x++)
 			{
-				// printf("%f vs %f\n", data->map.z_buffer[xstart + x] , (*spriteptr[i]).distance);
 				if  (xstart + x >= 0 && xstart + x < SCREEN_WIDTH && data->map.z_buffer[xstart + x] > (*spriteptr[i]).distance)
 				{
 					for (int j = 0; j < intsize; j++)
 						if (ystart + j >= 0 &&ystart + j < SCREEN_HEIGHT)
 							pixel_put(data->video.img_matrix, *(*spriteptr[i]).img_matrix[0][0], xstart + x, ystart + j);
 				}
-				// printf("%d\n")
 			}
-			// for (int i = 0;i<15;i++)
-			// {
-			// 	if (xstart + i > 0 && ystart + i > 0 && xstart + i < SCREEN_WIDTH && ystart + i < SCREEN_HEIGHT)
-			// 		pixel_put(data->video.img_matrix, tmpcolor, xstart + i, ystart + i);
-			// 	if (xstart + 15 - i > 0 && ystart + i > 0 && xstart + 15 - i < SCREEN_WIDTH && ystart + i < SCREEN_HEIGHT)
-			// 		pixel_put(data->video.img_matrix, tmpcolor, xstart + 15 - i, ystart + i);
-			// }
 		}
-			// for (int i=0; i<SCREEN_HEIGHT; i++)
-			// 		pixel_put(data->video.img_matrix, tmpcolor, tmpcolumn, i);
-
 	}
-	// printf("----------------------------------\n");
-
-
-	// printf("-----------------------\n");
-	// for(int i=0; i < 5; i++)
-	// 	printf("%f\n", (*spriteptr[i]).distance);
-	// printf("-----------------------\n");
 	for(int i=0; i < 5; i++)
 		free_img_matrix(&sprites[i]);
 }
