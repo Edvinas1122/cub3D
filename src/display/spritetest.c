@@ -164,6 +164,7 @@ void	sprite_test(t_data *data)
 					00X00
 		*/
 		//draw the motherfucking sprite
+		//sprites that are partially offscreen aren't drawn at all yet
 		if (spritex_on_screen >= 0 && spritex_on_screen < SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
 		{
 			double	scalefactor;
