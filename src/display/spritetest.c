@@ -61,6 +61,14 @@ void *next_highest(t_sprite sprites[5], double *last_distance)
 	return (ptr);
 }
 
+int	angle_to_column(double angle, t_vect dir)
+{
+	double	tmp;
+
+	tmp = ((double)SCREEN_WIDTH * tan(angle))/2;
+	return (SCREEN_WIDTH/2 + tmp);
+}
+
 void	sprite_test(t_data *data)
 {
 	t_sprite	sprites[5];
@@ -84,6 +92,29 @@ void	sprite_test(t_data *data)
 	tmpdbl = 1000000;
 	for(int i=0; i < 5; i++)
 		spriteptr[i] = (t_sprite *)next_highest(sprites, &tmpdbl);
+
+	//find angle between player vector and sprite angle
+	for(int i=0; i < 5; i++)
+	{
+		t_vect	spritevect;
+		spritevect.x = sprites[i].position.x - data->player.pos.x;
+		spritevect.y = sprites[i].position.y - data->player.pos.y;
+		normalize_vector(&spritevect);
+		double angle2 = atan2(spritevect.y, spritevect.x) - atan2(data->player.vect.y, data->player.vect.x);
+		double tmpcolumn = angle_to_column(angle2, data->player.vect);
+		printf("%f\n", angle2*180/M_PI);
+		t_color tmpcolor;
+		tmpcolor.a = 0;
+		tmpcolor.r = 255;
+		tmpcolor.g = 0;
+		tmpcolor.b = 0;
+		if (tmpcolumn >= 0 && tmpcolumn < SCREEN_WIDTH && (angle2*180/M_PI) > -90 && (angle2*180/M_PI) < 90)
+			for (int i=0; i<SCREEN_HEIGHT; i++)
+					pixel_put(data->video.img_matrix, tmpcolor, tmpcolumn, i);
+
+	}
+	printf("----------------------------------\n");
+
 
 	// printf("-----------------------\n");
 	// for(int i=0; i < 5; i++)
