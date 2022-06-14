@@ -9,7 +9,7 @@ CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c destructor.c
 					open_textures_xmp.c set_utils.c $(VALIDATOR) 
 CONSTRUCTOR := $(addprefix constructor/,$(CONSTRUCTOR_FILES))
 DISPLAY_FILES := display.c minimap.c raycast.c draw_vertical_line.c intersection_distances.c \
-				vertical_line_wall.c
+				vertical_line_wall.c draw_floor_and_ceiling.c
 DISPLAY := $(addprefix display/,$(DISPLAY_FILES))
 CONTROL_FILES := key_hooks.c move_player.c rotate_player.c more.c
 CONTROL := $(addprefix control/,$(CONTROL_FILES))

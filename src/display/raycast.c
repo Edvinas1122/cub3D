@@ -55,11 +55,13 @@ static void	raycast_constructor(t_raycast *raycast, t_data *data)
 	Ussing raycast technique draws a display image of "walls" "ceiling" "floor" in FOV
 	loop iterates for every vertical line in screen width plane
 */
+
 void	render_fov_view(t_data *data)
 {
 	t_raycast	raycast;
 
 	raycast_constructor(&raycast, data);
+	draw_floor_and_ceiling(data);
 	while (raycast.v_line_ct < SCREEN_WIDTH)
 	{
 		raycast.impact = find_intersections(data, &raycast.ray_dir, &raycast);
