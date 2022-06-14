@@ -127,21 +127,31 @@ void	sprite_test(t_data *data)
 		spritey_on_screen = (double)TILE_SIZE/(*spriteptr[i]).distance;
 		spritey_on_screen = SCREEN_HEIGHT/2 + (SCREEN_HEIGHT/2 * spritey_on_screen);
 
+		/*
+			NOTE: spritex_on_screen/spritey_on_screen is the position of the BOTTOM CENTER point of the sprite
+			example: if this is a sprite, the point will be the X
+					00000
+					00000
+					00000
+					00000
+					00X00
+		*/
 		//draw the motherfucking sprite
 		if (spritex_on_screen >= 0 && spritex_on_screen < SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
 		{
-			double	apparentsize;
-			int		intsize;
-			apparentsize = (*spriteptr[i]).size / ((*spriteptr[i]).distance / TILE_SIZE);
-			intsize = (int)apparentsize;
-			int xstart = spritex_on_screen - intsize/2;
-			int ystart = (int)spritey_on_screen - intsize;
-			for (int x = 0; x < intsize; x++)
+			double	scalefactor;
+			int		scaledsize;
+
+			scalefactor = 1 / ((*spriteptr[i]).distance / TILE_SIZE);
+			scaledsize = (int)((*spriteptr[i]).size * scalefactor);
+			int xstart = (int)spritex_on_screen - scaledsize/2;
+			int ystart = (int)spritey_on_screen - scaledsize;
+			for (int x = 0; x < scaledsize; x++)
 			{
-				if  (xstart + x >= 0 && xstart + x < SCREEN_WIDTH && data->map.z_buffer[xstart + x] > (*spriteptr[i]).distance)
+				if  (xstart + x >= 0 && xstart + x < SCREEN_WIDTH && data->map.z_buffer[xstart + x] > (*spriteptr[i]).distance) //checking if wall at this column is closer, and if it's offscreen
 				{
-					for (int j = 0; j < intsize; j++)
-						if (ystart + j >= 0 &&ystart + j < SCREEN_HEIGHT)
+					for (int j = 0; j < scaledsize; j++)
+						if (ystart + j >= 0 &&ystart + j < SCREEN_HEIGHT)	//checking if y val is offscreen
 							pixel_put(data->video.img_matrix, *(*spriteptr[i]).img_matrix[0][0], xstart + x, ystart + j);
 				}
 			}
