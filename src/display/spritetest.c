@@ -1,6 +1,8 @@
 #include "display.h"
 
-
+/*
+	initiating the sprites I'm using for testing
+*/
 static t_sprite	init_test_sprite(t_color color, double x, double y)
 {
 	t_sprite sprite;
@@ -23,6 +25,10 @@ static t_sprite	init_test_sprite(t_color color, double x, double y)
 	return (sprite);
 }
 
+
+/*
+	freeing the sprite memory again - again just for testing
+*/
 void	free_img_matrix(t_sprite *sprite)
 {
 	int i, j;
@@ -44,6 +50,12 @@ void	free_img_matrix(t_sprite *sprite)
 	free(sprite->img_matrix);
 }
 
+/*
+	finds the sprite with the next highest distance. 
+	Meant to be initiated with very high last_distance
+	and have it loop through number of sprites
+	returns pointer to the sprite object
+*/
 void *next_highest(t_sprite sprites[5], double *last_distance)
 {
 	double		tmpdist;
@@ -52,18 +64,19 @@ void *next_highest(t_sprite sprites[5], double *last_distance)
 	tmpdist = -1.0;
 	for (int i = 0; i < 5; i++)
 	{
-		// printf("trying to find a distance that is higher than %f but lower than %f\n", tmpdist, *last_distance);
 		if (sprites[i].distance > tmpdist && sprites[i].distance < *last_distance)
 		{
 			ptr = &sprites[i];
 			tmpdist = sprites[i].distance;
 		}
 	}
-	// printf("%f IS THE HIGHEST!!!\n", tmpdist);
 	*last_distance = tmpdist;
 	return (ptr);
 }
 
+/*
+	calculates and returns the respective y value for an angle
+*/
 int	angle_to_column(double angle, t_vect dir)
 {
 	double	tmp;
@@ -72,6 +85,9 @@ int	angle_to_column(double angle, t_vect dir)
 	return (SCREEN_WIDTH/2 + tmp);
 }
 
+/*
+	The big one: does everything there is to be done for sprites
+*/
 void	sprite_test(t_data *data)
 {
 	t_sprite	sprites[5];
