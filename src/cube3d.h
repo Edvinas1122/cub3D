@@ -104,18 +104,36 @@ typedef struct s_mlx
 	void	*win;
 }	t_mlx;
 
+typedef struct s_sprite_data
+{
+	t_color	***img_matrix;
+	int		width;
+	int		height;
+}	t_sprite_data;
+
+typedef struct s_sprite
+{
+	int				id;
+	t_vect			position;
+	double			scale;
+	//temp values for calc
+	t_vect			on_screen;
+	double			distance;
+}	t_sprite;
+
 /*
 	Main data stack segment
 */
 typedef struct	s_data
 {
-	t_map		map;
-	t_player	player;
-	t_mlx		mlx;
-	t_video		video;
-	t_utils		util;
+	t_map			map;
+	t_player		player;
+	t_mlx			mlx;
+	t_video			video;
+	t_utils			util;
+	t_sprite_data	*sprite_images;
+	t_sprite		*sprite_objects;
 }	t_data;
-
 
 /* 
 	Ussed in diyplay only
@@ -172,15 +190,6 @@ typedef struct s_line
 	int			horizontal_offset;
 	int			vertical_offset;
 }	t_line;
-
-typedef struct s_sprite
-{
-	t_vect	position;
-	t_vect	on_screen;
-	t_color	***img_matrix;
-	double	distance;
-	int		size;
-}	t_sprite;
 
 /* 
 	Ussed in diyplay only
