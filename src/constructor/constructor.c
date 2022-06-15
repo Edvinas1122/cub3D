@@ -71,4 +71,6 @@ void	constructor(t_data *data, char **argv)
 	data->video = set_video_window(data->mlx);
 	data->player = set_player(data->map.bit_map, TILE_SIZE);
 	data->util = set_utils(data);
+	set_sprites(data, "./map_files/sprite_info.ini");
+
 }

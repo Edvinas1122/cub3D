@@ -3,7 +3,7 @@ SO ./map_files/temple_textures/temple2.xpm
 WE ./map_files/temple_textures/temple3.xpm
 EA ./map_files/temple_textures/temple4.xpm
 
-F 1 1 1
+F 40,40,40
 C 0,40,40
 
 11111
