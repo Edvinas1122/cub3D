@@ -36,6 +36,7 @@ typedef struct s_sprite
 	//temp values for calc
 	t_vect			on_screen;
 	double			distance;
+	int				*obj_count;
 }	t_sprite;
 
 /*

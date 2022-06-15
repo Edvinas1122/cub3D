@@ -111,6 +111,7 @@ static t_sprite	*set_sprite_objects(t_list **file)
 	t_sprite	*sprites;
 	char		**info;
 	int			i;
+	int			*obj_count;
 
 	row = *file;
 	i = 0;
@@ -128,6 +129,9 @@ static t_sprite	*set_sprite_objects(t_list **file)
 		row = row->next;
 		i++;
 	}
+	obj_count = malloc(sizeof(int));
+	*obj_count = i;
+	sprites->obj_count = obj_count;
 	return (sprites);
 }
 
