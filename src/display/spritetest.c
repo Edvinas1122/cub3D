@@ -22,6 +22,7 @@ static	t_sprite_data	init_test_sprite_data(t_color color)
 		}
 	}
 	sprite_data.img_matrix[0][0]->a = 255;
+	sprite_data.img_matrix[8][8]->a = 255;
 	return (sprite_data);
 }
 /*
