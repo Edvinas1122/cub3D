@@ -18,9 +18,9 @@ static t_sprite	init_test_sprite(t_color color, double x, double y)
 		{
 			sprite.img_matrix[i][j] = ft_calloc(sizeof(t_color), 1);
 			sprite.img_matrix[i][j]->a = color.a;
-			sprite.img_matrix[i][j]->r = color.r;
-			sprite.img_matrix[i][j]->g = color.g;
-			sprite.img_matrix[i][j]->b = color.b;
+			sprite.img_matrix[i][j]->r = color.r - (int)(j * ((double)color.r/300))- (int)(i * ((double)color.r/300));
+			sprite.img_matrix[i][j]->g = color.g - (int)(j * ((double)color.g/300))- (int)(i * ((double)color.g/300));
+			sprite.img_matrix[i][j]->b = color.b - (int)(j * ((double)color.b/300))- (int)(i * ((double)color.b/300));
 		}
 	}
 	return (sprite);
@@ -94,7 +94,7 @@ void	sprite_test(t_data *data)
 	t_sprite	sprites[5];
 	t_sprite	**spriteptr;
 	double		tmpdbl;
-	t_vect	spritevect;
+	t_vect		spritevect;
 
 	//preparing the testsprites
 	spriteptr = ft_calloc(sizeof(t_sprite *), 5);
@@ -108,8 +108,8 @@ void	sprite_test(t_data *data)
 		UP UNTIL THIS POINT, EVERYTHING SHOULD HAVE HAPPENED IN THE CONSTRUCTOR OF THE PROGRAM
 	*/
 	/*
-		EVERYTHING BELOW NEEDS TO BE DONE AFTER RENDERING THE WALLS
-		anytime it counts up to 5, we will need to iterate through all sprites
+		EVERYTHING BELOW NEEDS TO BE DONE EACH LOOP AFTER RENDERING THE WALLS
+		anytime it counts up to 5, we will need to iterate through all sprites instead
 	*/
 
 	/*
@@ -129,7 +129,6 @@ void	sprite_test(t_data *data)
 		spriteptr[i] = (t_sprite *)next_highest(sprites, &tmpdbl);
 
 
-	//draw each sprite
 	for(int i = 0; i < 5; i++)
 	{
 		//find sprite direction vector
@@ -145,9 +144,9 @@ void	sprite_test(t_data *data)
 		else if (angle < -M_PI)
 			angle += 2*M_PI;
 
-		//find x position of sprite
+		//find x position of sprite (on screen)
 		(*spriteptr[i]).on_screen.x = angle_to_column(angle, data->player.vect);
-		//find y position of sprite
+		//find y position of sprite (on screen)
 		(*spriteptr[i]).distance /= 1/(cos(get_angle(&data->player.vect, &spritevect) / (180/M_PI)));
 		(*spriteptr[i]).on_screen.y = (double)TILE_SIZE/(*spriteptr[i]).distance;
 		(*spriteptr[i]).on_screen.y = SCREEN_HEIGHT/2 + (SCREEN_HEIGHT/2 * (*spriteptr[i]).on_screen.y);
@@ -171,6 +170,19 @@ void	sprite_test(t_data *data)
 		free_img_matrix(&sprites[i]);
 }
 
+static double	get_dim_factor(double distance)
+{
+	double factor;
+
+	factor = distance/1000;
+	if (factor > 1)
+		factor = 1;
+	factor = 1 - factor;
+	if (factor < 0.25)
+		factor = 0.25;
+	return (factor);
+}
+
 void	draw_the_mother_fucking_sprite(t_data *data, t_sprite sprite)
 {
 	double	scalefactor;
@@ -188,7 +200,7 @@ void	draw_the_mother_fucking_sprite(t_data *data, t_sprite sprite)
 		{
 			for (int j = 0; j < scaledsize; j++)
 				if (ystart + j >= 0 &&ystart + j < SCREEN_HEIGHT)	//checking if y val is offscreen
-					pixel_put(data->video.img_matrix, *sprite.img_matrix[0][0], xstart + x, ystart + j);
+					pixel_put(data->video.img_matrix, dim_color(*sprite.img_matrix[(int)(x/scalefactor)][(int)(j/scalefactor)], get_dim_factor(sprite.distance)), xstart + x, ystart + j);
 		}
 	}
 }
