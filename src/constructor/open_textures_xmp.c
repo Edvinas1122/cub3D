@@ -31,7 +31,7 @@ t_color	***create_color_matrix(int width, int height, t_tmp_video *img)
 		i = 0;
 		while (i < width)
 		{
-			cmatrix[j][i] = set_color_fstr(img, i, j);
+			cmatrix[j][i] = set_color_fstr(img, j, i);
 			i++;
 		}
 		j++;

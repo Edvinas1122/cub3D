@@ -37,9 +37,11 @@ t_color	***create_pixel_matrix(char *img_data, int width, int height)
 {
 	t_color	***array;
 	int		i;
-
+	printf("HEIGHT: %d WIDTH: %d\n", height, width);
 	i = 0;
 	array = ft_calloc(height + 1, sizeof(t_color **));
+
+
 	while (height > i)
 	{
 		array[i] = ft_calloc(width + 1, sizeof(t_color *));
@@ -48,3 +50,4 @@ t_color	***create_pixel_matrix(char *img_data, int width, int height)
 	}
 	return (array);
 }
+

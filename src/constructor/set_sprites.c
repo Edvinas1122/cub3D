@@ -95,10 +95,11 @@ static void	set_sprite_images(t_data *data, t_list **file)
 		img.img_data = mlx_get_data_addr(img_header, &img.img_bp, &img.img_sl, &img.img_e);
 		// mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, img_header, 0, 0);
 		printf("\n%s\n", img.img_data);
-		data->sprite_images[i].img_matrix = create_pixel_matrix(img.img_data, data->sprite_images[i].width,
-				data->sprite_images[i].height);
+		// data->sprite_images[i].img_matrix = create_pixel_matrix(img.img_data, data->sprite_images[i].width, data->sprite_images[i].height);
+		data->sprite_images[i].img_matrix = create_color_matrix(data->sprite_images[i].width, data->sprite_images[i].height, &img);
+
 		//color_the_matrix(data->sprite_images[i].img_matrix, 255, 255, 255, data->sprite_images[i].width, data->sprite_images[i].height);
-		// mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, img_header, 0, 0);
+		// mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, img_header, SCREEN_WIDTH, 0);
 		row = row->next;
 		i++;
 	}

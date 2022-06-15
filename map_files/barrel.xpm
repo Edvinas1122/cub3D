@@ -2,7 +2,7 @@
 static char *barrel[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 27 1 ",
-"  c black",
+"  c none",
 ". c gray11",
 "X c #231C0A",
 "o c #312611",

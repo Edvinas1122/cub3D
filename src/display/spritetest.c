@@ -235,7 +235,7 @@ void	draw_the_mother_fucking_sprite(t_data *data, t_sprite_data sprite_data, t_s
 				if (ystart + j >= 0 &&ystart + j < SCREEN_HEIGHT)	//checking if y val is offscreen
 				{
 					double dimfactor;
-					if ((*sprite_data.img_matrix[(int)(x/scalefactor)][(int)(j/scalefactor)]).a != 0) //not drawing if transparency value isn't 0
+					if ((*sprite_data.img_matrix[(int)(x/scalefactor)][(int)(j/scalefactor)]).a == 0) //not drawing if transparency value isn't 0
 					{
 						t_color dimmed;
 						dimfactor = get_dim_factor(sprite.distance);
