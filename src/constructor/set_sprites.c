@@ -121,7 +121,7 @@ static t_sprite	*set_sprite_objects(t_list **file)
 	while (row)
 	{
 		sprites[i].id = ft_atoi(row->content);
-		info = ft_split(&row->content[(sprites[i].id % 10) + 1], ',');
+		info = ft_split(&row->content[(sprites[i].id / 10) + 2], ',');
 		sprites[i].position.x = ft_atoi(info[0]);
 		sprites[i].position.y = ft_atoi(info[1]);
 		sprites[i].scale = ft_atoi(info[2]);
