@@ -21,16 +21,35 @@
 # define TILE_SIZE 100
 # define FOV 90
 
+typedef struct s_sprite_data
+{
+	t_color	***img_matrix;
+	int		width;
+	int		height;
+}	t_sprite_data;
+
+typedef struct s_sprite
+{
+	int				id;
+	t_vect			position;
+	double			scale;
+	//temp values for calc
+	t_vect			on_screen;
+	double			distance;
+}	t_sprite;
+
 /*
 	Main data stack segment
 */
 typedef struct	s_data
 {
-	t_map		map;
-	t_player	player;
-	t_mlx		mlx;
-	t_video		video;
-	t_utils		util;
+	t_map			map;
+	t_player		player;
+	t_mlx			mlx;
+	t_video			video;
+	t_utils			util;
+	t_sprite_data	*sprite_images;
+	t_sprite		*sprite_objects;
 }	t_data;
 
 

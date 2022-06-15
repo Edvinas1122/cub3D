@@ -1,5 +1,6 @@
 #ifndef CUBE3D_RECURRENT
 # define CUBE3D_RECURRENT
+# define SCREEN_WIDTH 1280
 
 #include "cube3d.h"
 
@@ -56,6 +57,7 @@ typedef struct	s_map
 	t_texture	east;
 	t_color		ceiling;
 	t_color		floor;
+	double		z_buffer[SCREEN_WIDTH];
 }	t_map;
 
 /*

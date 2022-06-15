@@ -77,5 +77,6 @@ void	draw_vertical_line(t_data *data, t_raycast *raycast);
 void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);
 double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast);
 void	draw_floor_and_ceiling(t_data *data);
+void	sprite_test(t_data *data);
 
 #endif
