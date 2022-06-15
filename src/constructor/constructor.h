@@ -39,4 +39,6 @@ t_texture	load_texture_files(t_data *data, char *filename);
 t_utils		set_utils(t_data *data);
 void		set_sprites(t_data *data, char *sprite_ini);
 
+t_color	***create_color_matrix(int width, int height, t_tmp_video *img);
+
 #endif

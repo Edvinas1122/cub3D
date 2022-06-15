@@ -1,5 +1,10 @@
 #include "display.h"
 
+// static void	display_hud(t_data *data)
+// {
+
+// }
+
 /*
 	Renders display
 */
@@ -9,6 +14,5 @@ int	render_display(t_data *data)
 	render_fov_view(data);
 	display_minimap(data);
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->video.img, 0, 0);
-
 	return (0);
 }
