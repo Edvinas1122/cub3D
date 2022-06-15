@@ -1,8 +1,14 @@
 CC			:= gcc
-CFLAGS		:= -Wall -Werror -Wextra -g
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+    CFLAGS         =    -g -ggdb -Wall -Wextra -Werror -fsanitize=address
+else
+    CFLAGS        =    -Wall -Wextra -Werror
+endif
 
 # SRC subdirrectories #
-VALIDATOR_FILES := validate_cub_file.c validate_map.c matrix_neighbour_check.c
+VALIDATOR_FILES := validate_cub_file.c validate_map.c matrix_neighbour_check.c map_checks.c \
+					validate_texture_names.c 
 VALIDATOR := $(addprefix validation/,$(VALIDATOR_FILES))
 
 CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c destructor.c \

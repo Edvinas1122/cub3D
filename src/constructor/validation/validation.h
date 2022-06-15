@@ -31,11 +31,16 @@ int	validate_cub_file(t_list **file, t_map_c *tmp);
 /*
 	validate_cub_file members
 */
-void	validate_map(char **map);
+int	validate_map(char **map);
+int	validate_texture_names(t_list **file, t_map_c *tmp);
 
 /*
 	validate_map members
 */
-void	matrix_neighbour_check(char **map, char *victims);
+int	matrix_neighbour_check(char **map, char *victims);
+
+int check_leaping_column_uncloses(char **map, char *valid_char);
+int	check_bottom_row(char **map, char *valid_char);
+int	all_rows_closed(char **map);
 
 #endif

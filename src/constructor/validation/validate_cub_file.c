@@ -1,5 +1,48 @@
 #include "validation.h"
 
+static int	color_conditions(char *number, int *ct, int *i, int *comma)
+{
+	if (ft_isdigit(number[*i]))
+		*ct = *ct + 1;
+	else if (ft_strncmp(&number[*i], ",", 1) && number[*i] != '\0')
+		return (0);
+	else
+	{
+		*comma = *comma + 1;
+		if (*ct > 3)
+			return (0);
+		if (ft_atoi(&number[*i - *ct]) > 255)
+			return (0);
+		*ct = 0;
+	}
+	*i = *i + 1;
+	return (1);
+}
+
+/*
+	Alert ! DANGEROUS!
+*/
+static int	validate_color_numbers(char	*number)
+{
+	int	i;
+	int	ct;
+	int	comma;
+
+	i = 0;
+	ct = 0;
+	comma = 0;
+	if (ft_strlen(number) < 5)
+		return (0);
+	while (number[i - 1])
+	{
+		if (!color_conditions(number, &ct, &i, &comma))
+			return (0);
+	}
+	if (comma != 3)
+		return (0);
+	return (1);
+}
+
 static int	validate_colors(t_list **file, t_map_c *tmp)
 {
 	t_list	*node;
@@ -8,37 +51,14 @@ static int	validate_colors(t_list **file, t_map_c *tmp)
 	if (ft_strncmp(node->content, "F ", 2))
 		return (0);
 	tmp->floor = &(node->content)[2];
+	if (!validate_color_numbers(tmp->floor))
+		return (0);
 	node = node->next;
 	if (ft_strncmp(node->content, "C ", 2))
 		return (0);
 	tmp->ceiling = &(node->content)[2];
-	node = node->next;
-	if (ft_strncmp(node->content, "\0\0", 2))
+	if (!validate_color_numbers(tmp->ceiling))
 		return (0);
-	return (1);
-}
-
-// Invalid delocation
-static int	validate_texture_names(t_list **file, t_map_c *tmp)
-{
-	t_list	*node;
-
-	node = *file;
-	if (ft_strncmp(node->content, "NO ", 3))
-		return (0);
-	tmp->no = &(node->content)[3];
-	node = node->next;
-	if (ft_strncmp(node->content, "SO ", 3))
-		return (0);
-	tmp->so = &(node->content)[3];
-	node = node->next;
-	if (ft_strncmp(node->content, "WE ", 3))
-		return (0);
-	tmp->we = &(node->content)[3];
-	node = node->next;
-	if (ft_strncmp(node->content, "EA ", 3))
-		return (0);
-	tmp->ea = &(node->content)[3];
 	node = node->next;
 	if (ft_strncmp(node->content, "\0\0", 2))
 		return (0);
@@ -63,6 +83,7 @@ int	validate_cub_file(t_list **file, t_map_c *tmp)
 		return (0);
 	}
 	tmp->map = list_to_array_offset(*file, 8);
-	validate_map(tmp->map);
+	if (!validate_map(tmp->map))
+		return (0);
 	return (1);
 }
