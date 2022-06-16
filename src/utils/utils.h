@@ -57,6 +57,6 @@ double	get_angle(t_vect *vector1, t_vect *vector2);
 /*
 	Game mechanics
 */
-int	check_if_wall(t_vect point, char **bitmap);
-
+int			check_if_wall(t_vect point, char **bitmap);
+long long	set_time(void);
 #endif

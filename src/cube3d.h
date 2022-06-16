@@ -19,7 +19,7 @@
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
-# define MOVE_DISTANCE 10
+# define MOVE_DISTANCE 8
 # define TILE_SIZE 100
 # define FOV 90
 # define MOUSE_SENSITIVITY 10
@@ -52,8 +52,9 @@ typedef struct s_utils
 	char		*soundtrack;
 	t_texture	pause;
 	int			game_state;
-	int			frame_rate;
+	int			move_factor;
 	long		time_stamp;
+	long		old_time_stamp;
 }	t_utils;
 
 

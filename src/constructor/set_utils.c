@@ -38,6 +38,6 @@ t_utils set_utils(t_data *data)
 	utils.minimap_size = set_minimap_scale(data);
 	utils.game_state = 1;
 	utils.pause = open_texture_xpm2(data, "./assets/utils/img_pause.xpm");
-	printf("\n%i\n", utils.minimap_size);
+	utils.time_stamp = set_time();
 	return (utils);
 }
