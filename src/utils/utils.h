@@ -39,6 +39,7 @@ t_color	string_to_color(char *str);
 t_color	set_color(int a, int r, int g, int b);
 t_color	dim_color(t_color color, double factor);
 t_color	***create_pixel_matrix(char *img_data, int width, int height);
+void	color_the_matrix(t_color ***img_matrix, int r, int g, int b);
 
 // t_color	set_color_fstr(void *bin);
 void	pixel_put(t_color ***img_matrix, t_color color, int x, int y);

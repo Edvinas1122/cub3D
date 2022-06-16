@@ -72,6 +72,7 @@ typedef struct s_raycast
 
 int		render_display(t_data *data);
 void	display_minimap(t_data *data);
+void	render_menu(t_data *data);
 void	render_fov_view(t_data *data);
 void	draw_vertical_line(t_data *data, t_raycast *raycast);
 void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);

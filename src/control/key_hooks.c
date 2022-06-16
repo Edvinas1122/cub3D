@@ -47,7 +47,7 @@ static void	*get_action_function(int keycode)
 	if (keycode == 48)
 		return (&pop_minimap);
 	if (keycode == 53)
-		return (&close_win);
+		return (&menu_pop);
 	return (NULL);
 }
 
@@ -64,5 +64,25 @@ int	player_action(int keycode, t_data *data)
 int	red_x_win(t_data *data)
 {
 	close_win(data);
+	return (0);
+}
+
+int	player_mouse_action(int x, int y, t_data *data)
+{
+	(void) data;
+	y++;
+	if (x > 1)
+		rotate_player(data, x);
+	else if (x < -1)
+		rotate_player(data, x);
+	mlx_mouse_move(data->mlx.win, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	return (0);
+}
+
+int	player_mouse_action_stop(int x, int y, t_data *data)
+{
+	(void) data;
+	x++;
+	y++;
 	return (0);
 }

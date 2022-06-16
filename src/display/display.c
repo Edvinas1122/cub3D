@@ -10,9 +10,18 @@
 */
 int	render_display(t_data *data)
 {
-	//color_the_matrix(data->video.img_matrix, 255, 0, 0);
-	render_fov_view(data);
-	display_minimap(data);
+	if (data->util.game_state == 1)
+	{
+		render_fov_view(data);
+		display_minimap(data);
+	}
+	else if (data->util.game_state == 0)
+	{
+		data->util.game_state = 2;
+		color_the_matrix(data->video.img_matrix, 80, 80, 80);
+	}
+	else if (data->util.game_state == 2)
+		render_menu(data);
 	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->video.img, 0, 0);
 	return (0);
 }

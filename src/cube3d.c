@@ -4,8 +4,8 @@ static void	control_hooks(t_data *data)
 {
 	mlx_hook(data->mlx.win, 2, 0, player_action, data);
 	mlx_hook(data->mlx.win, 17, 0L, red_x_win, data);
-	//mlx_key_hook(data.mlx->win, khook, &data.mlx);
-	//mlx_mouse_hook(data.mlx->win, mhook, &data.mlx);
+	mlx_hook(data->mlx.win, 6, (1L<<6), player_mouse_action, data);
+	mlx_mouse_hide(data->mlx.win, 0);
 }
 
 int	main(int argc, char **argv)
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 		return (0); //return error
 	constructor(&data, argv);
 	control_hooks(&data);
+	play_audio(data.util.soundtrack);
 	mlx_loop_hook(data.mlx.ptr, render_display, (void *)&data);
 	mlx_loop(data.mlx.ptr);
 	return (0);

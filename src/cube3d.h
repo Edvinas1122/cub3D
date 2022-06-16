@@ -7,6 +7,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
+# include <sys/types.h>
 # include "recurrent.h"
 # include "libs/mlx/mlx.h"
 # include "libs/libft/libft.h"
@@ -15,8 +16,8 @@
 # include "utils/utils.h"
 # include "display/display.h"
 
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1020
 # define MOVE_DISTANCE 25
 # define TILE_SIZE 100
 # define FOV 90
@@ -40,6 +41,19 @@ typedef struct s_sprite
 }	t_sprite;
 
 /*
+	Additional info for future includes
+*/
+typedef struct s_utils
+{
+	t_color		minimap[3];
+	int			minimap_size;
+	char		*soundtrack;
+	t_texture	pause;
+	int			game_state;
+}	t_utils;
+
+
+/*
 	Main data stack segment
 */
 typedef struct	s_data
@@ -54,6 +68,8 @@ typedef struct	s_data
 }	t_data;
 
 
-int	main(int argc, char **argv);
+int		main(int argc, char **argv);
+void	play_audio(char *audio);
+void	end_audio(void);
 
 #endif

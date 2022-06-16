@@ -13,6 +13,8 @@ typedef struct	s_mlx		t_mlx;
 
 int		player_action(int keycode, t_data *data);
 int		red_x_win(t_data *data);
+int		player_mouse_action(int x, int y, t_data *data);
+int		player_mouse_action_stop(int x, int y, t_data *data);
 
 /*
 	Move player functions
@@ -27,10 +29,12 @@ void	move_right(t_data *data);
 */
 void	rotate_player_left(t_data *data);
 void	rotate_player_right(t_data *data);
+void	rotate_player(t_data *data, int x);
 
 /*
 	More
 */
 void	pop_minimap(t_data *data);
 void	close_win(t_data *data);
+void	menu_pop(t_data *data);
 #endif

@@ -119,7 +119,7 @@ static t_sprite	*set_sprite_objects(t_list **file)
 		row = row->next;
 	row = row->next;
 	sprites = ft_calloc(ft_lstsize(row) + 1, sizeof(t_sprite));
-	while (row)
+	while (ft_strncmp(row->content, "\0\0", 2))
 	{
 		sprites[i].id = ft_atoi(row->content);
 		info = ft_split(&row->content[(sprites[i].id / 10) + 2], ',');
@@ -135,6 +135,20 @@ static t_sprite	*set_sprite_objects(t_list **file)
 	return (sprites);
 }
 
+static char	*set_soundtrack(t_list **file)
+{
+	t_list	*row;
+
+	row = *file;
+	while (ft_strncmp(row->content, "\0\0", 2))
+		row = row->next;
+	row = row->next;
+	while (ft_strncmp(row->content, "\0\0", 2))
+		row = row->next;
+	row = row->next;
+	return (ft_strdup(row->content));
+}
+
 void set_sprites(t_data *data, char *sprite_ini)
 {
 	t_list	**file;
@@ -142,4 +156,5 @@ void set_sprites(t_data *data, char *sprite_ini)
 	file = open_sprite_ini(&data->sprite_images, sprite_ini);
 	set_sprite_images(data, file);
 	data->sprite_objects = set_sprite_objects(file);
+	data->util.soundtrack = set_soundtrack(file);
 }

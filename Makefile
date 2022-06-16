@@ -1,5 +1,7 @@
 CC			:= gcc
 DEBUG ?= 0
+AU_FLAG = -DAUDIO
+
 ifeq ($(DEBUG), 1)
     CFLAGS         =    -g -ggdb -Wall -Wextra -Werror -fsanitize=address
 else
@@ -15,17 +17,17 @@ CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c destructor.c
 					open_textures_xmp.c set_utils.c set_sprites.c $(VALIDATOR) 
 CONSTRUCTOR := $(addprefix constructor/,$(CONSTRUCTOR_FILES))
 DISPLAY_FILES := display.c minimap.c raycast.c draw_vertical_line.c intersection_distances.c \
-				vertical_line_wall.c draw_floor_and_ceiling.c spritetest.c
+				vertical_line_wall.c draw_floor_and_ceiling.c spritetest.c menu.c
 DISPLAY := $(addprefix display/,$(DISPLAY_FILES))
 CONTROL_FILES := key_hooks.c move_player.c rotate_player.c more.c
 CONTROL := $(addprefix control/,$(CONTROL_FILES))
 UTIL_FILES := file_to_heap.c find_char.c ft_color.c len_func.c \
 				list_to_array.c match_str.c pixel_matrix.c delete_list.c \
-				math_functions.c game_mech.c
+				math_functions.c game_mech.c fill_screen_color.c
 UTIL := $(addprefix utils/,$(UTIL_FILES))
 # SRC subdirrectories #
 
-SRC_FILES	:= cube3d.c $(CONSTRUCTOR) $(DISPLAY) $(CONTROL) $(UTIL)
+SRC_FILES	:= cube3d.c audio.c $(CONSTRUCTOR) $(DISPLAY) $(CONTROL) $(UTIL)
 SRCDIR		:= src/
 SRC			:= $(addprefix $(SRCDIR),$(SRC_FILES))
 NAME		:= cube3d
@@ -45,6 +47,9 @@ re: clean $(NAME)
 
 $(NAME): $(LIBFT) $(SRC)
 	$(CC) $(CFLAGS) $(SRC) $(LBMLX) $(LIBS) $(LIBFT) -o $(NAME)
+
+audio: $(LIBFT) $(SRC)
+	$(CC) $(CFLAGS) $(AU_FLAG) $(SRC) $(LBMLX) $(LIBS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C $(SRCDIR)libs/libft/

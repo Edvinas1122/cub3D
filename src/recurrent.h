@@ -1,8 +1,9 @@
 #ifndef CUBE3D_RECURRENT
 # define CUBE3D_RECURRENT
-# define SCREEN_WIDTH 1280
+# define SCREEN_WIDTH 1920
 
 #include "cube3d.h"
+
 
 /*
 	X Y for positions & vectors
@@ -24,16 +25,6 @@ typedef	struct	s_color
 	unsigned char	r;
 	unsigned char	a;
 }	t_color;
-
-/*
-	Additional info for future includes
-*/
-typedef struct s_utils
-{
-	t_color	minimap[3];
-	int		minimap_size;
-}	t_utils;
-
 
 /* 
 	texture data

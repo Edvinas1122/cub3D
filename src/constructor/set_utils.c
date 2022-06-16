@@ -36,6 +36,8 @@ t_utils set_utils(t_data *data)
 	utils.minimap[1] = set_color(0, 120, 120, 120);
 	utils.minimap[2] = set_color(0, 255, 0, 0);
 	utils.minimap_size = set_minimap_scale(data);
+	utils.game_state = 1;
+	utils.pause = open_texture_xpm(data, "./assets/utils/img_pause.xpm");
 	printf("\n%i\n", utils.minimap_size);
 	return (utils);
 }

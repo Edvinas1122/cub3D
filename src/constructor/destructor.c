@@ -33,5 +33,6 @@ void	destructor(t_data *data)
 	if (data->mlx.win)
 		mlx_destroy_window(data->mlx.ptr, data->mlx.win);
 	free(data->mlx.ptr);
+	end_audio();
 	exit(0);
 }
