@@ -34,8 +34,11 @@ void	move_forward(t_data *data)
 		move_single_axis(data);
 	else
 	{
-		data->player.pos.x = destination.x;	
-		data->player.pos.y = destination.y;	
+		// while ()
+		// {
+		// }
+			data->player.pos.x = destination.x;	
+			data->player.pos.y = destination.y;	
 	}
 	// data->player.pos.x += data->player.vect.x * MOVE_DISTANCE;
 	// data->player.pos.y += data->player.vect.y * MOVE_DISTANCE;
