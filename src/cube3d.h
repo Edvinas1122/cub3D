@@ -8,6 +8,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <sys/types.h>
+# include <sys/time.h>
 # include "recurrent.h"
 # include "libs/mlx/mlx.h"
 # include "libs/libft/libft.h"
@@ -17,7 +18,7 @@
 # include "display/display.h"
 
 # define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1020
+# define SCREEN_HEIGHT 1080
 # define MOVE_DISTANCE 25
 # define TILE_SIZE 100
 # define FOV 90
@@ -51,6 +52,7 @@ typedef struct s_utils
 	char		*soundtrack;
 	t_texture	pause;
 	int			game_state;
+	unsigned long long	frame_rate;
 }	t_utils;
 
 
