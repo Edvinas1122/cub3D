@@ -19,8 +19,8 @@
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
-# define MOVE_DISTANCE 100
-# define TILE_SIZE 25
+# define MOVE_DISTANCE 25
+# define TILE_SIZE 100
 # define FOV 90
 # define MOUSE_SENSITIVITY 10
 
