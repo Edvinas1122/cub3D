@@ -30,7 +30,7 @@ typedef struct s_line
 */
 typedef struct s_wall
 {
-	int		y;
+	double	y;
 	double	size;
 	int		offset;
 	int		start;

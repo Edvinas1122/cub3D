@@ -70,35 +70,77 @@ int	get_texture_x(t_texture texture, t_raycast *raycast)
 	return ((int)floor(d_x));
 }
 
+// void	draw_vertical_line(t_data *data, t_raycast *raycast)
+// {
+// 	t_texture	texture;
+// 	int			textureX;
+// 	int			textureY;
+// 	double		wallsize;
+// 	int			wallstart;
+// 	int			wally;
+// 	double		d_y;
+// 	t_color		color;
+// 	double		dimfactor;
+
+// 	//get correct texture
+// 	texture = choose_texture(data, raycast->cardinal_direction);
+// 	//get textureX;
+// 	textureX = get_texture_x(texture, raycast);
+// 	//get wallsize
+// 	wallsize = (double)SCREEN_HEIGHT/(raycast->distance/TILE_SIZE);
+// 	wally = 0;
+// 	dimfactor = get_dim_factor(raycast->distance);
+// 	wallstart = (int)(SCREEN_HEIGHT/2 - wallsize/2);
+// 	while (wally < wallsize)
+// 	{
+// 		d_y = (double)((texture.height - 1) * wally)/wallsize;
+// 		textureY = (int)floor(d_y);
+// 		color = *texture.matx[textureX][textureY];
+// 		color = dim_color(color, dimfactor);
+// 		if (wally+wallstart>=0 && wally+wallstart<SCREEN_HEIGHT)
+// 			pixel_put(data->video.img_matrix, color, raycast->v_line_ct, wally + wallstart);
+// 		wally++;
+// 	}
+// 	//get textureY
+// }
+
+int	get_texture_y(t_texture texture, t_wall wall)
+{
+	double d_y;
+
+	d_y = (((double)texture.height - 1) * wall.y);
+	// printf("%f\n", d_y)
+	return ((int)d_y);
+}
+
 void	draw_vertical_line(t_data *data, t_raycast *raycast)
 {
+	t_wall		wall;
 	t_texture	texture;
 	int			textureX;
 	int			textureY;
-	double		wallsize;
-	int			wallstart;
-	int			wally;
-	double		d_y;
-	t_color		color;
+	int			i;
 	double		dimfactor;
-	//get correct texture
+
 	texture = choose_texture(data, raycast->cardinal_direction);
-	//get textureX;
 	textureX = get_texture_x(texture, raycast);
-	//get wallsize
-	wallsize = (double)SCREEN_HEIGHT/(raycast->distance/TILE_SIZE);
-	wally = 0;
+	wall.size = (double)SCREEN_HEIGHT/(raycast->distance / TILE_SIZE);
+	wall.start = (int)(SCREEN_HEIGHT - wall.size) / 2;
+	wall.end = (int)(SCREEN_HEIGHT + wall.size) / 2;
+	if (wall.size < SCREEN_HEIGHT)
+		i = wall.start;
+	else
+		i = 0;
 	dimfactor = get_dim_factor(raycast->distance);
-	wallstart = (int)(SCREEN_HEIGHT/2 - wallsize/2);
-	while (wally < wallsize)
+	while (i < SCREEN_HEIGHT - 1 && i < wall.end)
 	{
-		d_y = (double)((texture.height - 1) * wally)/wallsize;
-		textureY = (int)floor(d_y);
-		color = *texture.matx[textureX][textureY];
-		color = dim_color(color, dimfactor);
-		if (wally+wallstart>=0 && wally+wallstart<SCREEN_HEIGHT)
-			pixel_put(data->video.img_matrix, color, raycast->v_line_ct, wally + wallstart);
-		wally++;
+		wall.y = (double)(i - wall.start) / wall.size;
+		textureY = get_texture_y(texture, wall);
+		// printf("%d\n", textureY);
+		wall.color = *texture.matx[textureX][textureY];
+		wall.color = dim_color(wall.color, dimfactor);
+		// printf("trying to paint into %d %d\n", raycast->v_line_ct, i);
+		pixel_put(data->video.img_matrix, wall.color, raycast->v_line_ct, i);
+		i++;
 	}
-	//get textureY
 }
