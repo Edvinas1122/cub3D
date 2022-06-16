@@ -1,49 +1,6 @@
 #include "display.h"
 void	draw_the_mother_fucking_sprite(t_data *data, t_sprite_data sprite_data, t_sprite sprite);
 
-
-// static	t_sprite_data	init_test_sprite_data(t_color color)
-// {
-// 	t_sprite_data sprite_data;
-
-// 	sprite_data.width = 64;
-// 	sprite_data.height = 64;
-// 	sprite_data.img_matrix = ft_calloc(sizeof(t_color **), sprite_data.width + 1);
-// 	for (int i = 0; i < sprite_data.width; i++)
-// 	{
-// 		sprite_data.img_matrix[i] = ft_calloc(sizeof(t_color *), sprite_data.height + 1);
-// 		for (int j = 0; j < sprite_data.height; j++)
-// 		{
-// 			sprite_data.img_matrix[i][j] = ft_calloc(sizeof(t_color), 1);
-// 			sprite_data.img_matrix[i][j]->a = color.a;
-// 			sprite_data.img_matrix[i][j]->r = color.r - (int)(j * ((double)color.r/sprite_data.height))- (int)(i * ((double)color.r/sprite_data.width));
-// 			sprite_data.img_matrix[i][j]->g = color.g - (int)(j * ((double)color.g/sprite_data.height))- (int)(i * ((double)color.g/sprite_data.width));
-// 			sprite_data.img_matrix[i][j]->b = color.b - (int)(j * ((double)color.b/sprite_data.height))- (int)(i * ((double)color.b/sprite_data.width));
-// 		}
-// 	}
-// 	sprite_data.img_matrix[0][0]->a = 255;
-// 	sprite_data.img_matrix[8][8]->a = 255;
-// 	return (sprite_data);
-// }
-// /*
-// 	initiating the sprites I'm using for testing
-// */
-// static t_sprite	init_test_sprite(t_sprite_data *sprite_data, int id, double x, double y, double scale)
-// {
-// 	t_sprite sprite;
-
-// 	sprite.id = id;
-// 	sprite.position.x = x;
-// 	sprite.position.y = y;
-// 	sprite.scale = scale;
-// 	if (sprite_data[id].width * scale > SCREEN_HEIGHT)	
-// 		sprite.scale = (double)SCREEN_HEIGHT/sprite_data[id].width;
-// 	if (sprite_data[id].height * scale > SCREEN_HEIGHT)//limiting scale so sprite can never be higher than a wall
-// 		sprite.scale = (double)SCREEN_HEIGHT/sprite_data[id].height;
-// 	return (sprite);
-// }
-
-
 /*
 	freeing the sprite memory again - again just for testing (something is wrong here btw)
 */
@@ -116,24 +73,11 @@ void	sprite_test(t_data *data)
 	double			tmpdbl;
 	t_vect			spritevect;
 	int				itemp;
-	//preparing the testsprites
-	// sprite_data[0] = init_test_sprite_data(set_color(0, 255, 0, 0));
-	// sprite_data[1] = init_test_sprite_data(set_color(0, 0, 255, 0));
-	// sprite_data[2] = init_test_sprite_data(set_color(0, 0, 0, 255));
-	// sprite_data[3] = init_test_sprite_data(set_color(0, 255, 255, 0));
-	// sprite_data[4] = init_test_sprite_data(set_color(0, 255, 0, 255));
-	// sprite_data[5] = init_test_sprite_data(set_color(0, 0, 255, 255));
-	// sprites[0] = init_test_sprite(sprite_data, 0, 230, 410, 10);
-	// sprites[1] = init_test_sprite(sprite_data, 1, 350, 310, 6);
-	// sprites[2] = init_test_sprite(sprite_data, 2, 700, 110, 7);
-	// sprites[3] = init_test_sprite(sprite_data, 3, 225, 810, 4);
-	// sprites[4] = init_test_sprite(sprite_data, 4, 563, 213, 5);
-	// sprites[5] = init_test_sprite(sprite_data, 5, 700, 700, 8);
+
 	sprite_data = data->sprite_images;
 	sprites = data->sprite_objects;
-	itemp = 5;
-	// while (sprites[itemp] != NULL)
-	// 	itemp++;
+	itemp = *sprites->obj_count;
+
 	spriteptr = ft_calloc(sizeof(t_sprite *), itemp);
 	/*
 		UP UNTIL THIS POINT, EVERYTHING SHOULD HAVE HAPPENED IN THE CONSTRUCTOR OF THE PROGRAM
@@ -194,7 +138,7 @@ void	sprite_test(t_data *data)
 
 		//draw the motherfucking sprite
 		//sprites currently aren't drawn if more than half of them would be offscreen to the side
-		if ((*spriteptr[i]).on_screen.x >= 0 && (*spriteptr[i]).on_screen.x < SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
+		if ((*spriteptr[i]).on_screen.x + (*spriteptr[i]).scale * sprite_data[(*spriteptr[i]).id].width >= 0 && (*spriteptr[i]).on_screen.x - (*spriteptr[i]).scale * sprite_data[(*spriteptr[i]).id].width< SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
 			draw_the_mother_fucking_sprite(data, sprite_data[(*spriteptr[i]).id],(*spriteptr[i]));
 	}
 	// for(int i=0; i < 6; i++)
