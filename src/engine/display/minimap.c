@@ -29,9 +29,9 @@ static void	draw_player(t_color ***img, t_color color, t_player player, int size
 {
 	t_vect cord;
 
-	cord.x = (player.pos.x / TILE_SIZE);
-	cord.y = (player.pos.y / TILE_SIZE);
-	draw_box(img, color, cord, size);
+	cord.x = (((player.pos.x * 2) - size / 2) / TILE_SIZE);
+	cord.y = (((player.pos.y * 2) - size / 2) / TILE_SIZE);
+	draw_box(img, color, cord, size/2);
 }
 
 /**

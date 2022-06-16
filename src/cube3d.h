@@ -85,6 +85,7 @@ typedef struct	s_data
 
 int		main(int argc, char **argv);
 int		engine(t_data *data);
+void	player_movement(t_data *data);
 void	play_audio(char *audio);
 void	end_audio(void);
 
