@@ -61,6 +61,14 @@ int	player_action(int keycode, t_data *data)
 	return (0);
 }
 
+int	player_stop_movement(int keycode, t_data *data)
+{
+	keycode++;
+	data->player.movement.x = 0;
+	data->player.movement.y = 0;
+	return (0);
+}
+
 int	red_x_win(t_data *data)
 {
 	close_win(data);
@@ -86,3 +94,4 @@ int	player_mouse_action_stop(int x, int y, t_data *data)
 	y++;
 	return (0);
 }
+

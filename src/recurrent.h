@@ -52,15 +52,6 @@ typedef struct	s_map
 	double		z_buffer[SCREEN_WIDTH];
 }	t_map;
 
-/*
-	Player position in a world data
-*/
-typedef struct	s_player
-{
-	t_vect	pos;
-	t_vect	vect;
-}	t_player;
-
 /**
 * @brief video rendering data - mlx image and 
 * @param img pointer to image (image header) - used in mlx_img_put

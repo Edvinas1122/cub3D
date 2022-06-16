@@ -15,11 +15,11 @@
 # include "constructor/constructor.h"
 # include "control/control.h"
 # include "utils/utils.h"
-# include "display/display.h"
+# include "engine/display/display.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
-# define MOVE_DISTANCE 25
+# define MOVE_DISTANCE 10
 # define TILE_SIZE 100
 # define FOV 90
 # define MOUSE_SENSITIVITY 10
@@ -52,9 +52,20 @@ typedef struct s_utils
 	char		*soundtrack;
 	t_texture	pause;
 	int			game_state;
-	unsigned long long	frame_rate;
+	int			frame_rate;
+	long		time_stamp;
 }	t_utils;
 
+
+/*
+	Player position in a world data
+*/
+typedef struct	s_player
+{
+	t_vect	pos;
+	t_vect	vect;
+	t_vect	movement;
+}	t_player;
 
 /*
 	Main data stack segment
@@ -72,6 +83,7 @@ typedef struct	s_data
 
 
 int		main(int argc, char **argv);
+int		engine(t_data *data);
 void	play_audio(char *audio);
 void	end_audio(void);
 

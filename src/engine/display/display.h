@@ -1,7 +1,7 @@
 #ifndef CUBE3D_DISPLAY_H
 # define CUBE3D_DISPLAY_H
 
-#include "../cube3d.h"
+#include "../../cube3d.h"
 
 typedef struct	s_wall		t_wall;
 typedef struct	s_intersect	t_intersect;

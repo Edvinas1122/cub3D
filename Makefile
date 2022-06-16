@@ -19,6 +19,8 @@ CONSTRUCTOR := $(addprefix constructor/,$(CONSTRUCTOR_FILES))
 DISPLAY_FILES := display.c minimap.c raycast.c draw_vertical_line.c intersection_distances.c \
 				vertical_line_wall.c draw_floor_and_ceiling.c spritetest.c menu.c
 DISPLAY := $(addprefix display/,$(DISPLAY_FILES))
+ENGINE_FILES := engine.c $(DISPLAY)
+ENGINE := $(addprefix engine/,$(ENGINE_FILES))
 CONTROL_FILES := key_hooks.c move_player.c rotate_player.c more.c
 CONTROL := $(addprefix control/,$(CONTROL_FILES))
 UTIL_FILES := file_to_heap.c find_char.c ft_color.c len_func.c \
@@ -28,7 +30,7 @@ UTIL_FILES := file_to_heap.c find_char.c ft_color.c len_func.c \
 UTIL := $(addprefix utils/,$(UTIL_FILES))
 # SRC subdirrectories #
 
-SRC_FILES	:= cube3d.c audio.c $(CONSTRUCTOR) $(DISPLAY) $(CONTROL) $(UTIL)
+SRC_FILES	:= cube3d.c audio.c $(CONSTRUCTOR) $(ENGINE) $(CONTROL) $(UTIL)
 SRCDIR		:= src/
 SRC			:= $(addprefix $(SRCDIR),$(SRC_FILES))
 NAME		:= cube3d

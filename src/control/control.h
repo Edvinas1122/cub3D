@@ -15,6 +15,8 @@ int		player_action(int keycode, t_data *data);
 int		red_x_win(t_data *data);
 int		player_mouse_action(int x, int y, t_data *data);
 int		player_mouse_action_stop(int x, int y, t_data *data);
+int		player_stop_movement(int keycode, t_data *data);
+
 
 /*
 	Move player functions
