@@ -23,7 +23,8 @@ CONTROL_FILES := key_hooks.c move_player.c rotate_player.c more.c
 CONTROL := $(addprefix control/,$(CONTROL_FILES))
 UTIL_FILES := file_to_heap.c find_char.c ft_color.c len_func.c \
 				list_to_array.c match_str.c pixel_matrix.c delete_list.c \
-				math_functions.c game_mech.c fill_screen_color.c
+				math_functions.c game_mech.c fill_screen_color.c \
+				xpm_to_texture.c
 UTIL := $(addprefix utils/,$(UTIL_FILES))
 # SRC subdirrectories #
 

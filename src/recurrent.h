@@ -31,6 +31,7 @@ typedef	struct	s_color
 */
 typedef struct	s_texture
 {
+	void	*img_header;
 	t_color	***matx;
 	int 	height;
 	int		width;

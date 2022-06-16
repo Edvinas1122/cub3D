@@ -21,6 +21,7 @@
 # define MOVE_DISTANCE 25
 # define TILE_SIZE 100
 # define FOV 90
+# define MOUSE_SENSITIVITY 10
 
 typedef struct s_sprite_data
 {

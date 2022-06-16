@@ -53,7 +53,6 @@ t_texture	open_texture_xpm(t_data *data, char *filename)
 		destructor(data);
 	img.img_data = mlx_get_data_addr(imgptr, &img.img_bp, &img.img_sl, &img.img_e);
 	texture.matx = create_color_matrix(texture.width, texture.height, &img);
-	printf("\n%s\n", img.img_data);
 	return (texture);
 }
 

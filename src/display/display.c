@@ -18,7 +18,7 @@ int	render_display(t_data *data)
 	else if (data->util.game_state == 0)
 	{
 		data->util.game_state = 2;
-		color_the_matrix(data->video.img_matrix, 80, 80, 80);
+		color_the_matrix(data->video.img_matrix, 85, 80, 85);
 	}
 	else if (data->util.game_state == 2)
 		render_menu(data);
