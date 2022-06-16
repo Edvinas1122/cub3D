@@ -66,6 +66,8 @@ typedef struct	s_player
 	t_vect	pos;
 	t_vect	vect;
 	t_vect	movement;
+	int		dash_cooldown;
+	int		dash;
 }	t_player;
 
 /*

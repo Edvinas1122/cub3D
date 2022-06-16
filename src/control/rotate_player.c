@@ -16,5 +16,6 @@ void	rotate_player(t_data *data, int x)
 
 	strenght = x;
 	strenght /= MOUSE_SENSITIVITY;
+	//data->player.rotate = strenght;
 	rotate_vector(&data->player.vect, strenght);
 }

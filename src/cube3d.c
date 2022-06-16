@@ -15,7 +15,10 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc < 2)
-		return (0); //return error
+	{
+		ft_putstr_fd("No map input", 1);
+		return (0);
+	}
 	constructor(&data, argv);
 	control_hooks(&data);
 	play_audio(data.util.soundtrack);
