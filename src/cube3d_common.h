@@ -81,4 +81,30 @@ typedef struct s_mlx
 	void	*win;
 }	t_mlx;
 
+typedef struct s_sprite_data
+{
+	t_color	***img_matrix;
+	int		width;
+	int		height;
+}	t_sprite_data;
+
+typedef struct s_sprite_anim
+{
+	t_color	****img_matrix;
+	int		width;
+	int		height;
+}	t_sprite_anim;
+
+typedef struct s_sprite
+{
+	int				id;
+	t_vect			position;
+	double			scale;
+	int				frames;
+	//temp values for calc
+	t_vect			on_screen;
+	double			distance;
+	int				*obj_count;
+}	t_sprite;
+
 #endif 

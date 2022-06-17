@@ -25,32 +25,6 @@
 # define FOV 90
 # define MOUSE_SENSITIVITY 10
 
-typedef struct s_sprite_data
-{
-	t_color	***img_matrix;
-	int		width;
-	int		height;
-}	t_sprite_data;
-
-typedef struct s_sprite_anim
-{
-	t_color	****img_matrix;
-	int		frames;
-	int		width;
-	int		height;
-}	t_sprite_anim;
-
-typedef struct s_sprite
-{
-	int				id;
-	t_vect			position;
-	double			scale;
-	//temp values for calc
-	t_vect			on_screen;
-	double			distance;
-	int				*obj_count;
-}	t_sprite;
-
 /*
 	Additional info for future includes
 */
