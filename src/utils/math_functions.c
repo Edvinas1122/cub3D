@@ -27,20 +27,6 @@ double	point_distance(t_vect v1, t_vect v2)
 	return (sqrt(x*x+y*y));
 }
 
-/*
-	Normalize vector treshold
-*/
-void	normalize_vector_t(t_vect *vector)
-{
-	double len;
-	
-	len = sqrt((vector->x * vector->x) + (vector->y * vector->y));
-	if (len > 0.2)
-	{
-		vector->x /= len;
-		vector->y /= len;
-	}
-}
 
 /*
 	Normalize vector

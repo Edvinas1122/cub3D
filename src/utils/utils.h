@@ -54,7 +54,7 @@ double	point_distance(t_vect v1, t_vect v2);
 void	normalize_vector(t_vect *vector);
 void	normalize_vector_t(t_vect *vector);
 double	get_angle(t_vect *vector1, t_vect *vector2);
-
+double	find_angle_vecotrs(t_vect vect1, t_vect vect2);
 /*
 	Game mechanics
 */
