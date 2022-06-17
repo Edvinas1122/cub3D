@@ -33,7 +33,7 @@ static void find_angle_quadrant(t_intersect *data, t_vect *dir)
 }
 
 // short coment here 
-double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast)
+double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast, int doorflag)
 {
 	t_intersect	data;
 
@@ -41,6 +41,10 @@ double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast)
 	find_factor(&data, pos, dir);
 	data.dist_to_vert = TILE_SIZE/(cos(data.angle));
 	data.dist_to_hor = TILE_SIZE/(cos(M_PI/2 - data.angle));
+	if (doorflag && raycast->cardinal_direction == 1)
+		data.dist_to_hor /= 2;
+	if (doorflag && raycast->cardinal_direction == 3)
+		data.dist_to_vert /= 2;
 	data.vert_factor /= TILE_SIZE;
 	data.hor_factor /= TILE_SIZE;
 	data.dist_to_vert = fabs(data.dist_to_vert * data.vert_factor);

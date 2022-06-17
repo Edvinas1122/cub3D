@@ -65,30 +65,35 @@ static int	validate_colors(t_list **file, t_map_c *tmp)
 	return (1);
 }
 
-t_door *get_doormap_line(char *map)
+t_door *get_doormap_line(char *map, t_door **doors)
 {
-	int	max_y;
-	int	i;
+	int		doorcount;
+	int		max_y;
+	int		i;
 	t_door	*doormap_line;
 
+	doorcount = 0;
 	max_y = 0;
 	while (map[max_y])
 		max_y++;
-	doormap_line = ft_calloc(sizeof(t_door ), max_y + 1);
+	doormap_line = ft_calloc(sizeof(t_door), max_y + 1);
 	i = 0;
 	while (i < max_y)
 	{
 		if (map[i] == '2')
 		{
 			doormap_line[i].solid = 1;
-			doormap_line[i].closed_percentage = 50;
+			doormap_line[i].moving = 0;
+			doormap_line[i].closed_percentage = 0;
+			doors[doorcount] = &doormap_line[i];
+			doorcount++;
 		}
 		i++;
 	}
 	return (doormap_line);
 }
 
-t_door	**get_doormap(char	**map)
+t_door	**get_doormap(char	**map, t_door **doors)
 {
 	int	max_x;
 	int	i;
@@ -101,11 +106,34 @@ t_door	**get_doormap(char	**map)
 	i = 0;
 	while (i < max_x)
 	{
-		doormap[i] = get_doormap_line(map[i]);
+		doormap[i] = get_doormap_line(map[i], doors);
 		i++;
 	}
 	return (doormap);
 }
+
+int	count_doors(char **map)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[j])
+		{
+			if (map[i][j] == '2')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
+}
+
 
 /* 
 	Validates cub file for defined standart
@@ -127,6 +155,7 @@ int	validate_cub_file(t_list **file, t_map_c *tmp)
 	tmp->map = list_to_array_offset(*file, 8);
 	if (!validate_map(tmp->map))
 		return (0);
-	tmp->doormap = get_doormap(tmp->map);
+	tmp->doors = ft_calloc(sizeof(t_door *), count_doors(tmp->map) + 1);
+	tmp->doormap = get_doormap(tmp->map, tmp->doors);
 	return (1);
 }

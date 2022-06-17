@@ -18,6 +18,7 @@ typedef struct	s_map_c
 	t_list	**file;
 	char	**map;
 	t_door	**doormap;
+	t_door	**doors;
 	char	*no;
 	char	*so;
 	char	*we;

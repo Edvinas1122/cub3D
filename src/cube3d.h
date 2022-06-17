@@ -95,6 +95,7 @@ typedef struct	s_data
 	t_video			video;
 	t_utils			util;
 	t_keypress		keys;
+	t_door			**doors;
 	int				count;
 	t_sprite_data	*sprite_images;
 	t_sprite		*sprite_objects;

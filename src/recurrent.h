@@ -8,6 +8,7 @@ typedef struct s_door
 {
 	int	solid;
 	int	closed_percentage;
+	int	moving;
 }	t_door;
 
 /*

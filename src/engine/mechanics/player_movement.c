@@ -6,7 +6,7 @@ static void	move_single_axis(t_data *data)
 
 	destination.x = data->player.pos.x + data->player.movement.x * data->util.move_factor;
 	destination.y = data->player.pos.y;
-	if (!check_if_wall(data, destination, 1))
+	if (!check_if_wall(data, destination))
 	{
 		data->player.pos.x = destination.x;	
 		data->player.pos.y = destination.y;	
@@ -15,7 +15,7 @@ static void	move_single_axis(t_data *data)
 	{
 		destination.x = data->player.pos.x;
 		destination.y = data->player.pos.y + data->player.movement.y * data->util.move_factor;
-		if (!check_if_wall(data, destination, 1))
+		if (!check_if_wall(data, destination))
 		{
 			data->player.pos.x = destination.x;	
 			data->player.pos.y = destination.y;	
@@ -42,10 +42,10 @@ void	player_movement(t_data *data)
 	dash(data);
 	set_movement_vector(data);
 	unset_movement_vector(data);
-	printf("\nvecotr x: %f\nvecotr y: %f\n", data->player.movement.x, data->player.movement.y);
+	// printf("\nvecotr x: %f\nvecotr y: %f\n", data->player.movement.x, data->player.movement.y);
 	destination.x = data->player.pos.x + data->player.movement.x * data->util.move_factor;
 	destination.y = data->player.pos.y + data->player.movement.y * data->util.move_factor;
-	if (check_if_wall(data, destination, 1))
+	if (check_if_wall(data, destination))
 		move_single_axis(data);
 	else
 	{

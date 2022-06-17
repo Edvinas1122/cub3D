@@ -41,15 +41,17 @@ static double	get_dim_factor(double distance)
 // 	draw_wall_line(data, raycast, &wall);
 // }
 
-t_texture	choose_texture(t_data *data, int direction)
+t_texture	choose_texture(t_data *data, t_raycast *raycast)
 {
-	if (direction == 1)
+	if (raycast->isdoor == 1)
+		return (data->map.south);		//door texture instead
+	if (raycast->cardinal_direction == 1)
 		return (data->map.north);
-	if (direction == 2)
+	if (raycast->cardinal_direction == 2)
 		return (data->map.south);
-	if (direction == 3)
+	if (raycast->cardinal_direction == 3)
 		return (data->map.west);
-	if (direction == 4)
+	if (raycast->cardinal_direction == 4)
 		return (data->map.east);
 	return (data->map.north);
 }
@@ -104,12 +106,32 @@ int	get_texture_x(t_texture texture, t_raycast *raycast)
 // 	//get textureY
 // }
 
+int	get_texture_x_door(t_data *data, t_texture texture, t_raycast *raycast)
+{
+	double d_x;
+	int x = raycast->impact.x / TILE_SIZE;
+	int y = raycast->impact.y / TILE_SIZE;
+	t_door	door;
+
+	door = data->map.doormap[x][y];
+	if (raycast->cardinal_direction == 1)
+		d_x = fmod(raycast->impact.x, TILE_SIZE);
+	if (raycast->cardinal_direction == 3)
+		d_x = fmod(raycast->impact.y, TILE_SIZE);
+	d_x += (100 - door.closed_percentage);
+	if (d_x > 100)
+		d_x = 100;
+	if (d_x < 0)
+		d_x = 0;
+	d_x *= (double)(texture.width - 1)/100;
+	return ((int)floor(d_x));
+}
+
 int	get_texture_y(t_texture texture, t_wall wall)
 {
 	double d_y;
 
 	d_y = (((double)texture.height - 1) * wall.y);
-	// printf("%f\n", d_y)
 	return ((int)d_y);
 }
 
@@ -122,8 +144,11 @@ void	draw_vertical_line(t_data *data, t_raycast *raycast)
 	int			i;
 	double		dimfactor;
 
-	texture = choose_texture(data, raycast->cardinal_direction);
-	textureX = get_texture_x(texture, raycast);
+	texture = choose_texture(data, raycast);
+	if (raycast->isdoor == 1)
+		textureX = get_texture_x_door(data, texture, raycast);
+	else
+		textureX = get_texture_x(texture, raycast);
 	wall.size = (double)SCREEN_HEIGHT/(raycast->distance / TILE_SIZE);
 	wall.start = (int)(SCREEN_HEIGHT - wall.size) / 2;
 	wall.end = (int)(SCREEN_HEIGHT + wall.size) / 2;
@@ -136,10 +161,8 @@ void	draw_vertical_line(t_data *data, t_raycast *raycast)
 	{
 		wall.y = (double)(i - wall.start) / wall.size;
 		textureY = get_texture_y(texture, wall);
-		// printf("%d\n", textureY);
 		wall.color = *texture.matx[textureX][textureY];
 		wall.color = dim_color(wall.color, dimfactor);
-		// printf("trying to paint into %d %d\n", raycast->v_line_ct, i);
 		pixel_put(data->video.img_matrix, wall.color, raycast->v_line_ct, i);
 		i++;
 	}
