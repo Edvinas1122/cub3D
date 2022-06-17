@@ -53,7 +53,7 @@ static void	draw_2d_minimap(t_color ***img, char **bit_map, t_color color[3], in
 				draw_box(img, color[0], cord, minimap_size);
 			else if (bit_map[(int)cord.y][(int)cord.x] == '2')
 				draw_box(img, color[2], cord, minimap_size);
-			else
+			else if (bit_map[(int)cord.y][(int)cord.x] != ' ')
 				draw_box(img, color[1], cord, minimap_size);
 			cord.x++;
 		}
