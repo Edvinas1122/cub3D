@@ -9,7 +9,7 @@
 # include <stdio.h>
 # include <sys/types.h>
 # include <sys/time.h>
-# include "recurrent.h"
+# include "cube3d_common.h"
 # include "libs/mlx/mlx.h"
 # include "libs/libft/libft.h"
 # include "constructor/constructor.h"
@@ -31,6 +31,14 @@ typedef struct s_sprite_data
 	int		width;
 	int		height;
 }	t_sprite_data;
+
+typedef struct s_sprite_anim
+{
+	t_color	****img_matrix;
+	int		frames;
+	int		width;
+	int		height;
+}	t_sprite_anim;
 
 typedef struct s_sprite
 {
@@ -98,8 +106,20 @@ typedef struct	s_data
 	t_door			**doors;
 	int				count;
 	t_sprite_data	*sprite_images;
+	t_sprite_anim	*sprite_anim;
 	t_sprite		*sprite_objects;
+	t_sprite		**sprite_arr;
 }	t_data;
+
+typedef struct	s_draw_sprite
+{
+	t_sprite_data	*sprite_images;
+	t_sprite		*objects;
+	t_sprite		**sprite_arr;
+	double			tmpdbl;
+	t_vect			sprite_vect;
+	int				obj_count;
+}	t_draw_sprite;
 
 
 int		main(int argc, char **argv);

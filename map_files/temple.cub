@@ -3,9 +3,16 @@ SO ./assets/textures/temple_textures/example.xpm
 WE ./assets/textures/temple_textures/example.xpm
 EA ./assets/textures/temple_textures/example.xpm
 
-F 40,40,40
+F 64,64,64
 C 0,40,40
 
-11111
-100E1
-11111
+1111111111
+1000000001
+1000000001
+1000000001
+1000000001
+1010101101
+1000000001
+1000000001
+1000N00001
+1111111111

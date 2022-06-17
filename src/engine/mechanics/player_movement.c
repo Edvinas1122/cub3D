@@ -1,5 +1,8 @@
 #include "../../cube3d.h"
 
+/*
+	Controls colision
+*/
 static void	move_single_axis(t_data *data)
 {
 	t_vect	destination;

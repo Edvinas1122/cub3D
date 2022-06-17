@@ -79,4 +79,3 @@ int	player_mouse_action_stop(int x, int y, t_data *data)
 	y++;
 	return (0);
 }
-

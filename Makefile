@@ -5,7 +5,7 @@ AU_FLAG = -DAUDIO
 ifeq ($(DEBUG), 1)
     CFLAGS         =    -g -ggdb -Wall -Wextra -Werror -fsanitize=address
 else
-    CFLAGS        =    -Wall -Wextra -Werror
+    CFLAGS        =    -g -Wall -Wextra -Werror
 endif
 
 # SRC subdirrectories #
@@ -17,7 +17,7 @@ CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c destructor.c
 					open_textures_xmp.c set_utils.c set_sprites.c $(VALIDATOR) 
 CONSTRUCTOR := $(addprefix constructor/,$(CONSTRUCTOR_FILES))
 DISPLAY_FILES := display.c minimap.c raycast.c draw_vertical_line.c intersection_distances.c \
-				vertical_line_wall.c draw_floor_and_ceiling.c spritetest.c menu.c
+				vertical_line_wall.c draw_floor_and_ceiling.c sprite_draw.c menu.c
 DISPLAY := $(addprefix display/,$(DISPLAY_FILES))
 MECHANICS_FILES := player_movement.c move_player.c movement_vector.c
 MECHANICS := $(addprefix mechanics/,$(MECHANICS_FILES))
