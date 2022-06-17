@@ -4,6 +4,12 @@
 
 #include "cube3d.h"
 
+typedef struct s_door
+{
+	int	solid;
+	int	closed_percentage;
+	int	moving;
+}	t_door;
 
 /*
 	X Y for positions & vectors
@@ -43,6 +49,7 @@ typedef struct	s_texture
 typedef struct	s_map
 {
 	char		**bit_map;
+	t_door		**doormap;
 	t_texture	north;
 	t_texture	south;
 	t_texture 	west;

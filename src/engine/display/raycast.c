@@ -4,16 +4,36 @@ static t_vect	find_intersections(t_data *data, t_vect *dir, t_raycast *raycast)
 {
 	t_vect	tmp;
 	double	tmpdist;
+	int		hit_wall;
+	int		hit_door;
+
+	hit_door = 0;
 	// tmp = malloc(sizeof(t_vect));
 	tmp.x = data->player.pos.x;
 	tmp.y = data->player.pos.y;
 	while (42)
 	{
-		tmpdist = intersection_distances(tmp, dir, raycast);
+		tmpdist = intersection_distances(tmp, dir, raycast, 0);
 		tmp.x += (tmpdist * dir->x);
 		tmp.y += (tmpdist * dir->y);
-		if (check_if_wall(tmp, data->map.bit_map))
+		hit_wall = check_if_wall(data, tmp);
+		if (hit_wall == 2)
+		{
+			tmpdist = intersection_distances(tmp, dir, raycast, 1);
+			tmp.x += (tmpdist * dir->x);
+			tmp.y += (tmpdist * dir->y);
+			hit_wall = check_if_wall(data, tmp);
+			if (hit_wall == 2 && check_door(data, tmp, raycast->cardinal_direction))
+			{
+				raycast->isdoor = 1;
+				break ;
+			}
+		}
+		if (hit_wall == 1)
+		{
+			raycast->isdoor = 0;
 			break ;
+		}
 	}
 	if (raycast->cardinal_direction == 1 && data->player.pos.y < tmp.y)
 		raycast->cardinal_direction = 2;

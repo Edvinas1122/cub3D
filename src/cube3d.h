@@ -48,7 +48,7 @@ typedef struct s_sprite
 */
 typedef struct s_utils
 {
-	t_color		minimap[3];
+	t_color		minimap[4];
 	int			minimap_size;
 	char		*soundtrack;
 	t_texture	pause;
@@ -95,6 +95,7 @@ typedef struct	s_data
 	t_video			video;
 	t_utils			util;
 	t_keypress		keys;
+	t_door			**doors;
 	int				count;
 	t_sprite_data	*sprite_images;
 	t_sprite		*sprite_objects;

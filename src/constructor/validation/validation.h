@@ -9,7 +9,7 @@ typedef struct	s_map		t_map;
 typedef struct	s_texture	t_texture;
 typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
-
+typedef struct	s_door		t_door;
 /*
 	Temporary data, relarted to a validation process
 */
@@ -17,6 +17,8 @@ typedef struct	s_map_c
 {
 	t_list	**file;
 	char	**map;
+	t_door	**doormap;
+	t_door	**doors;
 	char	*no;
 	char	*so;
 	char	*we;

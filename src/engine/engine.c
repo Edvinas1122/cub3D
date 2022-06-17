@@ -17,12 +17,33 @@ static void	set_time_stamp(t_data *data)
 	data->util.move_factor = move_factor;
 }
 
+static void	update_doors(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->doors[i])
+	{
+		if ((*data->doors[i]).closed_percentage == 100)
+			(*data->doors[i]).moving = -10;
+		if ((*data->doors[i]).closed_percentage == 0)
+			(*data->doors[i]).moving = 10;
+		(*data->doors[i]).closed_percentage += (*data->doors[i]).moving;
+		if ((*data->doors[i]).closed_percentage > 100)
+			(*data->doors[i]).closed_percentage = 100;
+		if ((*data->doors[i]).closed_percentage < 0)
+			(*data->doors[i]).closed_percentage = 0;
+		i++;
+	}
+}
+
 int	engine(t_data *data)
 {
 	if (data->count++ > 10000000)
 		data->count = 0;
 	set_time_stamp(data);
 	player_movement(data);
+	update_doors(data);
 	render_display(data);
 	return (0);
 }

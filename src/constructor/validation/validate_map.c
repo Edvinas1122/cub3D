@@ -63,9 +63,10 @@ static int	valid_map_characters(char **map, char *valid_char)
 /* 
 	Validates map segment of a file for all required criteria 
 */
+// TODO: invalidate doors that aren't enclosed by walls
 int	validate_map(char **map)
 {
-	if (!valid_map_characters(map, "10NWESD "))
+	if (!valid_map_characters(map, "210NWESD "))
 	{
 		ft_putstr_fd("Invalid map character\n", 1);
 		return (0);
