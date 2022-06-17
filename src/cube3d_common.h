@@ -4,7 +4,6 @@
 
 #include "cube3d.h"
 
-
 /*
 	X Y for positions & vectors
 */
