@@ -84,7 +84,7 @@ t_door *get_doormap_line(char *map, t_door **doors)
 		{
 			doormap_line[i].solid = 1;
 			doormap_line[i].moving = 0;
-			doormap_line[i].closed_percentage = 0;
+			doormap_line[i].closed_percentage = 100;
 			doors[doorcount] = &doormap_line[i];
 			doorcount++;
 		}

@@ -39,4 +39,6 @@ void	rotate_player(t_data *data, int x);
 void	pop_minimap(t_data *data);
 void	close_win(t_data *data);
 void	menu_pop(t_data *data);
+void	toggle_door(t_data *data);
+
 #endif

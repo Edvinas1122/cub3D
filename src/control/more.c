@@ -16,6 +16,25 @@ void	pop_minimap(t_data *data)
 	}
 }
 
+void	toggle_door(t_data *data)
+{
+	int x;
+	int y;
+	t_vect	tmp;
+
+	tmp.x = data->player.pos.x + data->player.vect.x * (TILE_SIZE);
+	tmp.y = data->player.pos.y + data->player.vect.y * (TILE_SIZE);
+	x = tmp.x / TILE_SIZE;
+	y = tmp.y / TILE_SIZE;
+	if (data->map.bit_map[y][x] == '2')
+	{
+		if (data->map.doormap[x][y].closed_percentage == 100)
+			data->map.doormap[x][y].moving = -5;
+		else if (data->map.doormap[x][y].closed_percentage == 0)
+			data->map.doormap[x][y].moving = 5;
+	}
+}
+
 void	menu_pop(t_data *data)
 {
 	static int i;

@@ -10,6 +10,8 @@ static void	*get_action_function(int keycode, t_data *data)
 		data->keys.key_s[0] = 1;
 	if (keycode == 13 || keycode == 126)
 		data->keys.key_w[0] = 1;
+	if (keycode == 14)
+		return (&toggle_door);
 	if (keycode == 49)
 		data->keys.key_space[0] = 1;
 	if (keycode == 123)

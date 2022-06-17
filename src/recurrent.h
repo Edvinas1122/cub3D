@@ -54,6 +54,7 @@ typedef struct	s_map
 	t_texture	south;
 	t_texture 	west;
 	t_texture	east;
+	t_texture	door;
 	t_color		ceiling;
 	t_color		floor;
 	double		z_buffer[SCREEN_WIDTH];

@@ -44,7 +44,7 @@ static double	get_dim_factor(double distance)
 t_texture	choose_texture(t_data *data, t_raycast *raycast)
 {
 	if (raycast->isdoor == 1)
-		return (data->map.south);		//door texture instead
+		return (data->map.door);
 	if (raycast->cardinal_direction == 1)
 		return (data->map.north);
 	if (raycast->cardinal_direction == 2)

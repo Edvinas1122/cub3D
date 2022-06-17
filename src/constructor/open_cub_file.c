@@ -30,7 +30,7 @@ static t_map	assign_map(t_data *data, t_map_c tmp)
 	map.south = load_texture_files(data, tmp.so);
 	map.east = load_texture_files(data, tmp.ea);
 	map.west = load_texture_files(data, tmp.we);
-
+	map.door = load_texture_files(data, "./map_files/zo_portail2.xpm");
 	return (map);
 }
 
