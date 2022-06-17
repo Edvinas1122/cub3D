@@ -16,10 +16,11 @@
 # include "control/control.h"
 # include "utils/utils.h"
 # include "engine/display/display.h"
+# include "engine/mechanics/mechanics.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
-# define MOVE_DISTANCE 8
+# define MOVE_DISTANCE 6
 # define TILE_SIZE 100
 # define FOV 90
 # define MOUSE_SENSITIVITY 10
@@ -67,16 +68,20 @@ typedef struct	s_player
 	t_vect	vect;
 	t_vect	movement;
 	int		dash_cooldown;
-	int		dash;
 }	t_player;
 
+/*
+	provides info if key is pressed
+	or released
+	and	info if it was read
+*/
 typedef struct	s_keypress
 {
-	char	key_w;
-	char	key_s;
-	char	key_a;
-	char	key_d;
-	char	key_space;
+	char	key_w[2];
+	char	key_s[2];
+	char	key_a[2];
+	char	key_d[2];
+	char	key_space[2];
 }	t_keypress;
 
 /*
@@ -90,6 +95,7 @@ typedef struct	s_data
 	t_video			video;
 	t_utils			util;
 	t_keypress		keys;
+	int				count;
 	t_sprite_data	*sprite_images;
 	t_sprite		*sprite_objects;
 }	t_data;

@@ -1,15 +1,17 @@
 #include "control.h"
 
-static void	*get_action_function(int keycode)
+static void	*get_action_function(int keycode, t_data *data)
 {
 	if (keycode == 0)
-		return (&move_left);
+		data->keys.key_a[0] = 1;
 	if (keycode == 2)
-		return (&move_right);
+		data->keys.key_d[0] = 1;
 	if (keycode == 1 || keycode == 125)
-		return (&move_backwards);
+		data->keys.key_s[0] = 1;
 	if (keycode == 13 || keycode == 126)
-		return (&move_forward);
+		data->keys.key_w[0] = 1;
+	if (keycode == 49)
+		data->keys.key_space[0] = 1;
 	if (keycode == 123)
 		return (&rotate_player_left);
 	if (keycode == 124)
@@ -25,9 +27,7 @@ int	player_action(int keycode, t_data *data)
 {
 	void (*action)(t_data *);
 
-	if (keycode == 49 && data->player.dash_cooldown == 0)
-		data->player.dash = 1;
-	action = get_action_function(keycode);
+	action = get_action_function(keycode, data);
 	if (action)
 		action(data);
 	return (0);
@@ -36,12 +36,16 @@ int	player_action(int keycode, t_data *data)
 // subtract from movement acording to dir
 int	player_stop_movement(int keycode, t_data *data)
 {
-	if (keycode == 0 || keycode == 2 || keycode == 1
-		|| keycode == 13)
-	{
-		data->player.movement.x = 0;
-		data->player.movement.y = 0;
-	}
+	if (keycode == 0)
+		data->keys.key_a[0] = 0;
+	if (keycode == 2)
+		data->keys.key_d[0] = 0;
+	if (keycode == 1 || keycode == 125)
+		data->keys.key_s[0] = 0;
+	if (keycode == 13 || keycode == 126)
+		data->keys.key_w[0] = 0;
+	if (keycode == 49)
+		data->keys.key_space[0] = 0;
 	return (0);
 }
 
