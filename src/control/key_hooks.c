@@ -45,7 +45,10 @@ int	player_stop_movement(int keycode, t_data *data)
 	if (keycode == 13 || keycode == 126)
 		data->keys.key_w[0] = 0;
 	if (keycode == 49)
+	{
+		data->keys.key_space[1] = 0;
 		data->keys.key_space[0] = 0;
+	}
 	return (0);
 }
 
