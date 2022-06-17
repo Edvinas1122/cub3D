@@ -1,7 +1,9 @@
 #include "control.h"
 
+// movement start begin problem because 
 void	move_forward(t_data *data)
 {
+	data->keys.key_a = 1;
 	data->player.movement.x = data->player.vect.x;
 	data->player.movement.y = data->player.vect.y;
 }

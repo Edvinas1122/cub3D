@@ -41,6 +41,8 @@ static void	dash(t_data *data)
 		data->util.move_factor = 80;
 }
 
+
+
 void	player_movement(t_data *data)
 {
 	t_vect			destination;
@@ -48,6 +50,7 @@ void	player_movement(t_data *data)
 	// rotate_vector(&data->player.vect, data->player.rotate * data->util.move_factor/MOVE_DISTANCE);
 	// data->player.rotate = 0;
 	dash(data);
+	set_movement_vector(data);
 	destination.x = data->player.pos.x + data->player.movement.x * data->util.move_factor;
 	destination.y = data->player.pos.y + data->player.movement.y * data->util.move_factor;
 	if (check_if_wall(destination, data->map.bit_map))

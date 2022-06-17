@@ -33,6 +33,7 @@ int	player_action(int keycode, t_data *data)
 	return (0);
 }
 
+// subtract from movement acording to dir
 int	player_stop_movement(int keycode, t_data *data)
 {
 	if (keycode == 0 || keycode == 2 || keycode == 1

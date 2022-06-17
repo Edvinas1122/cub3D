@@ -70,6 +70,15 @@ typedef struct	s_player
 	int		dash;
 }	t_player;
 
+typedef struct	s_keypress
+{
+	char	key_w;
+	char	key_s;
+	char	key_a;
+	char	key_d;
+	char	key_space;
+}	t_keypress;
+
 /*
 	Main data stack segment
 */
@@ -80,6 +89,7 @@ typedef struct	s_data
 	t_mlx			mlx;
 	t_video			video;
 	t_utils			util;
+	t_keypress		keys;
 	t_sprite_data	*sprite_images;
 	t_sprite		*sprite_objects;
 }	t_data;
