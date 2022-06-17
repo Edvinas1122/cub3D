@@ -10,6 +10,7 @@ int	render_display(t_data *data)
 	{
 		render_fov_view(data);
 		display_minimap(data);
+		
 	}
 	else if (data->util.game_state == 0)
 	{

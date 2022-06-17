@@ -60,89 +60,94 @@ int	angle_to_column(double angle)
 	return (SCREEN_WIDTH/2 + tmp);
 }
 
+/*
+	sorting the sprites by distance
+*/
+static void	sort_sprites_by_distances(t_draw_sprite *layer)
+{
+	int	i;
+
+	i = 0;
+	layer->tmpdbl = 2e30;
+	while (i < layer->obj_count)
+	{
+		layer->sprite_arr[i] = (t_sprite *)next_highest(layer->objects, &layer->tmpdbl);
+		i++;
+	}
+}
+
+/*
+	calculating the distance to each sprite
+*/
+static void	sprites_calculate_distances(t_draw_sprite *layer, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < layer->obj_count)
+	{
+		layer->sprite_vect.x = layer->objects[i].position.x - data->player.pos.x;
+		layer->sprite_vect.y = layer->objects[i].position.y - data->player.pos.y;
+		normalize_vector(&layer->sprite_vect);
+		layer->objects[i].distance = point_distance(data->player.pos, layer->objects[i].position);
+		i++;
+	}
+}
+static void	sprite_constructor(t_draw_sprite *layer, t_data *data)
+{
+	layer->sprite_images = data->sprite_images;
+	layer->objects = data->sprite_objects;
+	layer->obj_count = *(data->sprite_objects->obj_count);
+	layer->sprite_arr = data->sprite_arr;
+}
 
 
 /*
-	The big one: does everything there is to be done for sprites
+	Calculates and draws each sprite
 */
-void	sprite_test(t_data *data)
+static void calculate_draw(t_draw_sprite *layer, t_data *data)
 {
-	t_sprite_data	*sprite_data;
-	t_sprite		*sprites;
-	t_sprite		**spriteptr;
-	double			tmpdbl;
-	t_vect			spritevect;
-	int				itemp;
+	int	i;
+	double angle;
 
-	sprite_data = data->sprite_images;
-	sprites = data->sprite_objects;
-	itemp = *sprites->obj_count;
-
-	spriteptr = ft_calloc(sizeof(t_sprite *), itemp);
-	/*
-		UP UNTIL THIS POINT, EVERYTHING SHOULD HAVE HAPPENED IN THE CONSTRUCTOR OF THE PROGRAM
-	*/
-	/*
-		EVERYTHING BELOW NEEDS TO BE DONE EACH LOOP AFTER RENDERING THE WALLS
-		anytime it counts up to 5, we will need to iterate through all sprites instead
-	*/
-
-	/*
-		calculating the distance to each sprite
-	*/
-	for(int i=0; i < itemp; i++){
-		spritevect.x = sprites[i].position.x - data->player.pos.x;
-		spritevect.y = sprites[i].position.y - data->player.pos.y;
-		normalize_vector(&spritevect);
-		sprites[i].distance = point_distance(data->player.pos, sprites[i].position);
-	}
-	/*
-		sorting the sprites by distance
-	*/
-	tmpdbl = 2e30;
-	for(int i=0; i < itemp; i++)
-		spriteptr[i] = (t_sprite *)next_highest(sprites, &tmpdbl);
-
-
-	for(int i = 0; i < itemp; i++)
+	i = 0;
+	while (i < layer->obj_count)
 	{
 		//find sprite direction vector
-		spritevect.x = (*spriteptr[i]).position.x - data->player.pos.x;
-		spritevect.y = (*spriteptr[i]).position.y - data->player.pos.y;
-		normalize_vector(&spritevect);
+		layer->sprite_vect.x = (*layer->sprite_arr[i]).position.x - data->player.pos.x;
+		layer->sprite_vect.y = (*layer->sprite_arr[i]).position.y - data->player.pos.y;
+		normalize_vector(&layer->sprite_vect);
 
 		//find angle between player direction and sprite
-		double angle;
-		angle = atan2(spritevect.y, spritevect.x) - atan2(data->player.vect.y, data->player.vect.x);
+		angle = atan2(layer->sprite_vect.y, layer->sprite_vect.x) - atan2(data->player.vect.y, data->player.vect.x);
 		if (angle > M_PI)
 			angle -= 2*M_PI;
 		else if (angle < -M_PI)
 			angle += 2*M_PI;
-
-		//find x position of sprite (on screen)
-		(*spriteptr[i]).on_screen.x = angle_to_column(angle);
-		//find y position of sprite (on screen)
-		(*spriteptr[i]).distance /= 1/(cos(get_angle(&data->player.vect, &spritevect) / (180/M_PI)));
-		(*spriteptr[i]).on_screen.y = (double)TILE_SIZE/(*spriteptr[i]).distance;
-		(*spriteptr[i]).on_screen.y = SCREEN_HEIGHT/2 + (SCREEN_HEIGHT/2 * (*spriteptr[i]).on_screen.y);
-
-		/*
-			NOTE: spritex_on_screen/spritey_on_screen is the position of the BOTTOM CENTER point of the sprite
-			example: if this is a sprite, the point will be the X
-					00000
-					00000
-					00000
-					00000
-					00X00
-		*/
-
-		//draw the motherfucking sprite
-		//sprites currently aren't drawn if more than half of them would be offscreen to the side
-		if ((*spriteptr[i]).on_screen.x + (*spriteptr[i]).scale * sprite_data[(*spriteptr[i]).id].width >= 0 && (*spriteptr[i]).on_screen.x - (*spriteptr[i]).scale * sprite_data[(*spriteptr[i]).id].width< SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
-			draw_the_mother_fucking_sprite(data, sprite_data[(*spriteptr[i]).id],(*spriteptr[i]));
+		(*layer->sprite_arr[i]).on_screen.x = angle_to_column(angle);
+		(*layer->sprite_arr[i]).distance /= 1/(cos(get_angle(&data->player.vect, &layer->sprite_vect) / (180/M_PI)));
+		(*layer->sprite_arr[i]).on_screen.y = (double)TILE_SIZE/(*layer->sprite_arr[i]).distance;
+		(*layer->sprite_arr[i]).on_screen.y = SCREEN_HEIGHT/2 + (SCREEN_HEIGHT/2 * (*layer->sprite_arr[i]).on_screen.y);
+		if ((*layer->sprite_arr[i]).on_screen.x + 
+			(*layer->sprite_arr[i]).scale * layer->sprite_images[(*layer->sprite_arr[i]).id].width >= 0 &&
+			(*layer->sprite_arr[i]).on_screen.x - (*layer->sprite_arr[i]).scale * layer->sprite_images[(*layer->sprite_arr[i]).id].width <
+				SCREEN_WIDTH && (angle*180/M_PI) > -90 && (angle*180/M_PI) < 90)
+			draw_the_mother_fucking_sprite(data, layer->sprite_images[(*layer->sprite_arr[i]).id],(*layer->sprite_arr[i]));
+		i++;
 	}
-	// for(int i=0; i < 6; i++)
-	// 	free_img_matrix(&sprite_data[i]);
+}
+
+/*
+	The big one: does everything there is to be done for sprites
+*/
+void	sprite_draw(t_data *data)
+{
+	t_draw_sprite	layer;
+
+	sprite_constructor(&layer, data);
+	sprites_calculate_distances(&layer, data);
+	sort_sprites_by_distances(&layer);
+	calculate_draw(&layer, data);
 }
 
 static double	get_dim_factor(double distance)
