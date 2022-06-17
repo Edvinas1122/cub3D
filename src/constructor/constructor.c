@@ -72,5 +72,6 @@ void	constructor(t_data *data, char **argv)
 	data->player = set_player(data->map.bit_map, TILE_SIZE);
 	data->util = set_utils(data);
 	set_sprites(data, "./map_files/sprite_info.ini");
+	data->player.dash_cooldown = 0;
 
 }

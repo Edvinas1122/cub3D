@@ -20,7 +20,7 @@ static void	set_time_stamp(t_data *data)
 int	engine(t_data *data)
 {
 	if (data->count++ > 10000000)
-		data->count = 0:
+		data->count = 0;
 	set_time_stamp(data);
 	player_movement(data);
 	render_display(data);
