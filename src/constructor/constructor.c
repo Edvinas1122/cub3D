@@ -73,5 +73,4 @@ void	constructor(t_data *data, char **argv)
 	data->util = set_utils(data);
 	set_sprites(data, "./assets/sprite_info.ini");
 	data->player.dash_cooldown = 0;
-
 }

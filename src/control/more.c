@@ -28,14 +28,14 @@ void	toggle_door(t_data *data)
 	y = tmp.y / TILE_SIZE;
 	if (data->map.bit_map[y][x] == '2')
 	{
-		if (data->map.doormap[x][y].closed_percentage == 100)
-			data->map.doormap[x][y].moving = -5;
-		else if (data->map.doormap[x][y].closed_percentage == 0)
-			data->map.doormap[x][y].moving = 5;
-		else if (data->map.doormap[x][y].moving > 0)
-			data->map.doormap[x][y].moving = -5;
-		else if (data->map.doormap[x][y].moving < 0)
-			data->map.doormap[x][y].moving = 5;
+		if (data->map.doormap[y][x].closed_percentage == 100)
+			data->map.doormap[y][x].moving = -5;
+		else if (data->map.doormap[y][x].closed_percentage == 0)
+			data->map.doormap[y][x].moving = 5;
+		else if (data->map.doormap[y][x].moving > 0)
+			data->map.doormap[y][x].moving = -5;
+		else if (data->map.doormap[y][x].moving < 0)
+			data->map.doormap[y][x].moving = 5;
 	}
 }
 

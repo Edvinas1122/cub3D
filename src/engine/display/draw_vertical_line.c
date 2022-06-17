@@ -113,7 +113,7 @@ int	get_texture_x_door(t_data *data, t_texture texture, t_raycast *raycast)
 	int y = raycast->impact.y / TILE_SIZE;
 	t_door	door;
 
-	door = data->map.doormap[x][y];
+	door = data->map.doormap[y][x];
 	if (raycast->cardinal_direction == 1 || raycast->cardinal_direction == 2)
 		d_x = fmod(raycast->impact.x, TILE_SIZE);
 	if (raycast->cardinal_direction == 3 || raycast->cardinal_direction == 4)
