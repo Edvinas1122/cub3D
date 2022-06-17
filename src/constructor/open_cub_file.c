@@ -23,6 +23,7 @@ static t_map	assign_map(t_data *data, t_map_c tmp)
 	t_map	map;
 
 	map.bit_map = tmp.map;
+	map.doormap = tmp.doormap;
 	map.ceiling = string_to_color(tmp.ceiling);
 	map.floor = string_to_color(tmp.floor);
 	map.north = load_texture_files(data, tmp.no);

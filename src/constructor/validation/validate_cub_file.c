@@ -65,6 +65,48 @@ static int	validate_colors(t_list **file, t_map_c *tmp)
 	return (1);
 }
 
+t_door *get_doormap_line(char *map)
+{
+	int	max_y;
+	int	i;
+	t_door	*doormap_line;
+
+	max_y = 0;
+	while (map[max_y])
+		max_y++;
+	doormap_line = ft_calloc(sizeof(t_door ), max_y + 1);
+	i = 0;
+	while (i < max_y)
+	{
+		if (map[i] == '2')
+		{
+			doormap_line[i].solid = 1;
+			doormap_line[i].closed_percentage = 100;
+		}
+		i++;
+	}
+	return (doormap_line);
+}
+
+t_door	**get_doormap(char	**map)
+{
+	int	max_x;
+	int	i;
+	t_door	**doormap;
+
+	max_x = 0;
+	while (map[max_x])
+		max_x++;
+	doormap = ft_calloc(sizeof(t_door *), max_x + 1);
+	i = 0;
+	while (i < max_x)
+	{
+		doormap[i] = get_doormap_line(map[i]);
+		i++;
+	}
+	return (doormap);
+}
+
 /* 
 	Validates cub file for defined standart
 	Returns temporary pointers for capturing
@@ -85,5 +127,6 @@ int	validate_cub_file(t_list **file, t_map_c *tmp)
 	tmp->map = list_to_array_offset(*file, 8);
 	if (!validate_map(tmp->map))
 		return (0);
+	tmp->doormap = get_doormap(tmp->map);
 	return (1);
 }

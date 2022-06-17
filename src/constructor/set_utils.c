@@ -34,7 +34,8 @@ t_utils set_utils(t_data *data)
 	(void) data;
 	utils.minimap[0] = set_color(0, 40, 40, 40);
 	utils.minimap[1] = set_color(0, 120, 120, 120);
-	utils.minimap[2] = set_color(0, 255, 0, 0);
+	utils.minimap[2] = set_color(0, 101, 67, 33);
+	utils.minimap[3] = set_color(0, 255, 0, 0);
 	utils.minimap_size = set_minimap_scale(data);
 	utils.game_state = 1;
 	utils.pause = open_texture_xpm2(data, "./assets/utils/img_pause.xpm");

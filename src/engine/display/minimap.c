@@ -51,6 +51,8 @@ static void	draw_2d_minimap(t_color ***img, char **bit_map, t_color color[3], in
 		{
 			if (bit_map[(int)cord.y][(int)cord.x] == '1')
 				draw_box(img, color[0], cord, minimap_size);
+			else if (bit_map[(int)cord.y][(int)cord.x] == '2')
+				draw_box(img, color[2], cord, minimap_size);
 			else
 				draw_box(img, color[1], cord, minimap_size);
 			cord.x++;
@@ -63,6 +65,6 @@ void	display_minimap(t_data *data)
 {
 	draw_2d_minimap(data->video.img_matrix, data->map.bit_map,
 					data->util.minimap, data->util.minimap_size);
-	draw_player(data->video.img_matrix, data->util.minimap[2],
+	draw_player(data->video.img_matrix, data->util.minimap[3],
 				data->player, data->util.minimap_size);
 }

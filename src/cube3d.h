@@ -48,7 +48,7 @@ typedef struct s_sprite
 */
 typedef struct s_utils
 {
-	t_color		minimap[3];
+	t_color		minimap[4];
 	int			minimap_size;
 	char		*soundtrack;
 	t_texture	pause;
