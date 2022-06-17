@@ -81,7 +81,7 @@ t_door *get_doormap_line(char *map)
 		if (map[i] == '2')
 		{
 			doormap_line[i].solid = 1;
-			doormap_line[i].closed_percentage = 100;
+			doormap_line[i].closed_percentage = 50;
 		}
 		i++;
 	}

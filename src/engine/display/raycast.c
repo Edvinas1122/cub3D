@@ -12,7 +12,7 @@ static t_vect	find_intersections(t_data *data, t_vect *dir, t_raycast *raycast)
 		tmpdist = intersection_distances(tmp, dir, raycast);
 		tmp.x += (tmpdist * dir->x);
 		tmp.y += (tmpdist * dir->y);
-		if (check_if_wall(tmp, data->map.bit_map))
+		if (check_if_wall(data, tmp, raycast->cardinal_direction))
 			break ;
 	}
 	if (raycast->cardinal_direction == 1 && data->player.pos.y < tmp.y)
