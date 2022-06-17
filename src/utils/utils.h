@@ -59,6 +59,7 @@ double	get_angle(t_vect *vector1, t_vect *vector2);
 	Game mechanics
 */
 int			check_if_wall(t_data *data, t_vect point);
-int	check_door(t_data *data, t_vect point, int direction);
+int			check_if_solid(t_data *data, t_vect point);
+int			check_door(t_data *data, t_vect point, int direction);
 long long	set_time(void);
 #endif

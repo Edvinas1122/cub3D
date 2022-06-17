@@ -32,6 +32,10 @@ void	toggle_door(t_data *data)
 			data->map.doormap[x][y].moving = -5;
 		else if (data->map.doormap[x][y].closed_percentage == 0)
 			data->map.doormap[x][y].moving = 5;
+		else if (data->map.doormap[x][y].moving > 0)
+			data->map.doormap[x][y].moving = -5;
+		else if (data->map.doormap[x][y].moving < 0)
+			data->map.doormap[x][y].moving = 5;
 	}
 }
 

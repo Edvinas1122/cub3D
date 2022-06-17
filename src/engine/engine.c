@@ -25,14 +25,18 @@ static void	update_doors(t_data *data)
 	while (data->doors[i])
 	{
 		(*data->doors[i]).closed_percentage += (*data->doors[i]).moving;
-		if ((*data->doors[i]).closed_percentage == 100)
-			(*data->doors[i]).moving = 0;
-		if ((*data->doors[i]).closed_percentage == 0)
-			(*data->doors[i]).moving = 0;
 		if ((*data->doors[i]).closed_percentage > 100)
 			(*data->doors[i]).closed_percentage = 100;
 		if ((*data->doors[i]).closed_percentage < 0)
 			(*data->doors[i]).closed_percentage = 0;
+		if ((*data->doors[i]).closed_percentage == 100)
+			(*data->doors[i]).moving = 0;
+		if ((*data->doors[i]).closed_percentage == 0)
+			(*data->doors[i]).moving = 0;
+		if ((*data->doors[i]).closed_percentage == 0)
+			(*data->doors[i]).solid = 0;
+		else
+			(*data->doors[i]).solid = 1;
 		i++;
 	}
 }

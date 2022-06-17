@@ -33,3 +33,20 @@ int	check_if_wall(t_data *data, t_vect point)
 	else
 		return (0);
 }
+
+int	check_if_solid(t_data *data, t_vect point)
+{
+	int	x;
+	int	y;
+	int	walltype;
+
+	walltype = check_if_wall(data, point);
+	if (walltype == 1)
+		return (1);
+	x = point.x / TILE_SIZE;
+	y = point.y / TILE_SIZE;
+	if (walltype == 2)
+		if (data->map.doormap[y][x].solid == 1)
+			return (1);
+	return (0);
+}
