@@ -65,14 +65,12 @@ static int	validate_colors(t_list **file, t_map_c *tmp)
 	return (1);
 }
 
-t_door *get_doormap_line(char *map, t_door **doors)
+t_door *get_doormap_line(char *map, t_door **doors, int *doorcount)
 {
-	int		doorcount;
 	int		max_y;
 	int		i;
 	t_door	*doormap_line;
 
-	doorcount = 0;
 	max_y = 0;
 	while (map[max_y])
 		max_y++;
@@ -85,8 +83,8 @@ t_door *get_doormap_line(char *map, t_door **doors)
 			doormap_line[i].solid = 1;
 			doormap_line[i].moving = 0;
 			doormap_line[i].closed_percentage = 100;
-			doors[doorcount] = &doormap_line[i];
-			doorcount++;
+			doors[*doorcount] = &doormap_line[i];
+			(*doorcount)++;
 		}
 		i++;
 	}
@@ -98,7 +96,9 @@ t_door	**get_doormap(char	**map, t_door **doors)
 	int	max_x;
 	int	i;
 	t_door	**doormap;
+	int		doorcount;
 
+	doorcount = 0;
 	max_x = 0;
 	while (map[max_x])
 		max_x++;
@@ -106,7 +106,7 @@ t_door	**get_doormap(char	**map, t_door **doors)
 	i = 0;
 	while (i < max_x)
 	{
-		doormap[i] = get_doormap_line(map[i], doors);
+		doormap[i] = get_doormap_line(map[i], doors, &doorcount);
 		i++;
 	}
 	return (doormap);
