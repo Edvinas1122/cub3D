@@ -114,15 +114,11 @@ int	get_texture_x_door(t_data *data, t_texture texture, t_raycast *raycast)
 	t_door	door;
 
 	door = data->map.doormap[x][y];
-	if (raycast->cardinal_direction == 1)
+	if (raycast->cardinal_direction == 1 || raycast->cardinal_direction == 2)
 		d_x = fmod(raycast->impact.x, TILE_SIZE);
-	if (raycast->cardinal_direction == 3)
+	if (raycast->cardinal_direction == 3 || raycast->cardinal_direction == 4)
 		d_x = fmod(raycast->impact.y, TILE_SIZE);
 	d_x += (100 - door.closed_percentage);
-	if (d_x > 100)
-		d_x = 100;
-	if (d_x < 0)
-		d_x = 0;
 	d_x *= (double)(texture.width - 1)/100;
 	return ((int)floor(d_x));
 }
