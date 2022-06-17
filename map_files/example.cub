@@ -1,7 +1,7 @@
-NO ./map_files/temple_textures/temple1.xpm
-SO ./map_files/temple_textures/temple2.xpm
-WE ./map_files/temple_textures/temple3.xpm
-EA ./map_files/temple_textures/temple4.xpm
+NO ./assets/textures/temple_textures/example.xpm
+SO ./assets/textures/temple_textures/example.xpm
+WE ./assets/textures/temple_textures/example.xpm
+EA ./assets/textures/temple_textures/example.xpm
 
 F 40,40,40
 C 0,40,40

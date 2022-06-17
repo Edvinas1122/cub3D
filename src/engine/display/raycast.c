@@ -72,5 +72,5 @@ void	render_fov_view(t_data *data)
 		set_next_ray(data, &raycast);
 		raycast.v_line_ct++;
 	}
-	sprite_test(data);
+	sprite_draw(data);
 }

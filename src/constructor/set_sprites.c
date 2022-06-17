@@ -36,47 +36,6 @@ static t_list	**open_sprite_ini(t_sprite_data **sprites, char *sprite_ini)
 	return (file);
 }
 
-// static void	set_sprite_images(t_data *data, t_list **file)
-// {
-// 	t_list			*row;
-// 	char			*img;
-// 	int				i;
-
-// 	row = *file;
-// 	i = 0;
-// 	while (ft_strncmp(row->content, "\0\0", 2))
-// 	{
-// 		img = mlx_xpm_file_to_image(data->mlx.ptr, row->content,
-// 				&data->sprite_images[i].width, &data->sprite_images[i].height);
-// 		data->sprite_images[i].img_matrix = create_pixel_matrix(img,
-// 				data->sprite_images[i].width, data->sprite_images[i].height);
-// 		row = row->next;
-// 		i++;
-// 	}
-// }
-
-// static int	color_the_matrix(t_color ***img_matrix, int r, int g, int b, int x, int y)
-// {
-// 	int		row;
-// 	int		col;
-
-// 	row = 0;
-// 	while (row < y)
-// 	{
-// 		col = 0;
-// 		while (col < x)
-// 		{
-//             (img_matrix)[row][col]->a = (char)0;
-//             (img_matrix)[row][col]->r = (char)r;
-//             (img_matrix)[row][col]->g = (char)g;
-//             (img_matrix)[row][col]->b = (char)b;
-// 			col++;
-// 		}
-// 		row++;
-// 	}
-// 	return (0);
-// }
-
 static void	set_sprite_images(t_data *data, t_list **file)
 {
 	t_list			*row;
@@ -93,13 +52,8 @@ static void	set_sprite_images(t_data *data, t_list **file)
 		if (!img_header)
 			destructor(data);
 		img.img_data = mlx_get_data_addr(img_header, &img.img_bp, &img.img_sl, &img.img_e);
-		// mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, img_header, 0, 0);
 		printf("\n%s\n", img.img_data);
-		// data->sprite_images[i].img_matrix = create_pixel_matrix(img.img_data, data->sprite_images[i].width, data->sprite_images[i].height);
 		data->sprite_images[i].img_matrix = create_color_matrix(data->sprite_images[i].width, data->sprite_images[i].height, &img);
-
-		//color_the_matrix(data->sprite_images[i].img_matrix, 255, 255, 255, data->sprite_images[i].width, data->sprite_images[i].height);
-		// mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, img_header, SCREEN_WIDTH, 0);
 		row = row->next;
 		i++;
 	}
@@ -115,6 +69,9 @@ static t_sprite	*set_sprite_objects(t_list **file)
 
 	row = *file;
 	i = 0;
+	while (ft_strncmp(row->content, "\0\0", 2))
+		row = row->next;
+	row = row->next;
 	while (ft_strncmp(row->content, "\0\0", 2))
 		row = row->next;
 	row = row->next;
@@ -146,7 +103,37 @@ static char	*set_soundtrack(t_list **file)
 	while (ft_strncmp(row->content, "\0\0", 2))
 		row = row->next;
 	row = row->next;
+	while (ft_strncmp(row->content, "\0\0", 2))
+		row = row->next;
+	row = row->next;
 	return (ft_strdup(row->content));
+}
+
+static void	set_entety_imgaes(t_data *data, t_list **file)
+{
+	t_list			*row;
+	void			*img_header;
+	t_tmp_video		img;
+	int				i;
+
+	data->sprite_anim = ft_calloc(1 + 1, sizeof(t_sprite_anim));
+	data->sprite_anim[0].img_matrix = ft_calloc(4 + 1, sizeof(t_color ***));
+	row = *file;
+	i = 0;
+	while (ft_strncmp(row->content, "\0\0", 2))
+		row = row->next;
+	row = row->next;
+	while (ft_strncmp(row->content, "\0\0", 2))
+	{
+		img_header = mlx_xpm_file_to_image(data->mlx.ptr, (char *)row->content,
+				&data->sprite_anim[0].width, &data->sprite_anim[0].height);
+		if (!img_header)
+			destructor(data);
+		img.img_data = mlx_get_data_addr(img_header, &img.img_bp, &img.img_sl, &img.img_e);
+		data->sprite_anim[0].img_matrix[i] = create_color_matrix(data->sprite_anim[0].width, data->sprite_anim[0].height, &img);
+		row = row->next;
+		i++;
+	}
 }
 
 void set_sprites(t_data *data, char *sprite_ini)
@@ -155,6 +142,8 @@ void set_sprites(t_data *data, char *sprite_ini)
 
 	file = open_sprite_ini(&data->sprite_images, sprite_ini);
 	set_sprite_images(data, file);
+	set_entety_imgaes(data, file);
 	data->sprite_objects = set_sprite_objects(file);
+	data->sprite_arr = ft_calloc(sizeof(t_sprite *), *(data->sprite_objects->obj_count) + 1);
 	data->util.soundtrack = set_soundtrack(file);
 }

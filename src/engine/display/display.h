@@ -14,7 +14,7 @@ typedef struct	s_texture	t_texture;
 typedef struct	s_video		t_video;
 typedef struct	s_mlx		t_mlx;
 
-typedef struct s_line
+typedef struct	s_line
 {
 	t_texture	texture;
 	double		strech_factor;
@@ -78,6 +78,6 @@ void	draw_vertical_line(t_data *data, t_raycast *raycast);
 void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);
 double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast);
 void	draw_floor_and_ceiling(t_data *data);
-void	sprite_test(t_data *data);
+void	sprite_draw(t_data *data);
 
 #endif
