@@ -37,7 +37,7 @@ static void	dash(t_data *data)
 		dash_dif = data->player.dash_cooldown - 5 * data->util.move_factor / MOVE_DISTANCE;
 	}
 	if (data->player.dash_cooldown > dash_dif)
-		data->util.move_factor *= 5;
+		data->util.move_factor *= DASH;
 	if (data->player.dash_cooldown)
 		data->player.dash_cooldown--;
 	if (data->util.move_factor > TILE_SIZE / 3)

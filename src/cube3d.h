@@ -25,6 +25,7 @@
 # define FOV 90
 # define MOUSE_SENSITIVITY 10
 # define ANIMATION_SPEED 10
+# define DASH 3
 
 /*
 	Additional info for future includes
