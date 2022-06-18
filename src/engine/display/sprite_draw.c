@@ -38,7 +38,7 @@ static void	sort_sprites_by_distances(t_draw_sprite *layer)
 	layer->tmpdbl = 2e30;
 	while (i < layer->obj_count)
 	{
-		layer->sprite_arr[i] = (t_sprite *)next_highest(layer, &layer->tmpdbl);
+		layer->entety_arr[i] = (t_entety *)next_highest(layer, &layer->tmpdbl);
 		i++;
 	}
 }
@@ -60,12 +60,13 @@ static void	sprites_calculate_distances(t_draw_sprite *layer, t_data *data)
 		i++;
 	}
 }
+
 static void	sprite_constructor(t_draw_sprite *layer, t_data *data)
 {
 	layer->sprite_images = data->sprite_images;
-	layer->objects = data->sprite_objects;
-	layer->obj_count = *(data->sprite_objects->obj_count);
-	layer->sprite_arr = data->sprite_arr;
+	layer->objects = data->entety;
+	layer->obj_count = *(data->entety->obj_count);
+	layer->entety_arr = data->entety_arr;
 }
 
 /*

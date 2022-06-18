@@ -19,7 +19,7 @@ static int	validate_name_ends(t_list **file)
 	return (i);
 }
 
-static t_list	**open_sprite_ini(t_sprite_data **sprites, char *sprite_ini)
+static t_list	**open_sprite_ini(t_texture **sprites, char *sprite_ini)
 {
 	t_list	**file;
 	int		num_of_sprites;
@@ -32,11 +32,11 @@ static t_list	**open_sprite_ini(t_sprite_data **sprites, char *sprite_ini)
 	num_of_sprites = validate_name_ends(file);
 	if (!num_of_sprites)
 		return (0);
-	*sprites = ft_calloc(num_of_sprites + 1, sizeof(t_sprite_data));
+	*sprites = ft_calloc(num_of_sprites + 1, sizeof(t_texture));
 	return (file);
 }
 
-static void	set_sprite_images(t_data *data, t_list **file)
+static void	set_sprite_images(t_data *data, t_list **file, int *img_ct)
 {
 	t_list			*row;
 	void			*img_header;
@@ -54,16 +54,17 @@ static void	set_sprite_images(t_data *data, t_list **file)
 		img.img_data = mlx_get_data_addr(img_header, &img.img_bp, &img.img_sl, &img.img_e);
 		printf("\n%s\n", img.img_data);
 		// data->sprite_images[i].img_matrix = ft_calloc(2, sizeof(t_color ***));
-		data->sprite_images[i].img_matrix = create_color_matrix(data->sprite_images[i].width, data->sprite_images[i].height, &img);
+		data->sprite_images[i].matx = create_color_matrix(data->sprite_images[i].width, data->sprite_images[i].height, &img);
 		row = row->next;
 		i++;
 	}
+	*img_ct = i;
 }
 
-static t_sprite	*set_sprite_objects(t_list **file)
+static t_entety	*set_enteties(t_list **file, int img_ct)
 {
 	t_list		*row;
-	t_sprite	*sprites;
+	t_entety	*entety;
 	char		**info;
 	int			i;
 	int			*obj_count;
@@ -76,21 +77,27 @@ static t_sprite	*set_sprite_objects(t_list **file)
 	while (ft_strncmp(row->content, "\0\0", 2))
 		row = row->next;
 	row = row->next;
-	sprites = ft_calloc(ft_lstsize(row) + 1, sizeof(t_sprite));
+	entety = ft_calloc(ft_lstsize(row) + 1, sizeof(t_entety));
 	while (ft_strncmp(row->content, "\0\0", 2))
 	{
-		sprites[i].id = ft_atoi(row->content);
-		info = ft_split(&row->content[(sprites[i].id / 10) + 2], ',');
-		sprites[i].position.x = ft_atoi(info[0]);
-		sprites[i].position.y = ft_atoi(info[1]);
-		sprites[i].scale = ft_atoi(info[2]);
+		entety[i].id = ft_atoi(row->content);
+		if (img_ct <= entety[i].id)
+			entety[i].anim_info = 1;
+		info = ft_split(&row->content[(entety[i].id / 10) + 2], ',');
+		entety[i].position.x = ft_atoi(info[0]);
+		entety[i].position.y = ft_atoi(info[1]);
+		entety[i].scale = ft_atoi(info[2]);
+		free(info[0]);
+		free(info[1]);
+		free(info[2]);
+		free(info);
 		row = row->next;
 		i++;
 	}
 	obj_count = malloc(sizeof(int));
 	*obj_count = i;
-	sprites->obj_count = obj_count;
-	return (sprites);
+	entety->obj_count = obj_count;
+	return (entety);
 }
 
 static char	*set_soundtrack(t_list **file)
@@ -110,7 +117,7 @@ static char	*set_soundtrack(t_list **file)
 	return (ft_strdup(row->content));
 }
 
-static void	set_entety_imgaes(t_data *data, t_list **file)
+static void	set_animation_sprites(t_data *data, t_list **file)
 {
 	t_list			*row;
 	void			*img_header;
@@ -142,20 +149,21 @@ void	set_minimap_frame(t_data *data)
 	void		*img_header;
 	t_tmp_video	img;
 
-	data->util.minimap_frame = ft_calloc(sizeof(t_sprite_data), 1);
+	data->util.minimap_frame = ft_calloc(sizeof(t_texture), 1);
 	img_header = mlx_xpm_file_to_image(data->mlx.ptr, "./assets/minimap_frame_HR.xpm", &data->util.minimap_frame->width, &data->util.minimap_frame->height);
-	data->util.minimap_frame->img_matrix = create_color_matrix(data->util.minimap_frame->width, data->util.minimap_frame->height, &img);
+	data->util.minimap_frame->matx = create_color_matrix(data->util.minimap_frame->width, data->util.minimap_frame->height, &img);
 }
 
 void set_sprites(t_data *data, char *sprite_ini)
 {
 	t_list	**file;
+	int		image_ct;
 
 	file = open_sprite_ini(&data->sprite_images, sprite_ini);
-	set_sprite_images(data, file);
-	set_entety_imgaes(data, file);
-	data->sprite_objects = set_sprite_objects(file);
-	data->sprite_arr = ft_calloc(sizeof(t_sprite *), *(data->sprite_objects->obj_count) + 1);
+	set_sprite_images(data, file, &image_ct);
+	set_animation_sprites(data, file);
+	data->entety = set_enteties(file, image_ct);
+	data->entety_arr = ft_calloc(sizeof(t_entety *), *(data->entety->obj_count) + 1);
 	data->util.soundtrack = set_soundtrack(file);
 	set_minimap_frame(data);
 }

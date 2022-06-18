@@ -21,7 +21,7 @@ static void	find_sprite_direction_vector(t_vect *vect, t_vect *position, t_vect 
 	normalize_vector(vect);
 }
 
-static void	sprite_set_data(t_sprite *sprite, t_vect vect, t_data *data, double angle)
+static void	sprite_set_data(t_entety *sprite, t_vect vect, t_data *data, double angle)
 {
 	sprite->on_screen.x = angle_to_column(angle);
 	sprite->distance /= 1/(cos(get_angle(&data->player.vect, &vect) / (180/M_PI)));
@@ -29,7 +29,7 @@ static void	sprite_set_data(t_sprite *sprite, t_vect vect, t_data *data, double 
 	sprite->on_screen.y = SCREEN_HEIGHT / 2 + (SCREEN_HEIGHT / 2 * sprite->on_screen.y);
 }
 
-static int check_condition(t_sprite *sprite, t_sprite_data *images, double angle)
+static int check_condition(t_entety *sprite, t_texture *images, double angle)
 {
 	if (sprite->on_screen.x + 
 		sprite->scale * images[sprite->id].width >= 0 &&
@@ -45,21 +45,22 @@ static int check_condition(t_sprite *sprite, t_sprite_data *images, double angle
 */
 void calculate_draw(t_draw_sprite *layer, t_data *data)
 {
-	int	i;
-	double angle;
+	int			i;
+	double		angle;
+	t_texture	image;
 
 	i = 0;
 	while (i < layer->obj_count)
 	{
 		find_sprite_direction_vector(&layer->sprite_vect,
-			&(*layer->sprite_arr[i]).position, &data->player.pos);
+			&(*layer->entety_arr[i]).position, &data->player.pos);
 		angle = find_angle_vecotrs(layer->sprite_vect, data->player.vect);
-		sprite_set_data(layer->sprite_arr[i], layer->sprite_vect, data, angle);
-		//set_sprite_frame();
-		if (check_condition(layer->sprite_arr[i], layer->sprite_images, angle))
+		image = set_sprite_image(layer, data, i);
+		sprite_set_data(layer->entety_arr[i], layer->sprite_vect, data, angle);
+		if (check_condition(layer->entety_arr[i], layer->sprite_images, angle))
 			draw_the_mother_ducking_sprite(data,
-						layer->sprite_images[(*layer->sprite_arr[i]).id],
-						(*layer->sprite_arr[i]));
+						image,
+						(*layer->entety_arr[i]));
 		i++;
 	}
 }

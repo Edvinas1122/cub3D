@@ -96,6 +96,7 @@ void	sprite_draw(t_data *data);
 /*
 	Members of sprite draw
 */
-void	draw_the_mother_ducking_sprite(t_data *data, t_sprite_data sprite_data, t_sprite sprite);
+void	draw_the_mother_ducking_sprite(t_data *data, t_texture sprite_data, t_entety sprite);
 void	calculate_draw(t_draw_sprite *layer, t_data *data);
+t_texture set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
 #endif

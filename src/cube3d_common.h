@@ -81,12 +81,12 @@ typedef struct s_mlx
 	void	*win;
 }	t_mlx;
 
-typedef struct s_sprite_data
-{
-	t_color	***img_matrix;
-	int		width;
-	int		height;
-}	t_sprite_data;
+// typedef struct s_texture
+// {
+// 	t_color	***matx;
+// 	int		width;
+// 	int		height;
+// }	t_texture;
 
 typedef struct s_sprite_anim
 {
@@ -98,9 +98,10 @@ typedef struct s_sprite_anim
 /*
 	Entety
 */
-typedef struct s_sprite
+typedef struct s_entety
 {
 	int				id;
+	int				anim_info;
 	t_vect			position;
 	double			scale;
 	int				frames;
@@ -108,6 +109,6 @@ typedef struct s_sprite
 	t_vect			on_screen;
 	double			distance;
 	int				*obj_count;
-}	t_sprite;
+}	t_entety;
 
 #endif 

@@ -24,6 +24,7 @@
 # define TILE_SIZE 100
 # define FOV 90
 # define MOUSE_SENSITIVITY 10
+# define ANIMATION_SPEED 10
 
 /*
 	Additional info for future includes
@@ -31,7 +32,7 @@
 typedef struct s_utils
 {
 	t_color		minimap[4];
-	t_sprite_data	*minimap_frame;
+	t_texture	*minimap_frame;
 	int			minimap_size;
 	char		*soundtrack;
 	t_texture	pause;
@@ -80,20 +81,20 @@ typedef struct	s_data
 	t_keypress		keys;
 	t_door			**doors;
 	int				count;
-	t_sprite_data	*sprite_images;
+	t_texture		*sprite_images;
 	t_sprite_anim	*sprite_anim;
-	t_sprite		*sprite_objects;
-	t_sprite		**sprite_arr;
+	t_entety		*entety;
+	t_entety		**entety_arr;
 }	t_data;
 
 typedef struct	s_draw_sprite
 {
-	t_sprite_data	*sprite_images;
-	t_sprite		*objects;
-	t_sprite		**sprite_arr;
-	double			tmpdbl;
-	t_vect			sprite_vect;
-	int				obj_count;
+	t_texture	*sprite_images;
+	t_entety	*objects;
+	t_entety	**entety_arr;
+	double		tmpdbl;
+	t_vect		sprite_vect;
+	int			obj_count;
 }	t_draw_sprite;
 
 
