@@ -136,6 +136,16 @@ static void	set_entety_imgaes(t_data *data, t_list **file)
 	}
 }
 
+void	set_minimap_frame(t_data *data)
+{
+	void		*img_header;
+	t_tmp_video	img;
+
+	data->util.minimap_frame = ft_calloc(sizeof(t_sprite_data), 1);
+	img_header = mlx_xpm_file_to_image(data->mlx.ptr, "./assets/minimap_frame_HR.xpm", &data->util.minimap_frame->width, &data->util.minimap_frame->height);
+	data->util.minimap_frame->img_matrix = create_color_matrix(data->util.minimap_frame->width, data->util.minimap_frame->height, &img);
+}
+
 void set_sprites(t_data *data, char *sprite_ini)
 {
 	t_list	**file;
@@ -146,4 +156,5 @@ void set_sprites(t_data *data, char *sprite_ini)
 	data->sprite_objects = set_sprite_objects(file);
 	data->sprite_arr = ft_calloc(sizeof(t_sprite *), *(data->sprite_objects->obj_count) + 1);
 	data->util.soundtrack = set_soundtrack(file);
+	set_minimap_frame(data);
 }

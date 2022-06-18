@@ -61,6 +61,8 @@ static void	draw_2d_minimap(t_color ***img, char **bit_map, t_color color[3], in
 	}
 }
 
+// void	display_minimap_frame(data->video.img_matrix, data->util.minimap_size)
+
 void	display_minimap(t_data *data)
 {
 	draw_2d_minimap(data->video.img_matrix, data->map.bit_map,

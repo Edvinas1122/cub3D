@@ -123,7 +123,7 @@ int	count_doors(char **map)
 	while (map[i])
 	{
 		j = 0;
-		while (map[j])
+		while (map[i][j])
 		{
 			if (map[i][j] == '2')
 				count++;

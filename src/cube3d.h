@@ -18,8 +18,8 @@
 # include "engine/display/display.h"
 # include "engine/mechanics/mechanics.h"
 
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1600
+# define SCREEN_HEIGHT 900
 # define MOVE_DISTANCE 6
 # define TILE_SIZE 100
 # define FOV 90
@@ -31,6 +31,7 @@
 typedef struct s_utils
 {
 	t_color		minimap[4];
+	t_sprite_data	*minimap_frame;
 	int			minimap_size;
 	char		*soundtrack;
 	t_texture	pause;
