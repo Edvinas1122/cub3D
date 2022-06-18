@@ -34,6 +34,7 @@ int	check_if_wall(t_data *data, t_vect point)
 		return (0);
 }
 
+
 int	check_if_solid(t_data *data, t_vect point)
 {
 	int	x;
@@ -48,5 +49,46 @@ int	check_if_solid(t_data *data, t_vect point)
 	if (walltype == 2)
 		if (data->map.doormap[y][x].solid == 1)
 			return (1);
+	return (0);
+}
+
+static void	set_around(t_vect *around, t_vect point)
+{
+	int		barrier;
+	t_vect	vect;
+	int		i;
+
+	vect.x = 0;
+	vect.y = 1;
+	barrier = TILE_SIZE/4;
+	i = 0;
+	while (i < 180)
+	{
+		rotate_vector(&vect, 2);
+		around[i].x = point.x + vect.x * barrier;
+ 		around[i].y = point.y + vect.y * barrier;
+		i++;
+	}
+}
+
+int	check_if_solid_around(t_data *data, t_vect point)
+{
+	t_vect	*around;
+	int		flag;
+	int		i;
+
+	i = 0;
+	flag = 0;
+	around = ft_calloc(181, sizeof(t_vect));
+	set_around(around, point);
+	while (i < 180 && !flag)
+	{
+		if (check_if_solid(data, around[i]))
+			flag = 1;
+		i++;
+	}
+	//free;
+	if (flag == 1)
+		return (1);
 	return (0);
 }

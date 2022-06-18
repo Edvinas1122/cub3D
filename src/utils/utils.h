@@ -60,6 +60,7 @@ double	find_angle_vecotrs(t_vect vect1, t_vect vect2);
 */
 int			check_if_wall(t_data *data, t_vect point);
 int			check_if_solid(t_data *data, t_vect point);
+int			check_if_solid_around(t_data *data, t_vect point);
 int			check_door(t_data *data, t_vect point, int direction);
 long long	set_time(void);
 #endif
