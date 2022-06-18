@@ -14,7 +14,7 @@ static int	all_rows_begin_check(char **map, char *valid_char)
 	return (1);
 }
 
-static int check_one_player(char **map, char *valid_char)
+static int	check_one_player(char **map, char *valid_char)
 {
 	int	flag;
 	int	i;
@@ -76,10 +76,10 @@ int	validate_map(char **map)
 		ft_putstr_fd("More than one or none players found\n", 1);
 		return (0);
 	}
-	if (!all_rows_begin_check(map, "1 ") || 
-		!check_bottom_row(map, "1 ") ||
-		!all_rows_closed(map) ||
-		!check_leaping_column_uncloses(map, "1") ||
+	if (!all_rows_begin_check(map, "1 ") || \
+		!check_bottom_row(map, "1 ") || \
+		!all_rows_closed(map) || \
+		!check_leaping_column_uncloses(map, "1") || \
 		!matrix_neighbour_check(map, "0NWESD"))
 	{
 		ft_putstr_fd("Unclosed map\n", 1);

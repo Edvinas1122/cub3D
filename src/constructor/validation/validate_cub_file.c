@@ -65,7 +65,7 @@ static int	validate_colors(t_list **file, t_map_c *tmp)
 	return (1);
 }
 
-t_door *get_doormap_line(char *map, t_door **doors, int *doorcount)
+t_door	*get_doormap_line(char *map, t_door **doors, int *doorcount)
 {
 	int		max_y;
 	int		i;
@@ -93,8 +93,8 @@ t_door *get_doormap_line(char *map, t_door **doors, int *doorcount)
 
 t_door	**get_doormap(char	**map, t_door **doors)
 {
-	int	max_x;
-	int	i;
+	int		max_x;
+	int		i;
 	t_door	**doormap;
 	int		doorcount;
 
@@ -134,7 +134,6 @@ int	count_doors(char **map)
 	return (count);
 }
 
-
 /* 
 	Validates cub file for defined standart
 	Returns temporary pointers for capturing
@@ -145,7 +144,7 @@ int	validate_cub_file(t_list **file, t_map_c *tmp)
 	if (!validate_texture_names(file, tmp))
 	{
 		ft_putstr_fd("Invalid texture convention\n", 1);
-		return (0);		
+		return (0);
 	}
 	if (!validate_colors(file, tmp))
 	{

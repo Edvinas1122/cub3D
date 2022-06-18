@@ -27,7 +27,7 @@ int	check_bottom_row(char **map, char *valid_char)
 			return (0);
 		i2++;
 	}
-	i2 = 0;	
+	i2 = 0;
 	while (map[i + 1])
 		i++;
 	while (map[i][i2])
@@ -42,10 +42,10 @@ int	check_bottom_row(char **map, char *valid_char)
 /*
 	Checks for leaping 0 over row below
 */
-int check_leaping_column_uncloses(char **map, char *valid_char)
+int	check_leaping_column_uncloses(char **map, char *valid_char)
 {
 	int	i;
-	int i2;
+	int	i2;
 	int	column;
 	int	*lenghts;
 
@@ -58,7 +58,7 @@ int check_leaping_column_uncloses(char **map, char *valid_char)
 		while (lenghts[i] - i2)
 		{
 			if (!compare_to_str2(map[i][lenghts[i] - i2 - 1], valid_char))
-				break;
+				break ;
 			column = lenghts[i] - i2;
 			i2++;
 		}

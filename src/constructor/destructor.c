@@ -2,7 +2,7 @@
 
 void	destroy_mtrx_image(t_color ***matrix, char *img)
 {
-	int y;
+	int	y;
 
 	y = 0;
 	while (matrix[y])

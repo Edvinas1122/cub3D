@@ -1,17 +1,17 @@
-#ifndef CUBE3D_CONSTRUCTOR_H
-# define CUBE3D_CONSTRUCTOR_H
+#ifndef CONSTRUCTOR_H
+# define CONSTRUCTOR_H
 
 # include "../cube3d.h"
 # include "validation/validation.h"
 
-typedef struct	s_vect		t_vect;
-typedef	struct	s_color		t_color;
-typedef struct	s_data		t_data;
-typedef struct	s_map		t_map;
-typedef struct	s_texture	t_texture;
-typedef struct	s_video		t_video;
-typedef struct	s_mlx		t_mlx;
-typedef struct	s_utils		t_utils;
+typedef struct s_vect		t_vect;
+typedef struct s_color		t_color;
+typedef struct s_data		t_data;
+typedef struct s_map		t_map;
+typedef struct s_texture	t_texture;
+typedef struct s_video		t_video;
+typedef struct s_mlx		t_mlx;
+typedef struct s_utils		t_utils;
 
 /**
 	@param img_data pointer to image data - string of color data
@@ -40,6 +40,6 @@ t_utils		set_utils(t_data *data);
 void		set_sprites(t_data *data, char *sprite_ini);
 t_texture	open_texture_xpm(t_data *data, char *filename);
 
-t_color	***create_color_matrix(int width, int height, t_tmp_video *img);
+t_color		***create_color_matrix(int width, int height, t_tmp_video *img);
 
 #endif

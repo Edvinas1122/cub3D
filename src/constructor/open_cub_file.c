@@ -40,7 +40,7 @@ static t_map	assign_map(t_data *data, t_map_c tmp)
 */
 void	open_cub_file(char *file_name, t_data *data)
 {
-	t_map_c tmp;
+	t_map_c	tmp;
 
 	if (!validate_file_name(file_name))
 		destructor(data);
@@ -49,7 +49,6 @@ void	open_cub_file(char *file_name, t_data *data)
 		ft_putstr_fd("File access error\n", 1);
 		destructor(data);
 	}
-	
 	if (!validate_cub_file(tmp.file, &tmp))
 		destructor(data);
 	data->map = assign_map(data, tmp);

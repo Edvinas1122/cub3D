@@ -14,7 +14,7 @@ static t_vect	set_player_vector(char **bit_map, char *directions)
 	{
 		dir.x = 0;
 		dir.y = -1;
-	} 
+	}
 	else if (*c == 'W')
 	{
 		dir.x = 1;

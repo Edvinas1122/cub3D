@@ -2,7 +2,7 @@
 
 static int	texture_name_ends(t_map_c *tmp)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(tmp->ea);
 	if (len < 5 || ft_strncmp(&tmp->ea[len - 4], ".xpm\0", 5))

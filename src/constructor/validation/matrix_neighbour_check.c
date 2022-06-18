@@ -5,19 +5,19 @@ static int	check_around(char **map, int i, int i2)
 	if (compare_to_str2(map[i + 1][i2 - 1], " \0"))
 		return (0);
 	else if (compare_to_str2(map[i + 1][i2], " \0"))
-		return(0);
+		return (0);
 	else if (compare_to_str2(map[i + 1][i2 + 1], " \0"))
-		return(0);
+		return (0);
 	else if (compare_to_str2(map[i][i2 - 1], " \0"))
-		return(0);
+		return (0);
 	else if (compare_to_str2(map[i][i2 + 1], " \0"))
-		return(0);
+		return (0);
 	else if (compare_to_str2(map[i - 1][i2 - 1], " \0"))
-		return(0);
+		return (0);
 	else if (compare_to_str2(map[i - 1][i2], " \0"))
-		return(0);
+		return (0);
 	else if (compare_to_str2(map[i - 1][i2 + 1], " \0"))
-		return(0);
+		return (0);
 	return (1);
 }
 
