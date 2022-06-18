@@ -42,7 +42,11 @@ void	toggle_door(t_data *data)
 void	menu_pop(t_data *data)
 {
 	static int i;
+	long			x;
+	long			y;
 
+	x = SCREEN_WIDTH / 2;
+	y = SCREEN_HEIGHT / 2;
 	if (!i) 
 	{
 		data->util.game_state = 0;
@@ -52,9 +56,10 @@ void	menu_pop(t_data *data)
 	}
 	else
 	{
+		printf("%d %d\n", SCREEN_WIDTH / 2, SCREEN_HEIGHT/2);
 		data->util.game_state = 1;
 		mlx_hook(data->mlx.win, 6, (1L<<6), player_mouse_action, data);
-		mlx_mouse_move(data->mlx.win, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+		mlx_mouse_move(data->mlx.win, (void*)x, y, 0);
 		mlx_mouse_hide(data->mlx.win, 0);
 		i = 0;
 	}

@@ -62,13 +62,14 @@ int	red_x_win(t_data *data)
 
 int	player_mouse_action(int x, int y, t_data *data)
 {
-	(void) data;
+	long	mouse_x;
+	long	mouse_y;
+
+	mouse_x = SCREEN_WIDTH / 2;
+	mouse_y = SCREEN_HEIGHT / 2;
 	y++;
-	if (x > 1)
-		rotate_player(data, x);
-	else if (x < -1)
-		rotate_player(data, x);
-	mlx_mouse_move(data->mlx.win, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	rotate_player(data, x - mouse_x);
+	mlx_mouse_move(data->mlx.win, (void *)mouse_x, mouse_y, 0);
 	return (0);
 }
 
