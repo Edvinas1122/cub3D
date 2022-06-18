@@ -86,7 +86,7 @@ void	render_fov_view(t_data *data)
 	{
 		raycast.impact = find_intersections(data, &raycast.ray_dir, &raycast);
 		raycast.distance = point_distance(data->player.pos, raycast.impact);		
-		raycast.distance /= 1/(cos(get_angle(&data->player.vect, &raycast.ray_dir) / (180/M_PI)));//removing fisheye
+		raycast.distance *= (cos(get_angle(&data->player.vect, &raycast.ray_dir) / (180/M_PI)));//removing fisheye
 		data->map.z_buffer[raycast.v_line_ct] = raycast.distance;
 		draw_vertical_line(data, &raycast);
 		set_next_ray(data, &raycast);
