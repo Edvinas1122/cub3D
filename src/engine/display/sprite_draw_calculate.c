@@ -55,11 +55,11 @@ void calculate_draw(t_draw_sprite *layer, t_data *data)
 			&(*layer->sprite_arr[i]).position, &data->player.pos);
 		angle = find_angle_vecotrs(layer->sprite_vect, data->player.vect);
 		sprite_set_data(layer->sprite_arr[i], layer->sprite_vect, data, angle);
-		//select_spriteif animation
+		//set_sprite_frame();
 		if (check_condition(layer->sprite_arr[i], layer->sprite_images, angle))
 			draw_the_mother_ducking_sprite(data,
-					layer->sprite_images[(*layer->sprite_arr[i]).id],
-					(*layer->sprite_arr[i]));
+						layer->sprite_images[(*layer->sprite_arr[i]).id],
+						(*layer->sprite_arr[i]));
 		i++;
 	}
 }
