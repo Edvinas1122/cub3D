@@ -6,19 +6,22 @@
 	and have it loop through number of sprites
 	returns pointer to the sprite object
 */
-static void *next_highest(t_sprite sprites[6], double *last_distance)
+static void *next_highest(t_draw_sprite *layer, double *last_distance)
 {
 	double		tmpdist;
 	void	*ptr;
+	int		i;
 
+	i = 0;
 	tmpdist = -1.0;
-	for (int i = 0; i < 6; i++)
+	while (i < layer->obj_count)
 	{
-		if (sprites[i].distance > tmpdist && sprites[i].distance < *last_distance)
+		if (layer->objects[i].distance > tmpdist && layer->objects[i].distance < *last_distance)
 		{
-			ptr = &sprites[i];
-			tmpdist = sprites[i].distance;
+			ptr = &layer->objects[i];
+			tmpdist = layer->objects[i].distance;
 		}
+		i++;
 	}
 	*last_distance = tmpdist;
 	return (ptr);
@@ -35,7 +38,7 @@ static void	sort_sprites_by_distances(t_draw_sprite *layer)
 	layer->tmpdbl = 2e30;
 	while (i < layer->obj_count)
 	{
-		layer->sprite_arr[i] = (t_sprite *)next_highest(layer->objects, &layer->tmpdbl);
+		layer->sprite_arr[i] = (t_sprite *)next_highest(layer, &layer->tmpdbl);
 		i++;
 	}
 }
