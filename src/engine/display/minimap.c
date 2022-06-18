@@ -74,8 +74,8 @@ void	display_minimap_frame(t_data *data)
 		{
 			for (int y = 0; y < scaledheight; y++)
 			{
-				if (data->util.minimap_frame->img_matrix[(int)(y/scalefactor)][(int)(x/scalefactor)]->a == 0)
-					pixel_put(data->video.img_matrix, *data->util.minimap_frame->img_matrix[(int)(y/scalefactor)][(int)(x/scalefactor)], x, y);
+				if (data->util.minimap_frame->matx[(int)(y/scalefactor)][(int)(x/scalefactor)]->a == 0)
+					pixel_put(data->video.img_matrix, *data->util.minimap_frame->matx[(int)(y/scalefactor)][(int)(x/scalefactor)], x, y);
 			}
 		}
 	}

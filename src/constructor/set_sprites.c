@@ -149,10 +149,10 @@ void	set_minimap_frame(t_data *data)
 	void		*img_header;
 	t_tmp_video	img;
 
-	data->util.minimap_frame = ft_calloc(sizeof(t_sprite_data), 1);
+	data->util.minimap_frame = ft_calloc(sizeof(t_texture), 1);
 	img_header = mlx_xpm_file_to_image(data->mlx.ptr, "./assets/minimap_frame_LR.xpm", &data->util.minimap_frame->width, &data->util.minimap_frame->height);
 	img.img_data = mlx_get_data_addr(img_header, &img.img_bp, &img.img_sl, &img.img_e);
-	data->util.minimap_frame->img_matrix = create_color_matrix(data->util.minimap_frame->width, data->util.minimap_frame->height, &img);
+	data->util.minimap_frame->matx = create_color_matrix(data->util.minimap_frame->width, data->util.minimap_frame->height, &img);
 }
 
 void	draw_minimap_new()
