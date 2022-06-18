@@ -95,6 +95,9 @@ typedef struct s_sprite_anim
 	int		height;
 }	t_sprite_anim;
 
+/*
+	Entety
+*/
 typedef struct s_sprite
 {
 	int				id;

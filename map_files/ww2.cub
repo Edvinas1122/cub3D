@@ -1,7 +1,7 @@
-NO ./map_files/ww2_textures/gw310.xpm
-SO ./map_files/ww2_textures/gw410.xpm
-WE ./map_files/ww2_textures/gw510.xpm
-EA ./map_files/ww2_textures/gw610.xpm
+NO ./assets/textures/ww2_textures/gw310.xpm
+SO ./assets/textures/ww2_textures/gw410.xpm
+WE ./assets/textures/ww2_textures/gw510.xpm
+EA ./assets/textures/ww2_textures/gw610.xpm
 
 F 64,64,64
 C 0,40,40

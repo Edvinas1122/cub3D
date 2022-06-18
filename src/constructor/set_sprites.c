@@ -53,6 +53,7 @@ static void	set_sprite_images(t_data *data, t_list **file)
 			destructor(data);
 		img.img_data = mlx_get_data_addr(img_header, &img.img_bp, &img.img_sl, &img.img_e);
 		printf("\n%s\n", img.img_data);
+		// data->sprite_images[i].img_matrix = ft_calloc(2, sizeof(t_color ***));
 		data->sprite_images[i].img_matrix = create_color_matrix(data->sprite_images[i].width, data->sprite_images[i].height, &img);
 		row = row->next;
 		i++;
