@@ -29,9 +29,15 @@ void	toggle_door(t_data *data)
 	if (data->map.bit_map[y][x] == '2')
 	{
 		if (data->map.doormap[y][x].closed_percentage == 100)
+		{
 			data->map.doormap[y][x].moving = -5;
+			play_audio("./audio/door.wav", 2);
+		}
 		else if (data->map.doormap[y][x].closed_percentage == 0)
+		{
 			data->map.doormap[y][x].moving = 5;
+			play_audio("./audio/door.wav", 2);
+		}
 		else if (data->map.doormap[y][x].moving > 0)
 			data->map.doormap[y][x].moving = -5;
 		else if (data->map.doormap[y][x].moving < 0)

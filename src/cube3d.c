@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	}
 	constructor(&data, argv);
 	control_hooks(&data);
-	play_audio(data.util.soundtrack);
+	play_audio(data.util.soundtrack, 1);
 	mlx_loop_hook(data.mlx.ptr, engine, (void *)&data);
 	mlx_loop(data.mlx.ptr);
 	return (0);

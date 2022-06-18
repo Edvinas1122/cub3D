@@ -102,7 +102,7 @@ typedef struct	s_draw_sprite
 int		main(int argc, char **argv);
 int		engine(t_data *data);
 void	player_movement(t_data *data);
-void	play_audio(char *audio);
+void	play_audio(char *audio, int loudness);
 void	end_audio(void);
 
 #endif

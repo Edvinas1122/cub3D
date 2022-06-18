@@ -1,6 +1,6 @@
 CC			:= gcc
 DEBUG ?= 0
-AU_FLAG = -DAUDIO
+AU_FLAG = -DBONUS
 
 ifeq ($(DEBUG), 1)
     CFLAGS         =    -g -ggdb -Wall -Wextra -Werror -fsanitize=address
@@ -54,7 +54,7 @@ re: clean $(NAME)
 $(NAME): $(LIBFT) $(SRC)
 	$(CC) $(CFLAGS) $(SRC) $(LBMLX) $(LIBS) $(LIBFT) -o $(NAME)
 
-audio: $(LIBFT) $(SRC)
+bonus: $(LIBFT) $(SRC)
 	$(CC) $(CFLAGS) $(AU_FLAG) $(SRC) $(LBMLX) $(LIBS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):

@@ -1,5 +1,7 @@
 #include "../cube3d.h"
 
+#ifdef BONUS
+
 static void	set_time_stamp(t_data *data)
 {
 	double			time_diff;
@@ -11,11 +13,17 @@ static void	set_time_stamp(t_data *data)
 	if (time_diff <= 0)
 		return ;
 	move_factor = (double)(MOVE_DISTANCE) * (time_diff /33333.0);
-	// printf("\nOne frame time: %f\n", time_diff);
-	// printf("\nFPS: %f\n", 1000000 / time_diff);
-	// printf("\nMove factor: %f\n", move_factor);
 	data->util.move_factor = move_factor;
 }
+
+#else
+
+static void	set_time_stamp(t_data *data)
+{
+	data->util.move_factor = (double)(MOVE_DISTANCE);
+}
+
+#endif
 
 static void	update_doors(t_data *data)
 {

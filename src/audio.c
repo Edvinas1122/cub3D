@@ -1,15 +1,17 @@
 #include "cube3d.h"
 
-#ifdef AUDIO
+#ifdef BONUS
 
-void play_audio(char *audio)
+void play_audio(char *audio, int loudness)
 {
 	int		pid;
 	char	**argv;
 
-	argv = ft_calloc(3, sizeof(char *));
+	argv = ft_calloc(5, sizeof(char *));
 	argv[0] = ft_strdup("afplay");
-	argv[1] = ft_strdup(audio);
+	argv[1] = ft_strdup("-v");
+	argv[2] = ft_itoa(loudness);
+	argv[3] = ft_strdup(audio);
 	pid = fork();
 	if (!pid)
 	{
@@ -18,6 +20,8 @@ void play_audio(char *audio)
 	}
 	free(argv[0]);
 	free(argv[1]);
+	free(argv[2]);
+	free(argv[3]);
 	free(argv);
 }
 
@@ -42,9 +46,10 @@ void end_audio(void)
 
 #else
 
-void play_audio(char *audio)
+void play_audio(char *audio, int loudness)
 {
 	(void) audio;
+	loudness++;
 }
 
 void end_audio(void)
