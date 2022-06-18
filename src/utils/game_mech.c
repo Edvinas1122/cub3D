@@ -58,13 +58,13 @@ static void	set_around(t_vect *around, t_vect point)
 	t_vect	vect;
 	int		i;
 
-	vect.x = 0;
-	vect.y = 1;
+	vect.x = 0.5;
+	vect.y = 0.5;
 	barrier = TILE_SIZE/4;
 	i = 0;
-	while (i < 180)
+	while (i < 4)
 	{
-		rotate_vector(&vect, 2);
+		rotate_vector(&vect, 90);
 		around[i].x = point.x + vect.x * barrier;
  		around[i].y = point.y + vect.y * barrier;
 		i++;
@@ -79,15 +79,15 @@ int	check_if_solid_around(t_data *data, t_vect point)
 
 	i = 0;
 	flag = 0;
-	around = ft_calloc(181, sizeof(t_vect));
+	around = ft_calloc(5, sizeof(t_vect));
 	set_around(around, point);
-	while (i < 180 && !flag)
+	while (i < 4 && !flag)
 	{
 		if (check_if_solid(data, around[i]))
 			flag = 1;
 		i++;
 	}
-	//free;
+	free(around);
 	if (flag == 1)
 		return (1);
 	return (0);
