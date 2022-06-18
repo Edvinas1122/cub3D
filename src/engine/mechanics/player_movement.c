@@ -28,17 +28,20 @@ static void	collisios_slide(t_data *data)
 
 static void	dash(t_data *data)
 {
+	static int	dash_dif;
+
 	if (data->keys.key_space[0] == 1 && data->keys.key_space[1] == 0)
 	{
 		data->keys.key_space[1] = 1;
-		data->player.dash_cooldown = 18;
+		data->player.dash_cooldown = 30 * data->util.move_factor / MOVE_DISTANCE;
+		dash_dif = data->player.dash_cooldown - 5 * data->util.move_factor / MOVE_DISTANCE;
 	}
-	if (data->player.dash_cooldown > 13)
-		data->util.move_factor *= 3.5;
+	if (data->player.dash_cooldown > dash_dif)
+		data->util.move_factor *= 5;
 	if (data->player.dash_cooldown)
 		data->player.dash_cooldown--;
-	if (data->util.move_factor > TILE_SIZE - 10)
-		data->util.move_factor = 80;
+	if (data->util.move_factor > TILE_SIZE / 3)
+		data->util.move_factor = TILE_SIZE / 3;
 }
 
 void	player_movement(t_data *data)

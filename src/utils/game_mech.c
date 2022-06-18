@@ -60,7 +60,7 @@ static void	set_around(t_vect *around, t_vect point)
 
 	vect.x = 0.5;
 	vect.y = 0.5;
-	barrier = TILE_SIZE/4;
+	barrier = TILE_SIZE / 3 + 1;
 	i = 0;
 	while (i < 4)
 	{
