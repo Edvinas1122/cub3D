@@ -1,6 +1,6 @@
 #include "constructor.h"
 
-static int	set_minimap_scale(t_data *data)
+static int	set_map_scale(t_data *data)
 {
 	int	size_x;
 	int	size_y;
@@ -17,10 +17,12 @@ static int	set_minimap_scale(t_data *data)
 		size_y++;
 	}
 	free(arr);
-	factor = (SCREEN_WIDTH / size_x);
-	if (((SCREEN_HEIGHT / size_y)) < factor)
-		factor = ((SCREEN_HEIGHT / size_y));
-	return (factor / 4);
+	factor = ((SCREEN_WIDTH * 0.8) / size_x);
+	if ((((SCREEN_HEIGHT * 0.8) / size_y)) < factor)
+		factor = (((SCREEN_HEIGHT * 0.8) / size_y));
+	data->util.map_offset_x = (SCREEN_WIDTH - (size_x * factor)) / 2;
+	data->util.map_offset_y = (SCREEN_HEIGHT - (size_y * factor)) / 2;
+	return (factor);
 }
 
 /*
@@ -31,15 +33,17 @@ t_utils	set_utils(t_data *data)
 {
 	t_utils	utils;
 
-	(void) data;
 	utils.minimap[0] = set_color(0, 40, 40, 40);
 	utils.minimap[1] = set_color(0, 120, 120, 120);
 	utils.minimap[2] = set_color(0, 101, 67, 33);
 	utils.minimap[3] = set_color(0, 255, 0, 0);
 	utils.minimap[4] = set_color(0, 0, 0, 0);
-	utils.minimap_size = set_minimap_scale(data);
+	utils.map_scale = set_map_scale(data);
+	utils.minimap_state = 1;
 	utils.game_state = 1;
 	utils.pause = open_texture_xpm2(data, "./assets/utils/img_pause.xpm");
 	utils.time_stamp = set_time();
+	utils.map_offset_x = data->util.map_offset_x;
+	utils.map_offset_y = data->util.map_offset_y;
 	return (utils);
 }

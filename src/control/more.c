@@ -2,18 +2,10 @@
 
 void	pop_minimap(t_data *data)
 {
-	static int	iteration;
-
-	if (!iteration)
-	{
-		data->util.minimap_size *= 4;
-		iteration = 1;
-	}
+	if (data->util.minimap_state == 1)
+		data->util.minimap_state = 2;
 	else
-	{
-		data->util.minimap_size /= 4;
-		iteration = 0;
-	}
+		data->util.minimap_state = 1;
 }
 
 void	toggle_door(t_data *data)

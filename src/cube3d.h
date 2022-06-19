@@ -34,13 +34,16 @@ typedef struct s_utils
 {
 	t_color		minimap[5];
 	t_texture	*minimap_frame;
-	int			minimap_size;
+	int			minimap_state;
 	char		*soundtrack;
 	t_texture	pause;
 	int			game_state;
 	int			move_factor;
 	long		time_stamp;
 	long		old_time_stamp;
+	int			map_scale;
+	int			map_offset_x;
+	int			map_offset_y;
 }	t_utils;
 
 /*
