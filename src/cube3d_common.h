@@ -1,8 +1,8 @@
-#ifndef CUBE3D_RECURRENT
-# define CUBE3D_RECURRENT
+#ifndef CUBE3D_COMMON_H
+# define CUBE3D_COMMON_H
 # define SCREEN_WIDTH 800
 
-#include "cube3d.h"
+# include "cube3d.h"
 
 typedef struct s_door
 {
@@ -14,7 +14,7 @@ typedef struct s_door
 /*
 	X Y for positions & vectors
 */
-typedef struct	s_vect
+typedef struct s_vect
 {
 	double	x;
 	double	y;
@@ -24,7 +24,7 @@ typedef struct	s_vect
 	Color aRGB
 	!! keep order of the struct
 */
-typedef	struct	s_color
+typedef struct s_color
 {
 	unsigned char	b;
 	unsigned char	g;
@@ -35,24 +35,24 @@ typedef	struct	s_color
 /* 
 	texture data
 */
-typedef struct	s_texture
+typedef struct s_texture
 {
 	void	*img_header;
 	t_color	***matx;
-	int 	height;
+	int		height;
 	int		width;
 }	t_texture;
 
 /*
 	Contais 3D world enviromet data
 */
-typedef struct	s_map
+typedef struct s_map
 {
 	char		**bit_map;
 	t_door		**doormap;
 	t_texture	north;
 	t_texture	south;
-	t_texture 	west;
+	t_texture	west;
 	t_texture	east;
 	t_texture	door;
 	t_color		ceiling;
@@ -66,7 +66,7 @@ typedef struct	s_map
 * @param img_matrix used to access img_data. 2D array contains 
 					type casted pointers to img_data pixels
 */
-typedef struct	s_video
+typedef struct s_video
 {
 	void	*img;
 	t_color	***img_matrix;
@@ -105,7 +105,6 @@ typedef struct s_entety
 	t_vect			position;
 	double			scale;
 	int				frames;
-	//temp values for calc
 	t_vect			on_screen;
 	double			distance;
 	int				*obj_count;

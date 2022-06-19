@@ -1,21 +1,21 @@
-#ifndef CUBE3D_DISPLAY_H
-# define CUBE3D_DISPLAY_H
+#ifndef DISPLAY_H
+# define DISPLAY_H
 
-#include "../../cube3d.h"
+# include "../../cube3d.h"
 
-typedef struct	s_wall		t_wall;
-typedef struct	s_intersect	t_intersect;
-typedef struct	s_raycast	t_raycast;
-typedef struct	s_vect		t_vect;
-typedef	struct	s_color		t_color;
-typedef struct	s_data		t_data;
-typedef struct	s_map		t_map;
-typedef struct	s_texture	t_texture;
-typedef struct	s_video		t_video;
-typedef struct	s_mlx		t_mlx;
-typedef struct	s_draw_sprite	t_draw_sprite;
+typedef struct s_wall			t_wall;
+typedef struct s_intersect		t_intersect;
+typedef struct s_raycast		t_raycast;
+typedef struct s_vect			t_vect;
+typedef struct s_color			t_color;
+typedef struct s_data			t_data;
+typedef struct s_map			t_map;
+typedef struct s_texture		t_texture;
+typedef struct s_video			t_video;
+typedef struct s_mlx			t_mlx;
+typedef struct s_draw_sprite	t_draw_sprite;
 
-typedef struct	s_line
+typedef struct s_line
 {
 	t_texture	texture;
 	double		strech_factor;
@@ -36,7 +36,7 @@ typedef struct s_wall
 	int		offset;
 	int		start;
 	int		end;
-	t_color color;
+	t_color	color;
 }	t_wall;
 
 // Konstantin comment here
@@ -54,7 +54,7 @@ typedef struct s_intersect
 	double	hor_factor;
 }	t_intersect;
 
-typedef struct	s_hit
+typedef struct s_hit
 {
 	double	tmpdist;
 	int		hit_wall;
@@ -73,7 +73,7 @@ typedef struct s_raycast
 	t_vect	impact;
 	double	distance;
 	int		v_line_ct;
-	int		cardinal_direction; //NO:1 SO:2 WE:3 EA:4
+	int		cardinal_direction;
 	int		isdoor;
 }	t_raycast;
 
@@ -101,7 +101,8 @@ void	sprite_draw(t_data *data);
 /*
 	Members of sprite draw
 */
-void	draw_the_mother_ducking_sprite(t_data *data, t_texture sprite_data, t_entety sprite);
+void	draw_the_mother_ducking_sprite(t_data *data,
+			t_texture sprite_data, t_entety sprite);
 void	calculate_draw(t_draw_sprite *layer, t_data *data);
-t_texture set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
+t_texture	set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
 #endif

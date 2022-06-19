@@ -43,7 +43,7 @@ static int	check_one_player(char **map, char *valid_char)
 static int	valid_map_characters(char **map, char *valid_char)
 {
 	int	i;
-	int i2;
+	int	i2;
 
 	i = 0;
 	while (map[i])

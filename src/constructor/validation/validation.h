@@ -45,4 +45,6 @@ int	check_leaping_column_uncloses(char **map, char *valid_char);
 int	check_bottom_row(char **map, char *valid_char);
 int	all_rows_closed(char **map);
 
+t_door	*get_doormap_line(char *map, t_door **doors, int *doorcount);
+t_door	**get_doormap(char	**map, t_door **doors);
 #endif
