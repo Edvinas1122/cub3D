@@ -15,7 +15,6 @@ static int	read_line(int fd, char **str)
 		ct = read(fd, c, 1);
 		if (*c == '\n' || ct == 0)
 		{
-			free(buf);
 			free(c);
 			break ;
 		}
