@@ -77,6 +77,15 @@ typedef struct s_raycast
 	int		isdoor;
 }	t_raycast;
 
+typedef struct s_dis_draw_spr
+{
+	double	scalefactor;
+	int		scaledwidth;
+	int		scaledheight;
+	int		xstart;
+	int		ystart;
+}	t_dis_draw_spr;
+
 /*
 	Main function
 */

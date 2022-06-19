@@ -1,34 +1,47 @@
 #include "display.h"
 
+static void	ducking_constructor(t_texture sprite_data, t_entety sprite, t_dis_draw_spr *tmp)
+{
+	tmp->scalefactor = sprite.scale / (sprite.distance / TILE_SIZE);
+	tmp->scaledwidth = (int)(sprite_data.width * tmp->scalefactor);
+	tmp->scaledheight = (int)(sprite_data.height * tmp->scalefactor);
+	tmp->xstart = (int)sprite.on_screen.x - tmp->scaledwidth/2;
+	tmp->ystart = (int)sprite.on_screen.y - tmp->scaledheight;
+}
+
+static void	draw_the_ducking_line(t_data *data, t_texture sprite_data, t_entety sprite, t_dis_draw_spr	tmp, int x)
+{
+	double	dimfactor;
+	int		j;
+	t_color	dimmed;
+
+	j = 0;
+	while (j < tmp.scaledheight)
+	{
+		if (tmp.ystart + j >= 0 &&tmp.ystart + j < SCREEN_HEIGHT)
+		{
+			if ((*sprite_data.matx[(int)(x/tmp.scalefactor)][(int)(j/tmp.scalefactor)]).a == 0)
+			{
+				dimfactor = get_dim_factor(sprite.distance);
+				dimmed = dim_color(*sprite_data.matx[(int)(x/tmp.scalefactor)][(int)(j/tmp.scalefactor)], dimfactor);
+				pixel_put(data->video.img_matrix, dimmed, tmp.xstart + x, tmp.ystart + j);
+			}
+		j++;
+	}
+}
+
 void	draw_the_mother_ducking_sprite(t_data *data, t_texture sprite_data, t_entety sprite)
 {
-	double	scalefactor;
-	int		scaledwidth;
-	int		scaledheight;
-	int		xstart;
-	int		ystart;
+	t_dis_draw_spr	tmp;
+	int				x;
 
-	scalefactor = sprite.scale / (sprite.distance / TILE_SIZE);
-	scaledwidth = (int)(sprite_data.width * scalefactor);
-	scaledheight = (int)(sprite_data.height * scalefactor);
-	xstart = (int)sprite.on_screen.x - scaledwidth/2;
-	ystart = (int)sprite.on_screen.y - scaledheight;
-	for (int x = 0; x < scaledwidth; x++)
+	ducking_constructor(sprite_data, sprite, &tmp);
+	x = 0;
+	while (x < tmp.scaledwidth)
 	{
-		if  (xstart + x >= 0 && xstart + x < SCREEN_WIDTH && data->map.z_buffer[xstart + x] > sprite.distance) //checking if wall at this column is closer, and if it's offscreen
-		{
-			for (int j = 0; j < scaledheight; j++)
-				if (ystart + j >= 0 &&ystart + j < SCREEN_HEIGHT)	//checking if y val is offscreen
-				{
-					double dimfactor;
-					if ((*sprite_data.matx[(int)(x/scalefactor)][(int)(j/scalefactor)]).a == 0) //not drawing if transparency value isn't 0
-					{
-						t_color dimmed;
-						dimfactor = get_dim_factor(sprite.distance);
-						dimmed = dim_color(*sprite_data.matx[(int)(x/scalefactor)][(int)(j/scalefactor)], dimfactor);
-						pixel_put(data->video.img_matrix, dimmed, xstart + x, ystart + j);
-					}
-				}
-		}
+		if (tmp.xstart + x >= 0 && tmp.xstart + x < SCREEN_WIDTH
+				&& data->map.z_buffer[tmp.xstart + x] > sprite.distance)
+			draw_the_ducking_line(data, sprite_data, sprite, tmp, x);
+		x++;
 	}
 }
