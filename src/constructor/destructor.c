@@ -18,43 +18,17 @@ static void	destroy_textures(t_data *data)
 		destroy_mtrx_image(data, data->map.door);
 }
 
-void	free_string_array(char **str)
-{
-	int	y;
-
-	y = 0;
-	while (str[y])
-	{
-		free(str[y]);
-		y++;
-	}
-	free(str);
-}
-
-void	free_doors_array(t_door **doors)
-{
-	int	y;
-
-	y = 0;
-	while (doors[y])
-	{
-		free(doors[y]);
-		y++;
-	}
-	free(doors);
-}
-
 void	destructor(t_data *data)
 {
 	if (data->map.bit_map)
-		free_string_array(data->map.bit_map);
+		delocate_arr(data->map.bit_map);
 	if (data->video.img)
 		destroy_mtrx_video(data, data->video);
 	destroy_textures(data);
 	if (data->doors)
 		free(data->doors);
 	if (data->map.doormap)
-		free_doors_array(data->map.doormap);
+		delocate_door(data->map.doormap);
 	if (data->sprite_images)
 		delocate_texture_array(data, data->sprite_images);
 	if (data->sprite_anim)
@@ -64,7 +38,7 @@ void	destructor(t_data *data)
 	if (data->entity_arr)
 		free(data->entity_arr);
 	if (data->util.soundtrack)
-		free (data->util.soundtrack);
+		free(data->util.soundtrack);
 	if (data->mlx.win)
 		mlx_destroy_window(data->mlx.ptr, data->mlx.win);
 	if (data->mlx.ptr)

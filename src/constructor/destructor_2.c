@@ -42,6 +42,7 @@ void	delocate_texture_array(t_data *data, t_texture *arr)
 		destroy_mtrx_image(data, arr[i]);
 		i++;
 	}
+	free(arr);
 }
 
 void	delocate_sprite_animation(t_data *data)

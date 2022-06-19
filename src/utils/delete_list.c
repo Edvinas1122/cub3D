@@ -17,6 +17,7 @@ void	lst_clear_2(t_list **list)
 	node = *list;
 	while (node)
 	{
+		printf("freeing %s\n", node->content);
 		tmp = node->next;
 		free(node->content);
 		free(node);
