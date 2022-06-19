@@ -1,18 +1,5 @@
 #include "display.h"
 
-static double	get_dim_factor(double distance)
-{
-	double factor;
-
-	factor = distance/1000;
-	if (factor > 1)
-		factor = 1;
-	factor = 1 - factor;
-	if (factor < 0.25)
-		factor = 0.25;
-	return (factor);
-}
-
 void	draw_the_mother_ducking_sprite(t_data *data, t_texture sprite_data, t_entety sprite)
 {
 	double	scalefactor;

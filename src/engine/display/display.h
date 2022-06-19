@@ -54,9 +54,14 @@ typedef struct s_intersect
 	double	hor_factor;
 }	t_intersect;
 
-/* 
-	Ussed in diyplay only
-*/
+typedef struct	s_hit
+{
+	double	tmpdist;
+	int		hit_wall;
+	int		hit_door;
+	t_vect	tmp;
+}	t_hit;
+
 /*
 	Raycast ray data;
 */
@@ -89,7 +94,7 @@ void	render_menu(t_data *data);
 */
 void	draw_vertical_line(t_data *data, t_raycast *raycast);
 void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);
-double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast, int doorflag);
+t_vect	find_intersections(t_data *data, t_vect *dir, t_raycast *raycast);
 void	draw_floor_and_ceiling(t_data *data);
 void	sprite_draw(t_data *data);
 

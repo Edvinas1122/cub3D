@@ -27,18 +27,18 @@ static int	vertical_offset_cal(t_vect impact, int texture_width, int plane, int 
 	return (vertical_offset);
 }
 
-static double	get_dim_factor(double distance)
-{
-	double factor;
+// static double	get_dim_factor(double distance)
+// {
+// 	double factor;
 
-	factor = (distance / TILE_SIZE) / 10;
-	if (factor > 1)
-		factor = 1;
-	factor = 1 - factor;
-	if (factor < 0.25)
-		factor = 0.25;
-	return (factor);
-}
+// 	factor = (distance / TILE_SIZE) / 10;
+// 	if (factor > 1)
+// 		factor = 1;
+// 	factor = 1 - factor;
+// 	if (factor < 0.25)
+// 		factor = 0.25;
+// 	return (factor);
+// }
 
 static void	construct_line(t_line *line, t_data *data, t_raycast *raycast, t_wall *wall)
 {

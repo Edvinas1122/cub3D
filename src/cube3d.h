@@ -43,7 +43,6 @@ typedef struct s_utils
 	long		old_time_stamp;
 }	t_utils;
 
-
 /*
 	Player position in a world data
 */

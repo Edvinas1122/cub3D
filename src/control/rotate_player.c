@@ -16,7 +16,12 @@ void	rotate_player(t_data *data, int x)
 
 	strenght = x;
 	strenght /= MOUSE_SENSITIVITY;
-	//data->player.rotate = strenght;
 	rotate_vector(&data->player.vect, strenght);
 	rotate_vector(&data->player.movement, strenght);
+}
+
+int	red_x_win(t_data *data)
+{
+	close_win(data);
+	return (0);
 }

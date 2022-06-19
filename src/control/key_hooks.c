@@ -27,7 +27,7 @@ static void	*get_action_function(int keycode, t_data *data)
 
 int	player_action(int keycode, t_data *data)
 {
-	void (*action)(t_data *);
+	void	(*action)(t_data *);
 
 	action = get_action_function(keycode, data);
 	if (action)
@@ -35,7 +35,9 @@ int	player_action(int keycode, t_data *data)
 	return (0);
 }
 
-// subtract from movement acording to dir
+/*
+	Subtract from movement acording to dir
+*/
 int	player_stop_movement(int keycode, t_data *data)
 {
 	if (keycode == 0)
@@ -51,12 +53,6 @@ int	player_stop_movement(int keycode, t_data *data)
 		data->keys.key_space[1] = 0;
 		data->keys.key_space[0] = 0;
 	}
-	return (0);
-}
-
-int	red_x_win(t_data *data)
-{
-	close_win(data);
 	return (0);
 }
 

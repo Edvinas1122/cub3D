@@ -2,7 +2,7 @@
 
 #ifdef BONUS
 
-void play_audio(char *audio, int loudness)
+void	play_audio(char *audio, int loudness)
 {
 	int		pid;
 	char	**argv;
@@ -25,7 +25,7 @@ void play_audio(char *audio, int loudness)
 	free(argv);
 }
 
-void end_audio(void)
+void	end_audio(void)
 {
 	int		pid;
 	char	**argv;
@@ -46,13 +46,13 @@ void end_audio(void)
 
 #else
 
-void play_audio(char *audio, int loudness)
+void	play_audio(char *audio, int loudness)
 {
 	(void) audio;
 	loudness++;
 }
 
-void end_audio(void)
+void	end_audio(void)
 {
 }
 #endif

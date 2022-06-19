@@ -21,9 +21,9 @@ static void	find_factor(t_intersect *data, t_vect pos, t_vect *dir)
 		data->hor_factor = 2e30;
 }
 
-static void find_angle_quadrant(t_intersect *data, t_vect *dir)
+static void	find_angle_quadrant(t_intersect *data, t_vect *dir)
 {
-	data->angle = atan2(dir->y*-1, dir->x);
+	data->angle = atan2(dir->y * -1, dir->x);
 	if (dir->x >= 0 && dir->y >= 0)
 		data->angle *= -1;
 	if (dir->x < 0 && dir->y >= 0)
@@ -32,15 +32,19 @@ static void find_angle_quadrant(t_intersect *data, t_vect *dir)
 		data->angle = M_PI - data->angle;
 }
 
-// short coment here 
-double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast, int doorflag)
+/*
+	Provides raycaster information by calculating next intersection
+	distance.
+*/
+static double	intersection_distances(t_vect pos, t_vect *dir,
+										t_raycast *raycast, int doorflag)
 {
 	t_intersect	data;
 
 	find_angle_quadrant(&data, dir);
 	find_factor(&data, pos, dir);
-	data.dist_to_vert = TILE_SIZE/(cos(data.angle));
-	data.dist_to_hor = TILE_SIZE/(cos(M_PI/2 - data.angle));
+	data.dist_to_vert = TILE_SIZE / (cos(data.angle));
+	data.dist_to_hor = TILE_SIZE / (cos(M_PI / 2 - data.angle));
 	if (doorflag && raycast->cardinal_direction == 1)
 		data.dist_to_hor /= 2;
 	if (doorflag && raycast->cardinal_direction == 3)
@@ -59,4 +63,51 @@ double	intersection_distances(t_vect pos, t_vect *dir, t_raycast *raycast, int d
 		raycast->cardinal_direction = 1;
 		return (data.dist_to_hor);
 	}
+}
+
+static int	itterate_intersection(t_data *data, t_vect *dir,
+									t_raycast *raycast, t_hit *in)
+{
+	in->tmpdist = intersection_distances(in->tmp, dir, raycast, 0);
+	in->tmp.x += (in->tmpdist * dir->x);
+	in->tmp.y += (in->tmpdist * dir->y);
+	in->hit_wall = check_if_wall(data, in->tmp);
+	if (in->hit_wall == 2)
+	{
+		in->tmpdist = intersection_distances(in->tmp, dir, raycast, 1);
+		in->tmp.x += (in->tmpdist * dir->x);
+		in->tmp.y += (in->tmpdist * dir->y);
+		in->hit_wall = check_if_wall(data, in->tmp);
+		if (in->hit_wall == 2 && check_door(data, in->tmp,
+				raycast->cardinal_direction))
+		{
+			raycast->isdoor = 1;
+			return (0);
+		}
+	}
+	if (in->hit_wall == 1)
+	{
+		raycast->isdoor = 0;
+		return (0);
+	}
+	return (1);
+}
+
+t_vect	find_intersections(t_data *data, t_vect *dir, t_raycast *raycast)
+{
+	t_hit	in;
+
+	in.hit_door = 0;
+	in.tmp.x = data->player.pos.x;
+	in.tmp.y = data->player.pos.y;
+	while (42)
+	{
+		if (!itterate_intersection(data, dir, raycast, &in))
+			break ;
+	}
+	if (raycast->cardinal_direction == 1 && data->player.pos.y < in.tmp.y)
+		raycast->cardinal_direction = 2;
+	if (raycast->cardinal_direction == 3 && data->player.pos.x < in.tmp.x)
+		raycast->cardinal_direction = 4;
+	return (in.tmp);
 }

@@ -18,6 +18,7 @@ int	render_display(t_data *data)
 	}
 	else if (data->util.game_state == 2)
 		render_menu(data);
-	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win, data->video.img, 0, 0);
+	mlx_put_image_to_window(data->mlx.ptr, data->mlx.win,
+		data->video.img, 0, 0);
 	return (0);
 }

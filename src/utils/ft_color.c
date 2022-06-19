@@ -1,15 +1,29 @@
 #include "utils.h"
 
-// t_color	set_color_fstr(void *bin)
-// {
-// 	t_color	color;
+double	get_dim_factor_2(int y)
+{
+	double	factor;
 
-// 	color.a = *(char *)bin;
-// 	color.r = *(char *)bin + 1;
-// 	color.g = *(char *)bin + 2;
-// 	color.b = *(char *)bin + 3;
-// 	return (color);
-// }
+	factor = 1 - ((double)y / (SCREEN_HEIGHT / 2));
+	factor = factor * factor * factor * factor;
+	return (1 - factor);
+}
+
+/*
+	Dim factor for color pixel by ratio - distance
+*/
+double	get_dim_factor(double distance)
+{
+	double	factor;
+
+	factor = (distance / TILE_SIZE) / 10;
+	if (factor > 1)
+		factor = 1;
+	factor = 1 - factor;
+	if (factor < 0.25)
+		factor = 0.25;
+	return (factor);
+}
 
 /*
 	Sets aRGB colors values to t_color struct

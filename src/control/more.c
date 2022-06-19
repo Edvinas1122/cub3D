@@ -18,8 +18,8 @@ void	pop_minimap(t_data *data)
 
 void	toggle_door(t_data *data)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
 	t_vect	tmp;
 
 	tmp.x = data->player.pos.x + data->player.vect.x * (TILE_SIZE);
@@ -47,24 +47,24 @@ void	toggle_door(t_data *data)
 
 void	menu_pop(t_data *data)
 {
-	static int i;
-	long			x;
-	long			y;
+	static int	i;
+	long		x;
+	long		y;
 
 	x = SCREEN_WIDTH / 2;
 	y = SCREEN_HEIGHT / 2;
-	if (!i) 
+	if (!i)
 	{
 		data->util.game_state = 0;
-		mlx_hook(data->mlx.win, 6, (1L<<6), player_mouse_action_stop, data);
+		mlx_hook(data->mlx.win, 6, (1L << 6), player_mouse_action_stop, data);
 		mlx_mouse_show(data->mlx.win, 0);
 		i = 1;
 	}
 	else
 	{
 		data->util.game_state = 1;
-		mlx_hook(data->mlx.win, 6, (1L<<6), player_mouse_action, data);
-		mlx_mouse_move(data->mlx.win, (void*)x, y, 0);
+		mlx_hook(data->mlx.win, 6, (1L << 6), player_mouse_action, data);
+		mlx_mouse_move(data->mlx.win, (void *)x, y, 0);
 		mlx_mouse_hide(data->mlx.win, 0);
 		i = 0;
 	}
