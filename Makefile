@@ -5,7 +5,7 @@ AU_FLAG = -DBONUS
 ifeq ($(DEBUG), 1)
     CFLAGS         =    -g -ggdb -Wall -Wextra -Werror -fsanitize=address
 else
-    CFLAGS        =    -g -Wall -Wextra -Werror
+    CFLAGS        =    -Wall -Wextra -Werror -O3
 endif
 
 # SRC subdirrectories #
@@ -14,7 +14,8 @@ VALIDATOR_FILES := validate_cub_file.c validate_map.c matrix_neighbour_check.c m
 VALIDATOR := $(addprefix validation/,$(VALIDATOR_FILES))
 
 CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c destructor.c \
-					open_textures_xmp.c set_utils.c set_sprites.c $(VALIDATOR) 
+					open_textures_xmp.c set_utils.c set_sprites.c \
+					set_sprites_2.c open_sprite_ini.c $(VALIDATOR) 
 CONSTRUCTOR := $(addprefix constructor/,$(CONSTRUCTOR_FILES))
 DISPLAY_FILES := display.c minimap.c minimap_2.c raycast.c draw_vertical_line.c intersection_distances.c \
 				draw_floor_and_ceiling.c sprite_draw.c menu.c sprite_draw_calculate.c \
@@ -29,7 +30,7 @@ CONTROL := $(addprefix control/,$(CONTROL_FILES))
 UTIL_FILES := file_to_heap.c find_char.c ft_color.c len_func.c \
 				list_to_array.c match_str.c pixel_matrix.c delete_list.c \
 				math_functions.c game_mech.c fill_screen_color.c \
-				xpm_to_texture.c time.c math_functions2.c
+				xpm_to_texture.c time.c math_functions2.c delocate.c
 UTIL := $(addprefix utils/,$(UTIL_FILES))
 # SRC subdirrectories #
 

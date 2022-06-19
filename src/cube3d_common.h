@@ -105,7 +105,7 @@ typedef struct s_entity
 	int				frames;
 	t_vect			on_screen;
 	double			distance;
-	int				*obj_count;
+	int				obj_count;
 }	t_entity;
 
 #endif 

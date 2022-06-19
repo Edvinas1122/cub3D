@@ -39,7 +39,13 @@ t_texture	load_texture_files(t_data *data, char *filename);
 t_utils		set_utils(t_data *data);
 void		set_sprites(t_data *data, char *sprite_ini);
 t_texture	open_texture_xpm(t_data *data, char *filename);
-
+t_list		**open_sprite_ini(t_texture **sprites, char *sprite_ini);
 t_color		***create_color_matrix(int width, int height, t_tmp_video *img);
+
+/*
+	member of set sprites
+*/
+void		set_minimap_frame(t_data *data);
+char		*set_soundtrack(t_list **file);
 
 #endif

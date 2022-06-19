@@ -67,7 +67,7 @@ static void	sprite_constructor(t_draw_sprite *layer, t_data *data)
 {
 	layer->sprite_images = data->sprite_images;
 	layer->objects = data->entety;
-	layer->obj_count = *(data->entety->obj_count);
+	layer->obj_count = data->entety->obj_count;
 	layer->entety_arr = data->entety_arr;
 }
 

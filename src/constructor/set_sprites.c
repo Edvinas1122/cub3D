@@ -1,39 +1,17 @@
 #include "constructor.h"
 
-static int	validate_name_ends(t_list **file)
+static t_list	*iterate_sections(t_list **file, int i)
 {
-	int		len;
-	t_list	*row;
-	int		i;
+	t_list		*row;
 
 	row = *file;
-	i = 0;
-	while (ft_strncmp(row->content, "\0\0", 2) && row)
+	while (i--)
 	{
-		len = ft_strlen(row->content);
-		if (len < 5 || ft_strncmp(&row->content[len - 4], ".xpm\0", 5))
-			return (0);
+		while (ft_strncmp(row->content, "\0\0", 2))
+			row = row->next;
 		row = row->next;
-		i++;
 	}
-	return (i);
-}
-
-static t_list	**open_sprite_ini(t_texture **sprites, char *sprite_ini)
-{
-	t_list	**file;
-	int		num_of_sprites;
-
-	if (!file_to_heap(sprite_ini, &file))
-	{
-		ft_putstr_fd("sprite_info.ini open error", 1);
-		return (NULL);
-	}
-	num_of_sprites = validate_name_ends(file);
-	if (!num_of_sprites)
-		return (0);
-	*sprites = ft_calloc(num_of_sprites + 1, sizeof(t_texture));
-	return (file);
+	return (row);
 }
 
 static void	set_sprite_images(t_data *data, t_list **file, int *img_ct)
@@ -69,16 +47,9 @@ static t_entity	*set_enteties(t_list **file, int img_ct)
 	t_entity	*entety;
 	char		**info;
 	int			i;
-	int			*obj_count;
 
-	row = *file;
 	i = 0;
-	while (ft_strncmp(row->content, "\0\0", 2))
-		row = row->next;
-	row = row->next;
-	while (ft_strncmp(row->content, "\0\0", 2))
-		row = row->next;
-	row = row->next;
+	row = iterate_sections(file, 2);
 	entety = ft_calloc(ft_lstsize(row) + 1, sizeof(t_entity));
 	while (ft_strncmp(row->content, "\0\0", 2))
 	{
@@ -89,34 +60,12 @@ static t_entity	*set_enteties(t_list **file, int img_ct)
 		entety[i].position.x = ft_atoi(info[0]);
 		entety[i].position.y = ft_atoi(info[1]);
 		entety[i].scale = ft_atoi(info[2]);
-		free(info[0]);
-		free(info[1]);
-		free(info[2]);
-		free(info);
+		delocate_arr(info);
 		row = row->next;
 		i++;
 	}
-	obj_count = malloc(sizeof(int));
-	*obj_count = i;
-	entety->obj_count = obj_count;
+	entety->obj_count = i;
 	return (entety);
-}
-
-static char	*set_soundtrack(t_list **file)
-{
-	t_list	*row;
-
-	row = *file;
-	while (ft_strncmp(row->content, "\0\0", 2))
-		row = row->next;
-	row = row->next;
-	while (ft_strncmp(row->content, "\0\0", 2))
-		row = row->next;
-	row = row->next;
-	while (ft_strncmp(row->content, "\0\0", 2))
-		row = row->next;
-	row = row->next;
-	return (ft_strdup(row->content));
 }
 
 static void	set_animation_sprites(t_data *data, t_list **file)
@@ -127,11 +76,8 @@ static void	set_animation_sprites(t_data *data, t_list **file)
 
 	data->sprite_anim = ft_calloc(1 + 1, sizeof(t_sprite_anim));
 	data->sprite_anim[0].img_arr = ft_calloc(4 + 1, sizeof(t_texture));
-	row = *file;
+	row = iterate_sections(file, 1);
 	i = 0;
-	while (ft_strncmp(row->content, "\0\0", 2))
-		row = row->next;
-	row = row->next;
 	while (ft_strncmp(row->content, "\0\0", 2))
 	{
 		data->sprite_anim[0].img_arr[i].img_header
@@ -151,18 +97,7 @@ static void	set_animation_sprites(t_data *data, t_list **file)
 	}
 }
 
-void	set_minimap_frame(t_data *data)
-{
-	void		*img_header;
-	t_tmp_video	img;
-
-	data->util.minimap_frame = ft_calloc(sizeof(t_texture), 1);
-	img_header = mlx_xpm_file_to_image(data->mlx.ptr, "./assets/minimap_frame_LR.xpm", &data->util.minimap_frame->width, &data->util.minimap_frame->height);
-	img.img_data = mlx_get_data_addr(img_header, &img.img_bp, &img.img_sl, &img.img_e);
-	data->util.minimap_frame->matx = create_color_matrix(data->util.minimap_frame->width, data->util.minimap_frame->height, &img);
-}
-
-void set_sprites(t_data *data, char *sprite_ini)
+void	set_sprites(t_data *data, char *sprite_ini)
 {
 	t_list	**file;
 	int		image_ct;
@@ -172,7 +107,7 @@ void set_sprites(t_data *data, char *sprite_ini)
 	set_animation_sprites(data, file);
 	data->entety = set_enteties(file, image_ct);
 	data->entety_arr = ft_calloc(sizeof(t_entity *),
-			*(data->entety->obj_count) + 1);
+			data->entety->obj_count + 1);
 	data->util.soundtrack = set_soundtrack(file);
 	set_minimap_frame(data);
 }
