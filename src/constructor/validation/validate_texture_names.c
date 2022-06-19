@@ -24,6 +24,7 @@ static int	texture_name_begins(t_list **file, t_map_c *tmp)
 	t_list	*node;
 
 	node = *file;
+	printf("\n%s\n", node->content);
 	if (ft_strncmp(node->content, "NO ", 3))
 		return (0);
 	tmp->no = &(node->content)[3];

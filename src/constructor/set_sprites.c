@@ -105,9 +105,9 @@ void	set_sprites(t_data *data, char *sprite_ini)
 	file = open_sprite_ini(&data->sprite_images, sprite_ini);
 	set_sprite_images(data, file, &image_ct);
 	set_animation_sprites(data, file);
-	data->entety = set_enteties(file, image_ct);
-	data->entety_arr = ft_calloc(sizeof(t_entity *),
-			data->entety->obj_count + 1);
+	data->entity = set_enteties(file, image_ct);
+	data->entity_arr = ft_calloc(sizeof(t_entity *),
+			data->entity->obj_count + 1);
 	data->util.soundtrack = set_soundtrack(file);
 	set_minimap_frame(data);
 	set_bigmap_background(data);

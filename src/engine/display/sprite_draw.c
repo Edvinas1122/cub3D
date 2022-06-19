@@ -66,9 +66,9 @@ static void	sprites_calculate_distances(t_draw_sprite *layer, t_vect pos)
 static void	sprite_constructor(t_draw_sprite *layer, t_data *data)
 {
 	layer->sprite_images = data->sprite_images;
-	layer->objects = data->entety;
-	layer->obj_count = data->entety->obj_count;
-	layer->entety_arr = data->entety_arr;
+	layer->objects = data->entity;
+	layer->obj_count = data->entity->obj_count;
+	layer->entety_arr = data->entity_arr;
 }
 
 /*

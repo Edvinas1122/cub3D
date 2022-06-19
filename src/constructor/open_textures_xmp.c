@@ -55,6 +55,7 @@ t_texture	open_texture_xpm(t_data *data, char *file)
 	img.img_data = mlx_get_data_addr(imgptr, &img.img_bp, \
 								&img.img_sl, &img.img_e);
 	txtr.matx = create_color_matrix(txtr.width, txtr.height, &img);
+	txtr.img_header = imgptr;
 	return (txtr);
 }
 

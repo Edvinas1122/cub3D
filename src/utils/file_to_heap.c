@@ -15,7 +15,6 @@ static int	read_line(int fd, char **str)
 		ct = read(fd, c, 1);
 		if (*c == '\n' || ct == 0)
 		{
-			free(buf);
 			free(c);
 			break ;
 		}
@@ -44,7 +43,6 @@ int	file_to_heap(char *name, t_list ***file)
 		exit(0);
 	*file = ft_calloc(1, sizeof(t_list *));
 	info = 1;
-	printf("Reading file: \n\n");
 	while (info)
 	{
 		info = read_line(fd, &row);

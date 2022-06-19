@@ -87,8 +87,8 @@ typedef struct s_data
 	int				count;
 	t_texture		*sprite_images;
 	t_sprite_anim	*sprite_anim;
-	t_entity		*entety;
-	t_entity		**entety_arr;
+	t_entity		*entity;
+	t_entity		**entity_arr;
 	double			scalefactor;
 }	t_data;
 
