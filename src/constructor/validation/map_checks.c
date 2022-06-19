@@ -47,29 +47,29 @@ int	check_leaping_column_uncloses(char **map, char *valid_char)
 	int	i;
 	int	i2;
 	int	column;
-	int	*lenghts;
+	int	*lengths;
 
-	lenghts = line_lenghts(map);
+	lengths = line_lengths(map);
 	column = 0;
 	i = 1;
 	while (map[i + 1])
 	{
 		i2 = 0;
-		while (lenghts[i] - i2)
+		while (lengths[i] - i2)
 		{
-			if (!compare_to_str2(map[i][lenghts[i] - i2 - 1], valid_char))
+			if (!compare_to_str2(map[i][lengths[i] - i2 - 1], valid_char))
 				break ;
-			column = lenghts[i] - i2;
+			column = lengths[i] - i2;
 			i2++;
 		}
 		i2 = 0;
-		if (column > lenghts[i + 1] || column > lenghts[i - 1])
+		if (column > lengths[i + 1] || column > lengths[i - 1])
 		{
-			free(lenghts);
+			free(lengths);
 			return (0);
 		}
 		i++;
 	}
-	free(lenghts);
+	free(lengths);
 	return (1);
 }
