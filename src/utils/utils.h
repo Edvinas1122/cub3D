@@ -4,7 +4,7 @@
 # include "../cube3d.h"
 
 typedef struct s_vect		t_vect;
-typedef	struct s_color		t_color;
+typedef struct s_color		t_color;
 typedef struct s_data		t_data;
 typedef struct s_map		t_map;
 typedef struct s_texture	t_texture;

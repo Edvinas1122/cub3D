@@ -11,25 +11,13 @@ static t_vect	set_player_vector(char **bit_map, char *directions)
 	ft_bzero(&dir, sizeof(t_vect));
 	c = find_char(bit_map, directions);
 	if (*c == 'N')
-	{
-		dir.x = 0;
 		dir.y = -1;
-	}
 	else if (*c == 'W')
-	{
 		dir.x = 1;
-		dir.y = 0;
-	}
 	else if (*c == 'S')
-	{
-		dir.x = 0;
 		dir.y = 1;
-	}
 	else if (*c == 'E')
-	{
 		dir.x = -1;
-		dir.y = 0;
-	}
 	return (dir);
 }
 
@@ -65,7 +53,6 @@ static t_mlx	start_window(void)
 */
 void	constructor(t_data *data, char **argv)
 {
-	// data->scalefactor = ft_calloc(sizeof(double), 1);
 	ft_bzero(data, sizeof(t_data));
 	data->mlx = start_window();
 	open_cub_file(argv[1], data);
