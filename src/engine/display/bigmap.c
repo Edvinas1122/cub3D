@@ -24,7 +24,7 @@ static void	draw_box(t_data *data, t_color color, int x, int y)
 	}
 }
 
-void	display_bigmap_background(t_texture *bg, t_color ***img, double sf)
+void	display_bigmap_background(t_texture bg, t_color ***img, double sf)
 {
 	int		x;
 	int		y;
@@ -32,16 +32,16 @@ void	display_bigmap_background(t_texture *bg, t_color ***img, double sf)
 	int		scaledstarty;
 	t_color	*color;
 
-	scaledstartx = sf * ((SCREEN_WIDTH - ((int)bg->width * sf * 1.5)) / 2);
-	scaledstarty = sf * ((SCREEN_HEIGHT - ((int)bg->height * sf * 1.5)) / 2);
+	scaledstartx = sf * ((SCREEN_WIDTH - ((int)bg.width * sf * 1.5)) / 2);
+	scaledstarty = sf * ((SCREEN_HEIGHT - ((int)bg.height * sf * 1.5)) / 2);
 	x = 0;
-	while (x < (int)bg->width * sf * 1.5)
+	while (x < (int)bg.width * sf * 1.5)
 	{
 		{
 			y = 0;
-			while (y < (int)bg->height * sf * 1.5)
+			while (y < (int)bg.height * sf * 1.5)
 			{
-				color = bg->matx[(int)(x / (sf * 1.5))][(int)(y / (sf * 1.5))];
+				color = bg.matx[(int)(x / (sf * 1.5))][(int)(y / (sf * 1.5))];
 				if (color->a == 0)
 					pixel_put(img, *color, scaledstartx + x, scaledstarty + y);
 				y++;

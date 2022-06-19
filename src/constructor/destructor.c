@@ -1,6 +1,6 @@
 #include "constructor.h"
 
-static void	destroy_wall_textures(t_data *data)
+static void	destroy_textures(t_data *data)
 {
 	if (data->map.north.matx)
 		destroy_mtrx_image(data, data->map.north);
@@ -10,17 +10,51 @@ static void	destroy_wall_textures(t_data *data)
 		destroy_mtrx_image(data, data->map.west);
 	if (data->map.south.matx)
 		destroy_mtrx_image(data, data->map.south);
+	if (data->util.bigmap_background.matx)
+		destroy_mtrx_image(data, data->util.bigmap_background);
+	if (data->util.minimap_frame.matx)
+		destroy_mtrx_image(data, data->util.minimap_frame);
+	if (data->map.door.matx)
+		destroy_mtrx_image(data, data->map.door);
+}
+
+void	free_string_array(char **str)
+{
+	int	y;
+
+	y = 0;
+	while (str[y])
+	{
+		free(str[y]);
+		y++;
+	}
+	free(str);
+}
+
+void	free_doors_array(t_door **doors)
+{
+	int	y;
+
+	y = 0;
+	while (doors[y])
+	{
+		free(doors[y]);
+		y++;
+	}
+	free(doors);
 }
 
 void	destructor(t_data *data)
 {
 	if (data->map.bit_map)
-		free(data->map.bit_map);
+		free_string_array(data->map.bit_map);
 	if (data->video.img)
 		destroy_mtrx_video(data, data->video);
-	destroy_wall_textures(data);
+	destroy_textures(data);
 	if (data->doors)
 		free(data->doors);
+	if (data->map.doormap)
+		free_doors_array(data->map.doormap);
 	if (data->sprite_images)
 		delocate_texture_array(data, data->sprite_images);
 	if (data->sprite_anim)

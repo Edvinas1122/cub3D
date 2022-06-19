@@ -1,14 +1,14 @@
 #include "display.h"
 
-static void	display_minimap_frame(t_texture *frame, t_color ***img, double sf)
+static void	display_minimap_frame(t_texture frame, t_color ***img, double sf)
 {
 	int	x;
 	int	y;
 	int	scaledwidth;
 	int	scaledheight;
 
-	scaledwidth = (int)frame->width * sf;
-	scaledheight = (int)frame->height * sf;
+	scaledwidth = (int)frame.width * sf;
+	scaledheight = (int)frame.height * sf;
 	x = 0;
 	while (x < scaledwidth)
 	{
@@ -16,8 +16,8 @@ static void	display_minimap_frame(t_texture *frame, t_color ***img, double sf)
 			y = 0;
 			while (y < scaledheight)
 			{
-				if (frame->matx[(int)(y / sf)][(int)(x / sf)]->a == 0)
-					pixel_put(img, *frame->matx[(int)(y / sf)][(int)(x / sf)], \
+				if (frame.matx[(int)(y / sf)][(int)(x / sf)]->a == 0)
+					pixel_put(img, *frame.matx[(int)(y / sf)][(int)(x / sf)], \
 																		x, y);
 				y++;
 			}

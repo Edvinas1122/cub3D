@@ -130,6 +130,6 @@ void		draw_the_mother_ducking_sprite(t_data *data, \
 					t_texture sprite_data, t_entity sprite);
 void		calculate_draw(t_draw_sprite *layer, t_data *data);
 t_texture	set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
-void		display_bigmap_background(t_texture *bg, t_color ***img, double sf);
+void		display_bigmap_background(t_texture bg, t_color ***img, double sf);
 void		draw_big_map(t_data *data);
 #endif
