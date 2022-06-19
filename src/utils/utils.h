@@ -31,7 +31,7 @@ void		delocate_door(t_door **door);
 */
 char		**list_to_array_offset(t_list *lst, int i);
 void		delete_list_node(void *lst);
-
+void		lst_clear_2(t_list **list);
 /*
 	Parce functios
 */

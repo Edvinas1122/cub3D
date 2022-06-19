@@ -53,4 +53,5 @@ void	open_cub_file(char *file_name, t_data *data)
 		destructor(data);
 	data->map = assign_map(data, tmp);
 	data->doors = tmp.doors;
+	lst_clear_2(tmp.file);
 }

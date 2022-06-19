@@ -48,7 +48,7 @@ int	file_to_heap(char *name, t_list ***file)
 		info = read_line(fd, &row);
 		if (info == -1)
 		{
-			ft_lstclear(*file, delete_list_node);
+			lst_clear_2(*file);
 			return (0);
 		}
 		ft_lstadd_back(*file, ft_lstnew(row));

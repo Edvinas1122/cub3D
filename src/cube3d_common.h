@@ -81,13 +81,6 @@ typedef struct s_mlx
 	void	*win;
 }	t_mlx;
 
-// typedef struct s_texture
-// {
-// 	t_color	***matx;
-// 	int		width;
-// 	int		height;
-// }	t_texture;
-
 typedef struct s_sprite_anim
 {
 	t_texture	*img_arr;

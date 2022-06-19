@@ -3,9 +3,9 @@ DEBUG ?= 0
 AU_FLAG = -DBONUS
 
 ifeq ($(DEBUG), 1)
-    CFLAGS         =    -g -ggdb -Wall -Wextra -Werror -fsanitize=address
+    CFLAGS         =    -g -ggdb -Wall -Wextra -Werror
 else
-    CFLAGS        =   -Wall -Wextra -Werror
+    CFLAGS        =   -g -Wall -Wextra -Werror
 endif
 
 # SRC subdirrectories #
