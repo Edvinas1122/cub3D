@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 #ifndef CUBE3D_RECURRENT
 # define CUBE3D_RECURRENT
 # define SCREEN_WIDTH 1600
-=======
-#ifndef CUBE3D_COMMON_H
-# define CUBE3D_COMMON_H
-# define SCREEN_WIDTH 800
->>>>>>> 2df9adede49553147ba178f69ca33bc3abfe9d3b
 
 # include "cube3d.h"
 
@@ -102,9 +96,9 @@ typedef struct s_sprite_anim
 }	t_sprite_anim;
 
 /*
-	Entety
+	Entity
 */
-typedef struct s_entety
+typedef struct s_entity
 {
 	int				id;
 	int				anim_info;
@@ -114,6 +108,6 @@ typedef struct s_entety
 	t_vect			on_screen;
 	double			distance;
 	int				*obj_count;
-}	t_entety;
+}	t_entity;
 
 #endif 

@@ -22,7 +22,7 @@ static void	find_sprite_direction_vector(t_vect *vect, t_vect *pos, \
 	normalize_vector(vect);
 }
 
-static void	sprite_set_data(t_entety *sprite, t_vect vect, \
+static void	sprite_set_data(t_entity *sprite, t_vect vect, \
 											t_data *data, double angle)
 {
 	sprite->on_screen.x = angle_to_column(angle);
@@ -33,7 +33,7 @@ static void	sprite_set_data(t_entety *sprite, t_vect vect, \
 							(SCREEN_HEIGHT / 2 * sprite->on_screen.y);
 }
 
-static int	check_condition(t_entety *sprite, t_texture *images, double angle)
+static int	check_condition(t_entity *sprite, t_texture *images, double angle)
 {
 	if (sprite->on_screen.x + \
 		sprite->scale * images[sprite->id].width >= 0 && \

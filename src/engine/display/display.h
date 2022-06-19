@@ -25,7 +25,7 @@ typedef struct s_draw_ent
 	double	distance;
 	double	dim;
 	t_color	color;
-}	t_draw_ent;
+}	t_draw_entity;
 
 typedef struct s_line
 {
@@ -117,7 +117,7 @@ void		sprite_draw(t_data *data);
 	Members of sprite draw
 */
 void		draw_the_mother_ducking_sprite(t_data *data, \
-					t_texture sprite_data, t_entety sprite);
+					t_texture sprite_data, t_entity sprite);
 void		calculate_draw(t_draw_sprite *layer, t_data *data);
 t_texture	set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
 #endif

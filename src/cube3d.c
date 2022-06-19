@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	constructor(&data, argv);
-	printf("SCALEFACTOR: %f\n", data.scalefactor);
 	control_hooks(&data);
 	play_audio(data.util.soundtrack, 1);
 	mlx_loop_hook(data.mlx.ptr, engine, (void *)&data);

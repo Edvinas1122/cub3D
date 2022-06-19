@@ -39,7 +39,7 @@ static void	sort_sprites_by_distances(t_draw_sprite *layer)
 	layer->tmpdbl = 2e30;
 	while (i < layer->obj_count)
 	{
-		layer->entety_arr[i] = (t_entety *)next_highest(layer, &layer->tmpdbl);
+		layer->entety_arr[i] = (t_entity *)next_highest(layer, &layer->tmpdbl);
 		i++;
 	}
 }
