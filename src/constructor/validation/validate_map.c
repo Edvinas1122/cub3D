@@ -60,6 +60,30 @@ static int	valid_map_characters(char **map, char *valid_char)
 	return (1);
 }
 
+static int	doors_enclosed_check(char **map)
+{
+	int	i;
+	int	i2;
+
+	i = 0;
+	while (map[i])
+	{
+		i2 = 0;
+		while (map[i][i2])
+		{
+			if (map[i][i2] == '2')
+			{
+				if (!(map[i - 1][i2] == '1' && map[i + 1][i2] == '1') && \
+					!(map[i][i2 - 1] == '1' && map[i][i2 + 1] == '1'))
+					return (0);
+			}
+			i2++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 /* 
 	Validates map segment of a file for all required criteria 
 */
@@ -80,9 +104,14 @@ int	validate_map(char **map)
 		!check_bottom_row(map, "1 ") || \
 		!all_rows_closed(map) || \
 		!check_leaping_column_uncloses(map, "1") || \
-		!matrix_neighbour_check(map, "0NWESD"))
+		!matrix_neighbour_check(map, "20NWESD"))
 	{
 		ft_putstr_fd("Unclosed map\n", 1);
+		return (0);
+	}
+	if (!doors_enclosed_check(map))
+	{
+		ft_putstr_fd("Invalid door\n", 1);
 		return (0);
 	}
 	return (1);
