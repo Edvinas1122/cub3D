@@ -90,9 +90,7 @@ typedef struct s_mlx
 
 typedef struct s_sprite_anim
 {
-	t_color	****img_matrix;
-	int		width;
-	int		height;
+	t_texture	*img_arr;
 }	t_sprite_anim;
 
 /*

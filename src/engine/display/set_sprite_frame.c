@@ -11,9 +11,9 @@ t_texture	set_sprite_image(t_draw_sprite *layer, t_data *data, int i)
 	else
 	{
 		frame = (data->count / ANIMATION_SPEED) % 4;
-		img.height = data->sprite_anim[0].height;
-		img.width = data->sprite_anim[0].width;
-		img.matx = data->sprite_anim[0].img_matrix[frame];
+		img.height = data->sprite_anim[0].img_arr[frame].height;
+		img.width = data->sprite_anim[0].img_arr[frame].width;
+		img.matx = data->sprite_anim[0].img_arr[frame].matx;
 	}
 	return (img);
 }
