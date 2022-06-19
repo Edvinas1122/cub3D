@@ -47,5 +47,6 @@ t_color		***create_color_matrix(int width, int height, t_tmp_video *img);
 */
 void		set_minimap_frame(t_data *data);
 char		*set_soundtrack(t_list **file);
+void		set_bigmap_background(t_data *data);
 
 #endif

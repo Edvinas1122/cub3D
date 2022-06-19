@@ -34,6 +34,7 @@ typedef struct s_utils
 {
 	t_color		minimap[5];
 	t_texture	*minimap_frame;
+	t_texture	*bigmap_background;
 	int			minimap_state;
 	char		*soundtrack;
 	t_texture	pause;

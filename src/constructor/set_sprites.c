@@ -110,4 +110,5 @@ void	set_sprites(t_data *data, char *sprite_ini)
 			data->entety->obj_count + 1);
 	data->util.soundtrack = set_soundtrack(file);
 	set_minimap_frame(data);
+	set_bigmap_background(data);
 }

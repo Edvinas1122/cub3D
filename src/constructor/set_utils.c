@@ -17,9 +17,9 @@ static int	set_map_scale(t_data *data)
 		size_y++;
 	}
 	free(arr);
-	factor = ((SCREEN_WIDTH * 0.8) / size_x);
-	if ((((SCREEN_HEIGHT * 0.8) / size_y)) < factor)
-		factor = (((SCREEN_HEIGHT * 0.8) / size_y));
+	factor = ((SCREEN_WIDTH * 0.6) / size_x);
+	if ((((SCREEN_HEIGHT * 0.6) / size_y)) < factor)
+		factor = (((SCREEN_HEIGHT * 0.6) / size_y));
 	data->util.map_offset_x = (SCREEN_WIDTH - (size_x * factor)) / 2;
 	data->util.map_offset_y = (SCREEN_HEIGHT - (size_y * factor)) / 2;
 	return (factor);
