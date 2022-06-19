@@ -23,7 +23,7 @@ void	set_minimap_frame(t_data *data)
 void	set_bigmap_background(t_data *data)
 {
 	data->util.bigmap_background = open_texture_xpm(data, \
-						"./assets/bigmap_background.xpm");
+							"./assets/bigmap_background.xpm");
 }
 
 char	*set_soundtrack(t_list **file)
