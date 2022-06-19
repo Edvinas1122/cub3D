@@ -4,7 +4,7 @@ static int	set_minimap_scale(t_data *data)
 {
 	int	size_x;
 	int	size_y;
-	int factor;
+	int	factor;
 	int	*arr;
 
 	size_y = 0;
@@ -20,16 +20,16 @@ static int	set_minimap_scale(t_data *data)
 	factor = (SCREEN_WIDTH / size_x);
 	if (((SCREEN_HEIGHT / size_y)) < factor)
 		factor = ((SCREEN_HEIGHT / size_y));
-	return (factor/4);
+	return (factor / 4);
 }
 
 /*
 	Sets additional data like minimap color
 	To avoid additional loops in video render
 */
-t_utils set_utils(t_data *data)
+t_utils	set_utils(t_data *data)
 {
-	t_utils utils;
+	t_utils	utils;
 
 	(void) data;
 	utils.minimap[0] = set_color(0, 40, 40, 40);

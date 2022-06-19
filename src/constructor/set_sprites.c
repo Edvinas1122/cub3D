@@ -154,15 +154,6 @@ void	set_minimap_frame(t_data *data)
 	data->util.minimap_frame->matx = create_color_matrix(data->util.minimap_frame->width, data->util.minimap_frame->height, &img);
 }
 
-void	draw_minimap_new()
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-}
-
 void set_sprites(t_data *data, char *sprite_ini)
 {
 	t_list	**file;
