@@ -1,47 +1,66 @@
 #include "display.h"
 
-static void	ducking_constructor(t_texture sprite_data, t_entety sprite, t_dis_draw_spr *tmp)
+void	mother_ducking_constructor(t_entity ent, t_texture texture, \
+													t_draw_entity *draw)
 {
-	tmp->scalefactor = sprite.scale / (sprite.distance / TILE_SIZE);
-	tmp->scaledwidth = (int)(sprite_data.width * tmp->scalefactor);
-	tmp->scaledheight = (int)(sprite_data.height * tmp->scalefactor);
-	tmp->xstart = (int)sprite.on_screen.x - tmp->scaledwidth/2;
-	tmp->ystart = (int)sprite.on_screen.y - tmp->scaledheight;
+	draw->sf = ent.scale / (ent.distance / TILE_SIZE);
+	draw->scaledwidth = (int)(texture.width * draw->sf);
+	draw->scaledheight = (int)(texture.height * draw->sf);
+	draw->xstart = (int)ent.on_screen.x - draw->scaledwidth / 2;
+	draw->ystart = (int)ent.on_screen.y - draw->scaledheight;
+	draw->distance = ent.distance;
+	draw->dim = get_dim_factor(draw->distance);
 }
 
-static void	draw_the_ducking_line(t_data *data, t_texture sprite_data, t_entety sprite, t_dis_draw_spr	tmp, int x)
+void	color_the_mother_ducking_pixel(t_color ***img, int x, int y, \
+													t_draw_entity draw)
 {
-	double	dimfactor;
-	int		j;
 	t_color	dimmed;
 
-	j = 0;
-	while (j < tmp.scaledheight)
+	if (draw.color.a == 0)
 	{
-		if (tmp.ystart + j >= 0 &&tmp.ystart + j < SCREEN_HEIGHT)
-		{
-			if ((*sprite_data.matx[(int)(x/tmp.scalefactor)][(int)(j/tmp.scalefactor)]).a == 0)
-			{
-				dimfactor = get_dim_factor(sprite.distance);
-				dimmed = dim_color(*sprite_data.matx[(int)(x/tmp.scalefactor)][(int)(j/tmp.scalefactor)], dimfactor);
-				pixel_put(data->video.img_matrix, dimmed, tmp.xstart + x, tmp.ystart + j);
-			}
-		j++;
+		dimmed = dim_color(draw.color, draw.dim);
+		pixel_put(img, dimmed, draw.xstart + x, draw.ystart + y);
 	}
 }
 
-void	draw_the_mother_ducking_sprite(t_data *data, t_texture sprite_data, t_entety sprite)
+void	draw_the_mother_ducking_line(t_color ***img, t_draw_entity draw, \
+													int x, t_color ***matx)
 {
-	t_dis_draw_spr	tmp;
-	int				x;
+	int	y;
 
-	ducking_constructor(sprite_data, sprite, &tmp);
-	x = 0;
-	while (x < tmp.scaledwidth)
+	y = 0;
+	while (y < draw.scaledheight)
 	{
-		if (tmp.xstart + x >= 0 && tmp.xstart + x < SCREEN_WIDTH
-				&& data->map.z_buffer[tmp.xstart + x] > sprite.distance)
-			draw_the_ducking_line(data, sprite_data, sprite, tmp, x);
+		if (draw.ystart + y >= 0 && draw.ystart + y < SCREEN_HEIGHT)
+		{
+			draw.color = (*matx[(int)(x / draw.sf)][(int)(y / draw.sf)]);
+			color_the_mother_ducking_pixel(img, x, y, draw);
+		}
+		y++;
+	}
+}
+
+void	mother_ducking_drawer(t_data *data, t_draw_entity draw, double dist, \
+															t_color ***matx)
+{
+	int	x;
+
+	x = 0;
+	while (x < draw.scaledwidth)
+	{
+		if (draw.xstart + x >= 0 && draw.xstart + x < SCREEN_WIDTH && \
+			data->map.z_buffer[draw.xstart + x] > dist)
+			draw_the_mother_ducking_line(data->video.img_matrix, draw, x, matx);
 		x++;
 	}
+}
+
+void	draw_the_mother_ducking_sprite(t_data *data, t_texture sprite_data, \
+															t_entity sprite)
+{
+	t_draw_entity	draw;
+
+	mother_ducking_constructor(sprite, sprite_data, &draw);
+	mother_ducking_drawer(data, draw, sprite.distance, sprite_data.matx);
 }

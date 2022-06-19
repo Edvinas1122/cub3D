@@ -15,6 +15,18 @@ typedef struct s_video			t_video;
 typedef struct s_mlx			t_mlx;
 typedef struct s_draw_sprite	t_draw_sprite;
 
+typedef struct s_draw_ent
+{
+	double	sf;
+	int		scaledwidth;
+	int		scaledheight;
+	int		xstart;
+	int		ystart;
+	double	distance;
+	double	dim;
+	t_color	color;
+}	t_draw_entity;
+
 typedef struct s_line
 {
 	t_texture	texture;
@@ -33,10 +45,13 @@ typedef struct s_wall
 {
 	double	y;
 	double	size;
-	int		offset;
 	int		start;
 	int		end;
 	t_color	color;
+	int		iterator;
+	double	dim;
+	int		txt_x;
+	int		txt_y;
 }	t_wall;
 
 // Konstantin comment here
@@ -89,29 +104,29 @@ typedef struct s_dis_draw_spr
 /*
 	Main function
 */
-int		render_display(t_data *data);
+int			render_display(t_data *data);
 
 /*
 	Members of render_display
 */
-void	render_fov_view(t_data *data);
-void	display_minimap(t_data *data);
-void	render_menu(t_data *data);
+void		render_fov_view(t_data *data);
+void		display_minimap(t_data *data);
+void		render_menu(t_data *data);
 
 /*
 	Members of render fov view
 */
-void	draw_vertical_line(t_data *data, t_raycast *raycast);
-void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);
-t_vect	find_intersections(t_data *data, t_vect *dir, t_raycast *raycast);
-void	draw_floor_and_ceiling(t_data *data);
-void	sprite_draw(t_data *data);
+void		draw_vertical_line(t_data *data, t_raycast *raycast);
+void		draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);
+t_vect		find_intersections(t_data *data, t_vect *dir, t_raycast *raycast);
+void		draw_floor_and_ceiling(t_data *data);
+void		sprite_draw(t_data *data);
 
 /*
 	Members of sprite draw
 */
-void	draw_the_mother_ducking_sprite(t_data *data,
-			t_texture sprite_data, t_entety sprite);
-void	calculate_draw(t_draw_sprite *layer, t_data *data);
+void		draw_the_mother_ducking_sprite(t_data *data, \
+					t_texture sprite_data, t_entity sprite);
+void		calculate_draw(t_draw_sprite *layer, t_data *data);
 t_texture	set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
 #endif

@@ -60,10 +60,10 @@ static void	set_sprite_images(t_data *data, t_list **file, int *img_ct)
 	*img_ct = i;
 }
 
-static t_entety	*set_enteties(t_list **file, int img_ct)
+static t_entity	*set_enteties(t_list **file, int img_ct)
 {
 	t_list		*row;
-	t_entety	*entety;
+	t_entity	*entety;
 	char		**info;
 	int			i;
 	int			*obj_count;
@@ -76,7 +76,7 @@ static t_entety	*set_enteties(t_list **file, int img_ct)
 	while (ft_strncmp(row->content, "\0\0", 2))
 		row = row->next;
 	row = row->next;
-	entety = ft_calloc(ft_lstsize(row) + 1, sizeof(t_entety));
+	entety = ft_calloc(ft_lstsize(row) + 1, sizeof(t_entity));
 	while (ft_strncmp(row->content, "\0\0", 2))
 	{
 		entety[i].id = ft_atoi(row->content);
@@ -173,7 +173,7 @@ void set_sprites(t_data *data, char *sprite_ini)
 	set_sprite_images(data, file, &image_ct);
 	set_animation_sprites(data, file);
 	data->entety = set_enteties(file, image_ct);
-	data->entety_arr = ft_calloc(sizeof(t_entety *), *(data->entety->obj_count) + 1);
+	data->entety_arr = ft_calloc(sizeof(t_entity *), *(data->entety->obj_count) + 1);
 	data->util.soundtrack = set_soundtrack(file);
 	set_minimap_frame(data);
 }

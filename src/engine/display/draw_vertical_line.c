@@ -18,22 +18,6 @@ t_texture	choose_texture(t_data *data, t_raycast *raycast)
 	return (data->map.north);
 }
 
-static int	get_texture_x(t_texture texture, t_raycast *raycast)
-{
-	double	d_x;
-
-	if (raycast->cardinal_direction == 1)
-		d_x = fmod(raycast->impact.x, TILE_SIZE);
-	if (raycast->cardinal_direction == 2)
-		d_x = TILE_SIZE - fmod(raycast->impact.x, TILE_SIZE);
-	if (raycast->cardinal_direction == 3)
-		d_x = fmod(raycast->impact.y, TILE_SIZE);
-	if (raycast->cardinal_direction == 4)
-		d_x = TILE_SIZE - fmod(raycast->impact.y, TILE_SIZE);
-	d_x *= (double)(texture.width - 1) / 100;
-	return ((int)floor(d_x));
-}
-
 static int	get_texture_x_door(t_data *data, t_texture texture,
 								t_raycast *raycast)
 {
@@ -54,43 +38,47 @@ static int	get_texture_x_door(t_data *data, t_texture texture,
 	return ((int)floor(d_x));
 }
 
-static int	get_texture_y(t_texture texture, t_wall wall)
+static int	get_texture_x(t_data *data, t_texture texture, t_raycast *raycast)
 {
-	double	d_y;
+	double	d_x;
 
-	d_y = (((double)texture.height - 1) * wall.y);
-	return ((int)d_y);
+	if (raycast->isdoor == 1)
+		return (get_texture_x_door(data, texture, raycast));
+	if (raycast->cardinal_direction == 1)
+		d_x = fmod(raycast->impact.x, TILE_SIZE);
+	if (raycast->cardinal_direction == 2)
+		d_x = TILE_SIZE - fmod(raycast->impact.x, TILE_SIZE);
+	if (raycast->cardinal_direction == 3)
+		d_x = fmod(raycast->impact.y, TILE_SIZE);
+	if (raycast->cardinal_direction == 4)
+		d_x = TILE_SIZE - fmod(raycast->impact.y, TILE_SIZE);
+	d_x *= (double)(texture.width - 1) / 100;
+	return ((int)floor(d_x));
 }
 
 void	draw_vertical_line(t_data *data, t_raycast *raycast)
 {
 	t_wall		wall;
 	t_texture	texture;
-	int			textureX;
-	int			textureY;
-	int			i;
-	double		dimfactor;
 
 	texture = choose_texture(data, raycast);
-	if (raycast->isdoor == 1)
-		textureX = get_texture_x_door(data, texture, raycast);
-	else
-		textureX = get_texture_x(texture, raycast);
+	wall.txt_x = get_texture_x(data, texture, raycast);
 	wall.size = (double)SCREEN_HEIGHT / (raycast->distance / TILE_SIZE);
 	wall.start = (int)(SCREEN_HEIGHT - wall.size) / 2;
 	wall.end = (int)(SCREEN_HEIGHT + wall.size) / 2;
 	if (wall.size < SCREEN_HEIGHT)
-		i = wall.start;
+		wall.iterator = wall.start;
 	else
-		i = 0;
-	dimfactor = get_dim_factor(raycast->distance);
-	while (i < SCREEN_HEIGHT - 1 && i < wall.end)
+		wall.iterator = 0;
+	wall.dim = get_dim_factor(raycast->distance);
+	while (wall.iterator < SCREEN_HEIGHT - 1 && wall.iterator < wall.end)
 	{
-		wall.y = (double)(i - wall.start) / wall.size;
-		textureY = get_texture_y(texture, wall);
-		wall.color = *texture.matx[textureX][textureY];
-		wall.color = dim_color(wall.color, dimfactor);
-		pixel_put(data->video.img_matrix, wall.color, raycast->v_line_ct, i);
-		i++;
+		wall.y = (double)(wall.iterator - wall.start) / wall.size;
+		wall.txt_y = (int)(((double)texture.height - 1) * wall.y);
+		wall.color = *texture.matx[wall.txt_x][wall.txt_y];
+		wall.color = dim_color(wall.color, wall.dim);
+		pixel_put(data->video.img_matrix, wall.color, \
+							raycast->v_line_ct, wall.iterator);
+		(wall.iterator)++;
 	}
 }
