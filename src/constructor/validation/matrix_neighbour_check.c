@@ -32,7 +32,7 @@ int	matrix_neighbour_check(char **map, char *victims)
 	int	i2;
 	int	*lenghts;
 
-	lenghts = line_lenghts(map);
+	lenghts = line_lengths(map);
 	i = 1;
 	while (map[i + 1])
 	{

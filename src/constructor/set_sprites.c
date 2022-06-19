@@ -51,9 +51,11 @@ static void	set_sprite_images(t_data *data, t_list **file, int *img_ct)
 				&data->sprite_images[i].width, &data->sprite_images[i].height);
 		if (!img_header)
 			destructor(data);
-		img.img_data = mlx_get_data_addr(img_header, &img.img_bp, &img.img_sl, &img.img_e);
+		img.img_data = mlx_get_data_addr(img_header, &img.img_bp, \
+										&img.img_sl, &img.img_e);
 		printf("\n%s\n", img.img_data);
-		data->sprite_images[i].matx = create_color_matrix(data->sprite_images[i].width, data->sprite_images[i].height, &img);
+		data->sprite_images[i].matx = create_color_matrix(\
+			data->sprite_images[i].width, data->sprite_images[i].height, &img);
 		row = row->next;
 		i++;
 	}

@@ -4,7 +4,7 @@
 	Returns a pointer to an integer array
 	array represents LENGHTS of char array lines
 */
-int	*line_lentghs(char **map)
+int	*line_lengths(char **map)
 {
 	int	*arr;
 	int	i;

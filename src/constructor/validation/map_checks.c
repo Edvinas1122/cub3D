@@ -39,6 +39,12 @@ int	check_bottom_row(char **map, char *valid_char)
 	return (1);
 }
 
+int	free_and_get_out(int *lengths)
+{
+	free(lengths);
+	return (0);
+}
+
 /*
 	Checks for leaping 0 over row below
 */
@@ -64,10 +70,7 @@ int	check_leaping_column_uncloses(char **map, char *valid_char)
 		}
 		i2 = 0;
 		if (column > lengths[i + 1] || column > lengths[i - 1])
-		{
-			free(lengths);
-			return (0);
-		}
+			return (free_and_get_out(lengths));
 		i++;
 	}
 	free(lengths);

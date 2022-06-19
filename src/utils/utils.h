@@ -18,7 +18,7 @@ void		compare_to_str(char c, char *valid_char);
 int			compare_to_str2(char c, char *valid_char);
 t_vect		find_char_cordinates(char **map, char *c);
 char		*find_char(char **map, char *c);
-int			*line_lenghts(char **map);
+int			*line_lengths(char **map);
 
 /*
 	List functions

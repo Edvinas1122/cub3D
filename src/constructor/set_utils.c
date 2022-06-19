@@ -9,7 +9,7 @@ static int	set_minimap_scale(t_data *data)
 
 	size_y = 0;
 	size_x = 0;
-	arr = line_lenghts(data->map.bit_map);
+	arr = line_lengths(data->map.bit_map);
 	while (arr[size_y])
 	{
 		if (arr[size_y] > size_x)
