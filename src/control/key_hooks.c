@@ -20,8 +20,10 @@ static void	*get_action_function(int keycode, t_data *data)
 		return (&rotate_player_right);
 	if (keycode == 48)
 		return (&pop_minimap);
-	if (keycode == 53)
+	if (keycode == 35)
 		return (&menu_pop);
+	if (keycode == 53)
+		return (&close_win);
 	return (NULL);
 }
 
