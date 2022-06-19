@@ -112,6 +112,7 @@ int			render_display(t_data *data);
 void		render_fov_view(t_data *data);
 void		display_minimap(t_data *data);
 void		render_menu(t_data *data);
+void		draw_2d_minimap_small(t_data *data, double sf);
 
 /*
 	Members of render fov view
