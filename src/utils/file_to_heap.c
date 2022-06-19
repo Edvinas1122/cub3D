@@ -16,7 +16,7 @@ static int	read_line(int fd, char **str)
 		if (*c == '\n' || ct == 0)
 		{
 			free(c);
-			break;
+			break ;
 		}
 		tmp = ft_strjoin(buf, c);
 		free(buf);
@@ -52,13 +52,6 @@ int	file_to_heap(char *name, t_list ***file)
 			ft_lstclear(*file, delete_list_node);
 			return (0);
 		}
-
-		/*Debug print*/
-		ft_putstr_fd(row, 1);
-		ft_putchar_fd('\n', 1);
-		ft_putchar_fd('\n', 1);
-		/*Debug print*/
-
 		ft_lstadd_back(*file, ft_lstnew(row));
 	}
 	return (1);

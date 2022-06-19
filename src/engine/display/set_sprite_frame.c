@@ -1,6 +1,6 @@
 #include "display.h"
 
-t_texture set_sprite_image(t_draw_sprite *layer, t_data *data, int i)
+t_texture	set_sprite_image(t_draw_sprite *layer, t_data *data, int i)
 {
 	t_texture	img;
 	int			frame;

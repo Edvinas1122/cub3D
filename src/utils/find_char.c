@@ -38,7 +38,7 @@ t_vect	find_char_cordinates(char **map, char *c)
 	}
 	pos.x = 0;
 	pos.y = 0;
-	return(pos); // no error return
+	return (pos);
 }
 
 static char	*find_char_in_row_add(char *row, char *c)
@@ -69,8 +69,8 @@ char	*find_char(char **map, char *c)
 	{
 		address = find_char_in_row_add(map[i], c);
 		if (address)
-			return(address);
+			return (address);
 		i++;
 	}
-	return(NULL);
+	return (NULL);
 }

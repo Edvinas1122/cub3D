@@ -12,7 +12,7 @@ static void	set_time_stamp(t_data *data)
 	time_diff = data->util.time_stamp - data->util.old_time_stamp;
 	if (time_diff <= 0)
 		return ;
-	move_factor = (double)(MOVE_DISTANCE) * (time_diff /33333.0);
+	move_factor = (double)MOVE_DISTANCE * (time_diff / 33333.0);
 	data->util.move_factor = move_factor;
 }
 

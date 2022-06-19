@@ -19,7 +19,7 @@ int	*line_lenghts(char **map)
 	while (map[i])
 	{
 		arr[i] = ft_strlen(map[i]);
-		i++;	
+		i++;
 	}
 	return (arr);
 }

@@ -12,8 +12,8 @@ void	print_arr(char **str)
 int	find_longest_line(t_list *lst)
 {
 	t_list	*node;
-	int max;
-	int	current;
+	int		max;
+	int		current;
 
 	node = lst;
 	max = 0;
@@ -58,5 +58,5 @@ char	**list_to_array_offset(t_list *lst, int i)
 		node = node->next;
 	}
 	print_arr(arr);
-	return(arr);
+	return (arr);
 }

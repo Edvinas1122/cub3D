@@ -1,11 +1,11 @@
 #include "mechanics.h"
 
-static void all_keys_relesed(t_data *data)
+static void	all_keys_relesed(t_data *data)
 {
-	if (data->keys.key_w[0] == 0 && data->keys.key_w[1] == 0 &&
-		data->keys.key_s[0] == 0 && data->keys.key_s[1] == 0 &&
-		data->keys.key_a[0] == 0 && data->keys.key_a[1] == 0 &&
-		data->keys.key_d[0] == 0 && data->keys.key_d[1] == 0)
+	if (data->keys.key_w[0] == 0 && data->keys.key_w[1] == 0
+		&& data->keys.key_s[0] == 0 && data->keys.key_s[1] == 0
+		&& data->keys.key_a[0] == 0 && data->keys.key_a[1] == 0
+		&& data->keys.key_d[0] == 0 && data->keys.key_d[1] == 0)
 	{
 		data->player.movement.x = 0;
 		data->player.movement.y = 0;

@@ -61,7 +61,7 @@ t_color	string_to_color(char *str)
 
 t_color	dim_color(t_color color, double factor)
 {
-	t_color dimmed;
+	t_color	dimmed;
 
 	dimmed.a = 0;
 	dimmed.r = color.r * factor;
