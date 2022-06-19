@@ -10,7 +10,7 @@ endif
 
 # SRC subdirrectories #
 VALIDATOR_FILES := validate_cub_file.c validate_map.c matrix_neighbour_check.c map_checks.c \
-					validate_texture_names.c 
+					validate_texture_names.c get_door.c
 VALIDATOR := $(addprefix validation/,$(VALIDATOR_FILES))
 
 CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c destructor.c \

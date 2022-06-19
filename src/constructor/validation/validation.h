@@ -28,21 +28,26 @@ typedef struct s_map_c
 
 }	t_map_c;
 
-int	validate_cub_file(t_list **file, t_map_c *tmp);
+int		validate_cub_file(t_list **file, t_map_c *tmp);
 
 /*
 	validate_cub_file members
 */
-int	validate_map(char **map);
-int	validate_texture_names(t_list **file, t_map_c *tmp);
+int		validate_map(char **map);
+int		validate_texture_names(t_list **file, t_map_c *tmp);
 
 /*
 	validate_map members
 */
-int	matrix_neighbour_check(char **map, char *victims);
+int		matrix_neighbour_check(char **map, char *victims);
 
-int	check_leaping_column_uncloses(char **map, char *valid_char);
-int	check_bottom_row(char **map, char *valid_char);
-int	all_rows_closed(char **map);
+int		check_leaping_column_uncloses(char **map, char *valid_char);
+int		check_bottom_row(char **map, char *valid_char);
+int		all_rows_closed(char **map);
 
+/*
+	get door
+*/
+t_door	*get_doormap_line(char *map, t_door **doors, int *doorcount);
+t_door	**get_doormap(char	**map, t_door **doors);
 #endif

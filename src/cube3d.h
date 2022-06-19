@@ -46,7 +46,7 @@ typedef struct s_utils
 /*
 	Player position in a world data
 */
-typedef struct	s_player
+typedef struct s_player
 {
 	t_vect	pos;
 	t_vect	vect;
@@ -59,7 +59,7 @@ typedef struct	s_player
 	or released
 	and	info if it was read
 */
-typedef struct	s_keypress
+typedef struct s_keypress
 {
 	char	key_w[2];
 	char	key_s[2];
@@ -71,7 +71,7 @@ typedef struct	s_keypress
 /*
 	Main data stack segment
 */
-typedef struct	s_data
+typedef struct s_data
 {
 	t_map			map;
 	t_player		player;
@@ -88,7 +88,7 @@ typedef struct	s_data
 	double			scalefactor;
 }	t_data;
 
-typedef struct	s_draw_sprite
+typedef struct s_draw_sprite
 {
 	t_texture	*sprite_images;
 	t_entety	*objects;
