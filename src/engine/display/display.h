@@ -1,21 +1,33 @@
-#ifndef CUBE3D_DISPLAY_H
-# define CUBE3D_DISPLAY_H
+#ifndef DISPLAY_H
+# define DISPLAY_H
 
-#include "../../cube3d.h"
+# include "../../cube3d.h"
 
-typedef struct	s_wall		t_wall;
-typedef struct	s_intersect	t_intersect;
-typedef struct	s_raycast	t_raycast;
-typedef struct	s_vect		t_vect;
-typedef	struct	s_color		t_color;
-typedef struct	s_data		t_data;
-typedef struct	s_map		t_map;
-typedef struct	s_texture	t_texture;
-typedef struct	s_video		t_video;
-typedef struct	s_mlx		t_mlx;
-typedef struct	s_draw_sprite	t_draw_sprite;
+typedef struct s_wall			t_wall;
+typedef struct s_intersect		t_intersect;
+typedef struct s_raycast		t_raycast;
+typedef struct s_vect			t_vect;
+typedef struct s_color			t_color;
+typedef struct s_data			t_data;
+typedef struct s_map			t_map;
+typedef struct s_texture		t_texture;
+typedef struct s_video			t_video;
+typedef struct s_mlx			t_mlx;
+typedef struct s_draw_sprite	t_draw_sprite;
 
-typedef struct	s_line
+typedef struct s_draw_ent
+{
+	double	sf;
+	int		scaledwidth;
+	int		scaledheight;
+	int		xstart;
+	int		ystart;
+	double	distance;
+	double	dim;
+	t_color	color;
+}	t_draw_ent;
+
+typedef struct s_line
 {
 	t_texture	texture;
 	double		strech_factor;
@@ -33,10 +45,13 @@ typedef struct s_wall
 {
 	double	y;
 	double	size;
-	int		offset;
 	int		start;
 	int		end;
-	t_color color;
+	t_color	color;
+	int		iterator;
+	double	dim;
+	int		txt_x;
+	int		txt_y;
 }	t_wall;
 
 // Konstantin comment here
@@ -54,7 +69,7 @@ typedef struct s_intersect
 	double	hor_factor;
 }	t_intersect;
 
-typedef struct	s_hit
+typedef struct s_hit
 {
 	double	tmpdist;
 	int		hit_wall;
@@ -73,35 +88,36 @@ typedef struct s_raycast
 	t_vect	impact;
 	double	distance;
 	int		v_line_ct;
-	int		cardinal_direction; //NO:1 SO:2 WE:3 EA:4
+	int		cardinal_direction;
 	int		isdoor;
 }	t_raycast;
 
 /*
 	Main function
 */
-int		render_display(t_data *data);
+int			render_display(t_data *data);
 
 /*
 	Members of render_display
 */
-void	render_fov_view(t_data *data);
-void	display_minimap(t_data *data);
-void	render_menu(t_data *data);
+void		render_fov_view(t_data *data);
+void		display_minimap(t_data *data);
+void		render_menu(t_data *data);
 
 /*
 	Members of render fov view
 */
-void	draw_vertical_line(t_data *data, t_raycast *raycast);
-void	draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);
-t_vect	find_intersections(t_data *data, t_vect *dir, t_raycast *raycast);
-void	draw_floor_and_ceiling(t_data *data);
-void	sprite_draw(t_data *data);
+void		draw_vertical_line(t_data *data, t_raycast *raycast);
+void		draw_wall_line(t_data *data, t_raycast *raycast, t_wall *wall);
+t_vect		find_intersections(t_data *data, t_vect *dir, t_raycast *raycast);
+void		draw_floor_and_ceiling(t_data *data);
+void		sprite_draw(t_data *data);
 
 /*
 	Members of sprite draw
 */
-void	draw_the_mother_ducking_sprite(t_data *data, t_texture sprite_data, t_entety sprite);
-void	calculate_draw(t_draw_sprite *layer, t_data *data);
-t_texture set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
+void		draw_the_mother_ducking_sprite(t_data *data, \
+					t_texture sprite_data, t_entety sprite);
+void		calculate_draw(t_draw_sprite *layer, t_data *data);
+t_texture	set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
 #endif

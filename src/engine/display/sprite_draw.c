@@ -6,24 +6,25 @@
 	and have it loop through number of sprites
 	returns pointer to the sprite object
 */
-static void *next_highest(t_draw_sprite *layer, double *last_distance)
+static void	*next_highest(t_draw_sprite *layer, double *last_dist)
 {
 	double		tmpdist;
-	void	*ptr;
-	int		i;
+	void		*ptr;
+	int			i;
 
 	i = 0;
 	tmpdist = -1.0;
 	while (i < layer->obj_count)
 	{
-		if (layer->objects[i].distance > tmpdist && layer->objects[i].distance < *last_distance)
+		if (layer->objects[i].distance > tmpdist && \
+			layer->objects[i].distance < *last_dist)
 		{
 			ptr = &layer->objects[i];
 			tmpdist = layer->objects[i].distance;
 		}
 		i++;
 	}
-	*last_distance = tmpdist;
+	*last_dist = tmpdist;
 	return (ptr);
 }
 
@@ -46,17 +47,18 @@ static void	sort_sprites_by_distances(t_draw_sprite *layer)
 /*
 	calculating the distance to each sprite
 */
-static void	sprites_calculate_distances(t_draw_sprite *layer, t_data *data)
+static void	sprites_calculate_distances(t_draw_sprite *layer, t_vect pos)
 {
 	int	i;
 
 	i = 0;
 	while (i < layer->obj_count)
 	{
-		layer->sprite_vect.x = layer->objects[i].position.x - data->player.pos.x;
-		layer->sprite_vect.y = layer->objects[i].position.y - data->player.pos.y;
+		layer->sprite_vect.x = layer->objects[i].position.x - pos.x;
+		layer->sprite_vect.y = layer->objects[i].position.y - pos.y;
 		normalize_vector(&layer->sprite_vect);
-		layer->objects[i].distance = point_distance(data->player.pos, layer->objects[i].position);
+		layer->objects[i].distance = point_distance(pos, \
+										layer->objects[i].position);
 		i++;
 	}
 }
@@ -77,7 +79,7 @@ void	sprite_draw(t_data *data)
 	t_draw_sprite	layer;
 
 	sprite_constructor(&layer, data);
-	sprites_calculate_distances(&layer, data);
+	sprites_calculate_distances(&layer, data->player.pos);
 	sort_sprites_by_distances(&layer);
 	calculate_draw(&layer, data);
 }

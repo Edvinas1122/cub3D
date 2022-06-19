@@ -7,34 +7,39 @@ static int	angle_to_column(double angle)
 {
 	double	tmp;
 
-	tmp = ((double)SCREEN_WIDTH * tan(angle))/2;
-	return (SCREEN_WIDTH/2 + tmp);
+	tmp = ((double)SCREEN_WIDTH * tan(angle)) / 2;
+	return (SCREEN_WIDTH / 2 + tmp);
 }
 
 /*
 	Find sprite direction vector
 */
-static void	find_sprite_direction_vector(t_vect *vect, t_vect *position, t_vect *player_pos)
+static void	find_sprite_direction_vector(t_vect *vect, t_vect *pos, \
+													t_vect *player_pos)
 {
-	vect->x = position->x - player_pos->x;
-	vect->y = position->y - player_pos->y;
+	vect->x = pos->x - player_pos->x;
+	vect->y = pos->y - player_pos->y;
 	normalize_vector(vect);
 }
 
-static void	sprite_set_data(t_entety *sprite, t_vect vect, t_data *data, double angle)
+static void	sprite_set_data(t_entety *sprite, t_vect vect, \
+											t_data *data, double angle)
 {
 	sprite->on_screen.x = angle_to_column(angle);
-	sprite->distance /= 1/(cos(get_angle(&data->player.vect, &vect) / (180/M_PI)));
+	sprite->distance /= 1 / (cos(get_angle(&data->player.vect, &vect) / \
+														(180 / M_PI)));
 	sprite->on_screen.y = (double)TILE_SIZE / sprite->distance;
-	sprite->on_screen.y = SCREEN_HEIGHT / 2 + (SCREEN_HEIGHT / 2 * sprite->on_screen.y);
+	sprite->on_screen.y = SCREEN_HEIGHT / 2 + \
+							(SCREEN_HEIGHT / 2 * sprite->on_screen.y);
 }
 
-static int check_condition(t_entety *sprite, t_texture *images, double angle)
+static int	check_condition(t_entety *sprite, t_texture *images, double angle)
 {
-	if (sprite->on_screen.x + 
-		sprite->scale * images[sprite->id].width >= 0 &&
-		sprite->on_screen.x - sprite->scale * images[sprite->id].width <
-			SCREEN_WIDTH && (angle * 180/M_PI) > -90 && (angle*180/M_PI) < 90)
+	if (sprite->on_screen.x + \
+		sprite->scale * images[sprite->id].width >= 0 && \
+		sprite->on_screen.x - sprite->scale * images[sprite->id].width < \
+			SCREEN_WIDTH && (angle * 180 / M_PI) > -90 && \
+		(angle * 180 / M_PI) < 90)
 		return (1);
 	else
 		return (0);

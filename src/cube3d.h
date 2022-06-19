@@ -18,8 +18,8 @@
 # include "engine/display/display.h"
 # include "engine/mechanics/mechanics.h"
 
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 450
+# define SCREEN_WIDTH 1600
+# define SCREEN_HEIGHT 900
 # define MOVE_DISTANCE 6
 # define TILE_SIZE 100
 # define FOV 90
@@ -97,7 +97,6 @@ typedef struct	s_draw_sprite
 	t_vect		sprite_vect;
 	int			obj_count;
 }	t_draw_sprite;
-
 
 int		main(int argc, char **argv);
 int		engine(t_data *data);

@@ -1,6 +1,6 @@
 #ifndef CUBE3D_RECURRENT
 # define CUBE3D_RECURRENT
-# define SCREEN_WIDTH 800
+# define SCREEN_WIDTH 1600
 
 #include "cube3d.h"
 
