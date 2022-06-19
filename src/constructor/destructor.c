@@ -28,6 +28,16 @@ static void	destroy_wall_textures(t_data *data)
 		destroy_mtrx_image(data, data->map.south);
 }
 
+static void	destroy_other_textures(t_data *data)
+{
+	if (data->map.door.matx)
+		destroy_mtrx_image(data, data->map.door);
+	if (data->util.bigmap_background->matx)
+		destroy_mtrx_image(data, *data->util.bigmap_background);
+	if (data->util.minimap_frame->matx)
+		destroy_mtrx_image(data, *data->util.minimap_frame);
+}
+
 static void	destroy_mtrx_video(t_data *data, t_video texture)
 {
 	int		y;
@@ -62,15 +72,44 @@ static void	delocate_sprite_animation(t_data *data)
 	free(data->sprite_anim);
 }
 
+static void free_string_array(char **str)
+{
+	int	y;
+
+	y = 0;
+	while (str[y])
+	{
+		free(str[y]);
+		y++;
+	}
+	free(str);
+}
+
+static void free_doors_array(t_door **arr)
+{
+	int	y;
+
+	y = 0;
+	while (arr[y])
+	{
+		free(arr[y]);
+		y++;
+	}
+	free(arr);
+}
+
 void	destructor(t_data *data)
 {
 	if (data->map.bit_map)
-		free(data->map.bit_map);
+		free_string_array(data->map.bit_map);
 	if (data->video.img)
 		destroy_mtrx_video(data, data->video);
 	destroy_wall_textures(data);
+	destroy_other_textures(data);
 	if (data->doors)
 		free(data->doors);
+	if (data->map.doormap)
+		free_doors_array(data->map.doormap);
 	if (data->sprite_images)
 		delocate_texture_array(data, data->sprite_images);
 	if (data->sprite_anim)
