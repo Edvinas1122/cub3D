@@ -163,7 +163,6 @@ void	draw_minimap_new()
 	y = 0;
 }
 
-
 void set_sprites(t_data *data, char *sprite_ini)
 {
 	t_list	**file;

@@ -1,5 +1,5 @@
-#ifndef CUBE3D_RECURRENT
-# define CUBE3D_RECURRENT
+#ifndef RECURRENT
+# define RECURRENT
 # define SCREEN_WIDTH 1600
 
 # include "cube3d.h"
@@ -14,7 +14,7 @@ typedef struct s_door
 /*
 	X Y for positions & vectors
 */
-typedef struct s_vect
+typedef struct	s_vect
 {
 	double	x;
 	double	y;
