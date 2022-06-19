@@ -1,21 +1,5 @@
 #include "constructor.h"
 
-static void	destroy_mtrx_image(t_data *data, t_texture texture)
-{
-	int		y;
-	t_color	***matrix;
-
-	y = 0;
-	matrix = texture.matx;
-	while (matrix[y])
-	{
-		free(matrix[y]);
-		y++;
-	}
-	free(matrix);
-	mlx_destroy_image(data->mlx.ptr, texture.img_header);
-}
-
 static void	destroy_wall_textures(t_data *data)
 {
 	if (data->map.north.matx)
@@ -26,40 +10,6 @@ static void	destroy_wall_textures(t_data *data)
 		destroy_mtrx_image(data, data->map.west);
 	if (data->map.south.matx)
 		destroy_mtrx_image(data, data->map.south);
-}
-
-static void	destroy_mtrx_video(t_data *data, t_video texture)
-{
-	int		y;
-	t_color	***matrix;
-
-	y = 0;
-	matrix = texture.img_matrix;
-	while (matrix[y])
-	{
-		free(matrix[y]);
-		y++;
-	}
-	free(matrix);
-	mlx_destroy_image(data->mlx.ptr, texture.img);
-}
-
-static void	delocate_texture_array(t_data *data, t_texture *arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i].matx)
-	{
-		destroy_mtrx_image(data, arr[i]);
-		i++;
-	}
-}
-
-static void	delocate_sprite_animation(t_data *data)
-{
-	delocate_texture_array(data, data->sprite_anim->img_arr);
-	free(data->sprite_anim);
 }
 
 void	destructor(t_data *data)

@@ -15,7 +15,7 @@ VALIDATOR := $(addprefix validation/,$(VALIDATOR_FILES))
 
 CONSTRUCTOR_FILES := constructor.c open_cub_file.c initiate_video.c destructor.c \
 					open_textures_xmp.c set_utils.c set_sprites.c \
-					set_sprites_2.c open_sprite_ini.c $(VALIDATOR) 
+					set_sprites_2.c open_sprite_ini.c destructor_2.c $(VALIDATOR) 
 CONSTRUCTOR := $(addprefix constructor/,$(CONSTRUCTOR_FILES))
 DISPLAY_FILES := display.c minimap.c minimap_2.c raycast.c draw_vertical_line.c intersection_distances.c \
 				draw_floor_and_ceiling.c sprite_draw.c menu.c sprite_draw_calculate.c \

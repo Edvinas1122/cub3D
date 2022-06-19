@@ -49,4 +49,12 @@ void		set_minimap_frame(t_data *data);
 char		*set_soundtrack(t_list **file);
 void		set_bigmap_background(t_data *data);
 
+/*
+	member of destructor
+*/
+void		delocate_sprite_animation(t_data *data);
+void		delocate_texture_array(t_data *data, t_texture *arr);
+void		destroy_mtrx_video(t_data *data, t_video texture);
+void		destroy_mtrx_image(t_data *data, t_texture texture);
+
 #endif
