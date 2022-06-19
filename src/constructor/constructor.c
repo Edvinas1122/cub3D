@@ -65,6 +65,7 @@ static t_mlx	start_window(void)
 */
 void	constructor(t_data *data, char **argv)
 {
+	// data->scalefactor = ft_calloc(sizeof(double), 1);
 	ft_bzero(data, sizeof(t_data));
 	data->mlx = start_window();
 	open_cub_file(argv[1], data);
@@ -73,4 +74,5 @@ void	constructor(t_data *data, char **argv)
 	data->util = set_utils(data);
 	set_sprites(data, "./assets/sprite_info.ini");
 	data->player.dash_cooldown = 0;
+	data->scalefactor = (double)SCREEN_WIDTH / 1600;
 }
