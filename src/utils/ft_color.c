@@ -52,10 +52,7 @@ t_color	string_to_color(char *str)
 	item.r = ft_atoi(colors[0]);
 	item.g = ft_atoi(colors[1]);
 	item.b = ft_atoi(colors[2]);
-	free(colors[0]);
-	free(colors[1]);
-	free(colors[2]);
-	free(colors);
+	delocate_arr(colors);
 	return (item);
 }
 

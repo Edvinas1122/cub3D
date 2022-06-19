@@ -19,7 +19,12 @@ int			compare_to_str2(char c, char *valid_char);
 t_vect		find_char_cordinates(char **map, char *c);
 char		*find_char(char **map, char *c);
 int			*line_lengths(char **map);
+
+/*
+	memory func
+*/
 void		delocate_arr(char **str);
+void		delocate_door(t_door **door);
 
 /*
 	List functions
