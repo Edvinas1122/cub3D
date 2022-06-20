@@ -64,4 +64,5 @@ void	constructor(t_data *data, char **argv)
 	data->player.dash_cooldown = 0;
 	data->potion.position.x = 150;
 	data->potion.position.y = 150;
+	data->audio = 1;
 }

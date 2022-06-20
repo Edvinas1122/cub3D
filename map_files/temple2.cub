@@ -3,8 +3,8 @@ SO ./assets/textures/temple_textures/example.xpm
 WE ./assets/textures/temple_textures/example.xpm
 EA ./assets/textures/temple_textures/example.xpm
 
-F 80,80,64
-C 40,40,40
+F 50,50,40
+C 90,90,80
 
 1111111111
 1000000001

@@ -35,6 +35,8 @@ static int	validate_color_numbers(char	*number)
 		return (0);
 	while (number[i - 1])
 	{
+		if (number[i - 1] == ',' && number[i] == ',')
+			return (0);
 		if (!color_conditions(number, &ct, &i, &comma))
 			return (0);
 	}

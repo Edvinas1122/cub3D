@@ -39,8 +39,8 @@ int	file_to_heap(char *name, t_list ***file)
 	int		info;
 
 	fd = open(name, O_RDONLY);
-	if (!fd)
-		exit(0);
+	if (fd == -1)
+		return (0);
 	*file = ft_calloc(1, sizeof(t_list *));
 	info = 1;
 	while (info)
@@ -48,10 +48,12 @@ int	file_to_heap(char *name, t_list ***file)
 		info = read_line(fd, &row);
 		if (info == -1)
 		{
+			close(fd);
 			lst_clear_2(*file);
 			return (0);
 		}
 		ft_lstadd_back(*file, ft_lstnew(row));
 	}
+	close(fd);
 	return (1);
 }

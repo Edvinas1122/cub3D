@@ -97,6 +97,7 @@ typedef struct s_data
 	t_entity		**entity_arr;
 	double			scalefactor;
 	t_trigger		potion;
+	int				audio;
 }	t_data;
 
 typedef struct s_draw_sprite
