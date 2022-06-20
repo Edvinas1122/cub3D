@@ -36,8 +36,8 @@ static void	sprite_set_data(t_entity *sprite, t_vect vect, \
 static int	check_condition(t_entity *sprite, t_texture *images, double angle)
 {
 	if (sprite->on_screen.x + \
-		sprite->scale * images[sprite->id].width >= 0 && \
-		sprite->on_screen.x - sprite->scale * images[sprite->id].width < \
+		sprite->scale * images[0].width >= 0 && \
+		sprite->on_screen.x - sprite->scale * images[0].width < \
 			SCREEN_WIDTH && (angle * 180 / M_PI) > -90 && \
 		(angle * 180 / M_PI) < 90)
 		return (1);
