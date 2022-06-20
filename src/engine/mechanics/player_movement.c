@@ -34,6 +34,7 @@ static void	dash(t_data *data)
 
 	if (data->keys.key_space[0] == 1 && data->keys.key_space[1] == 0)
 	{
+		play_audio("./audio/jump.mp3", 1);
 		data->keys.key_space[1] = 1;
 		data->player.dash_cooldown = 30 * data->util.move_factor
 			/ MOVE_DISTANCE;

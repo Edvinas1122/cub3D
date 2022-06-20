@@ -4,13 +4,13 @@ static int	texture_name_ends(t_map_c *tmp)
 {
 	int	len;
 
-	len = ft_strlen(tmp->ea);
-	if (len < 5 || ft_strncmp(&tmp->ea[len - 4], ".xpm\0", 5))
+	len = ft_strlen(tmp->so);
+	if (len < 5 || ft_strncmp(&tmp->so[len - 4], ".xpm\0", 5))
 		return (0);
 	len = ft_strlen(tmp->no);
 	if (len < 5 || ft_strncmp(&tmp->no[len - 4], ".xpm\0", 5))
 		return (0);
-	len = ft_strlen(tmp->no);
+	len = ft_strlen(tmp->ea);
 	if (len < 5 || ft_strncmp(&tmp->ea[len - 4], ".xpm\0", 5))
 		return (0);
 	len = ft_strlen(tmp->we);

@@ -31,7 +31,6 @@ static void	set_sprite_images(t_data *data, t_list **file, int *img_ct)
 			destructor(data);
 		img.img_data = mlx_get_data_addr(img_header, &img.img_bp, \
 										&img.img_sl, &img.img_e);
-		printf("\n%s\n", img.img_data);
 		data->sprite_images[i].matx = create_color_matrix(\
 			data->sprite_images[i].height, data->sprite_images[i].width, &img);
 		data->sprite_images[i].img_header = img_header;

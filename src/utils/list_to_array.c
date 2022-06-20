@@ -1,14 +1,5 @@
 #include "utils.h"
 
-void	print_arr(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		printf("%s\n", str[i++]);
-}
-
 int	find_longest_line(t_list *lst)
 {
 	t_list	*node;
@@ -57,6 +48,5 @@ char	**list_to_array_offset(t_list *lst, int i)
 		i2++;
 		node = node->next;
 	}
-	print_arr(arr);
 	return (arr);
 }

@@ -47,7 +47,7 @@ void	open_cub_file(char *file_name, t_data *data)
 	if (!file_to_heap(file_name, &tmp.file))
 	{
 		ft_putstr_fd("File access error\n", 1);
-		// lst_clear_2(tmp.file);
+		//lst_clear_2(tmp.file);
 		destructor(data);
 	}
 	if (!validate_cub_file(tmp.file, &tmp))

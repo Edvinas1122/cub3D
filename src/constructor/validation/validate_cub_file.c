@@ -38,7 +38,7 @@ static int	validate_color_numbers(char	*number)
 		if (!color_conditions(number, &ct, &i, &comma))
 			return (0);
 	}
-	if (comma != 3)
+	if (comma != 3 || !ft_isdigit(number[i - 2]))
 		return (0);
 	return (1);
 }
