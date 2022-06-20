@@ -62,4 +62,6 @@ void	constructor(t_data *data, char **argv)
 	set_sprites(data, "./assets/sprite_info.ini");
 	data->player.dash_cooldown = 0;
 	data->scalefactor = (double)SCREEN_WIDTH / 1600;
+	data->potion.position.x = 150;
+	data->potion.position.y = 150;
 }

@@ -36,8 +36,8 @@ static void	sprite_set_data(t_entity *sprite, t_vect vect, \
 static int	check_condition(t_entity *sprite, t_texture *images, double angle)
 {
 	if (sprite->on_screen.x + \
-		sprite->scale * images[sprite->id].width >= 0 && \
-		sprite->on_screen.x - sprite->scale * images[sprite->id].width < \
+		sprite->scale * images[0].width >= 0 && \
+		sprite->on_screen.x - sprite->scale * images[0].width < \
 			SCREEN_WIDTH && (angle * 180 / M_PI) > -90 && \
 		(angle * 180 / M_PI) < 90)
 		return (1);
@@ -62,7 +62,7 @@ void	calculate_draw(t_draw_sprite *layer, t_data *data)
 		angle = find_angle_vecotrs(layer->sprite_vect, data->player.vect);
 		image = set_sprite_image(layer, data, i);
 		sprite_set_data(layer->entety_arr[i], layer->sprite_vect, data, angle);
-		if (check_condition(layer->entety_arr[i], layer->sprite_images, angle))
+		if (check_condition(layer->entety_arr[i], &image, angle))
 			draw_the_mother_ducking_sprite(data,
 				image, (*layer->entety_arr[i]));
 		i++;

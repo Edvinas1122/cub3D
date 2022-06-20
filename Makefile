@@ -21,7 +21,7 @@ DISPLAY_FILES := display.c minimap.c minimap_2.c raycast.c draw_vertical_line.c 
 				draw_floor_and_ceiling.c sprite_draw.c menu.c sprite_draw_calculate.c \
 				sprite_draw_single.c set_sprite_frame.c bigmap.c
 DISPLAY := $(addprefix display/,$(DISPLAY_FILES))
-MECHANICS_FILES := player_movement.c move_player.c movement_vector.c
+MECHANICS_FILES := player_movement.c move_player.c movement_vector.c triger_area.c
 MECHANICS := $(addprefix mechanics/,$(MECHANICS_FILES))
 ENGINE_FILES := engine.c $(DISPLAY) $(MECHANICS)
 ENGINE := $(addprefix engine/,$(ENGINE_FILES))
