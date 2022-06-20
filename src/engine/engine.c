@@ -55,6 +55,7 @@ int	engine(t_data *data)
 		data->count = 0;
 	set_time_stamp(data);
 	player_movement(data);
+	trigger_area(data);
 	update_doors(data);
 	render_display(data);
 	return (0);
