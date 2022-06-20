@@ -30,7 +30,7 @@ CONTROL := $(addprefix control/,$(CONTROL_FILES))
 UTIL_FILES := file_to_heap.c find_char.c ft_color.c len_func.c \
 				list_to_array.c match_str.c pixel_matrix.c delete_list.c \
 				math_functions.c game_mech.c fill_screen_color.c \
-				xpm_to_texture.c time.c math_functions2.c delocate.c
+				xpm_to_texture.c time.c math_functions2.c delocate.c ft_color_2.c
 UTIL := $(addprefix utils/,$(UTIL_FILES))
 # SRC subdirrectories #
 

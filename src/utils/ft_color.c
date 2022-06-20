@@ -66,14 +66,3 @@ t_color	dim_color(t_color color, double factor)
 	dimmed.b = color.b * factor;
 	return (dimmed);
 }
-
-// t_color	rotate_color(t_color color, double factor)
-// {
-// 	t_color	dimmed;
-
-// 	dimmed.a = 0;
-// 	dimmed.r = color.r * factor;
-// 	dimmed.g = color.g * factor;
-// 	dimmed.b = color.b * factor;
-// 	return (dimmed);
-// }

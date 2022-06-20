@@ -77,6 +77,7 @@ void	draw_vertical_line(t_data *data, t_raycast *raycast)
 		wall.txt_y = (int)(((double)texture.height - 1) * wall.y);
 		wall.color = *texture.matx[wall.txt_x][wall.txt_y];
 		wall.color = dim_color(wall.color, wall.dim);
+		wall.color = rotate_color(wall.color, data->count);
 		pixel_put(data->video.img_matrix, wall.color, \
 							raycast->v_line_ct, wall.iterator);
 		(wall.iterator)++;
