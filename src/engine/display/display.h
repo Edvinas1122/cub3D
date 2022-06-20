@@ -14,6 +14,7 @@ typedef struct s_texture		t_texture;
 typedef struct s_video			t_video;
 typedef struct s_mlx			t_mlx;
 typedef struct s_draw_sprite	t_draw_sprite;
+typedef struct s_utils			t_utils;
 
 typedef struct s_draw_ent
 {
@@ -132,4 +133,5 @@ void		calculate_draw(t_draw_sprite *layer, t_data *data);
 t_texture	set_sprite_image(t_draw_sprite *layer, t_data *data, int i);
 void		display_bigmap_background(t_texture bg, t_color ***img, double sf);
 void		draw_big_map(t_data *data);
+void	draw_player_big(t_color ***matx, t_vect pos, t_utils utils);
 #endif

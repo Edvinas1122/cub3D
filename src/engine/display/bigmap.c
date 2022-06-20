@@ -49,6 +49,28 @@ void	display_bigmap_background(t_texture bg, t_color ***img, double sf)
 	}
 }
 
+void	draw_player_big(t_color ***img, t_vect pos, t_utils utils)
+{
+	int	bmp_x;
+	int	bmp_y;
+	int	draw_x;
+	int	draw_y;
+	int	size;
+
+	size = 10 * utils.map_scale / 25;
+	bmp_x = pos.x / TILE_SIZE;
+	bmp_y = pos.y / TILE_SIZE;
+	draw_x = bmp_x * utils.map_scale + utils.map_offset_x;
+	draw_y = bmp_y * utils.map_scale + utils.map_offset_y;
+	draw_x += (utils.map_scale * fmod(pos.x, TILE_SIZE)) / TILE_SIZE;
+	draw_y += (utils.map_scale * fmod(pos.y, TILE_SIZE)) / TILE_SIZE;
+	draw_x -= size / 2;
+	draw_y -= size / 2;
+	for (int i = 0; i < size; i++)
+		for(int j = 0; j < size; j++)
+			pixel_put(img, utils.minimap[3], draw_x+i, draw_y+j);
+}
+
 void	draw_big_map(t_data *data)
 {
 	int	x;
