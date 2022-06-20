@@ -24,7 +24,6 @@ int	until_not_space(char *ptr)
 	int	i;
 
 	i = 0;
-
 	while (ptr[i] != ' ')
 		i++;
 	while (ptr[i] == ' ')
@@ -32,9 +31,8 @@ int	until_not_space(char *ptr)
 	return (i);
 }
 
-static int	check_for_convention(t_list *node, t_map_c *tmp)
+static int	check_for_textures(t_list *node, t_map_c *tmp)
 {
-
 	if (!ft_strncmp(node->content, "NO ", 3))
 	{
 		tmp->no = &(node->content)[until_not_space(node->content)];
@@ -55,6 +53,16 @@ static int	check_for_convention(t_list *node, t_map_c *tmp)
 		tmp->ea = &(node->content)[until_not_space(node->content)];
 		return (3);
 	}
+	return (-1);
+}
+
+static int	check_for_convention(t_list *node, t_map_c *tmp)
+{
+	int	ret;
+
+	ret = check_for_textures(node, tmp);
+	if (ret != -1)
+		return (ret);
 	if (!ft_strncmp(node->content, "F ", 2))
 	{
 		tmp->floor = &(node->content)[until_not_space(node->content)];
@@ -86,6 +94,20 @@ static int	figure_out_map_begin(t_list **file)
 	return (i);
 }
 
+static int	check_for_zeros(char *check_arr)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+	{
+		if (check_arr[i] == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 static int	texture_name_begins(t_list **file, t_map_c *tmp)
 {
 	t_list	*node;
@@ -108,14 +130,7 @@ static int	texture_name_begins(t_list **file, t_map_c *tmp)
 		node = node->next;
 		i++;
 	}
-	i = 0;
-	while (i < 6)
-	{
-		if (check_arr[i] == 0)
-			return (0);
-		i++;
-	}
-	return (1);
+	return (check_for_zeros(check_arr));
 }
 
 int	validate_info(t_list **file, t_map_c *tmp)
