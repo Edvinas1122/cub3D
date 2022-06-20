@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_cub_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:04:11 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:04:12 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "constructor.h"
 
 /* 
@@ -47,7 +59,6 @@ void	open_cub_file(char *file_name, t_data *data)
 	if (!file_to_heap(file_name, &tmp.file))
 	{
 		ft_putstr_fd("File access error\n", 1);
-		//lst_clear_2(tmp.file);
 		destructor(data);
 	}
 	if (!validate_cub_file(tmp.file, &tmp))

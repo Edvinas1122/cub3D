@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:12:19 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:13:13 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VALIDATION_H
 # define VALIDATION_H
 
@@ -53,6 +65,5 @@ int		figure_out_map_begin(t_list **file);
 */
 t_door	*get_doormap_line(char *map, t_door **doors, int *doorcount);
 t_door	**get_doormap(char	**map, t_door **doors);
-
 
 #endif

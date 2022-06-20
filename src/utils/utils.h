@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:06:45 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:17:49 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "../cube3d.h"
+# include "../cub3d.h"
 
 typedef struct s_vect		t_vect;
 typedef struct s_color		t_color;

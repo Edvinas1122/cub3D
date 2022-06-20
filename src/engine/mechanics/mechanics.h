@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mechanics.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:05:36 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:17:28 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MECHANICS_H
 # define MECHANICS_H
 
-# include "../../cube3d.h"
+# include "../../cub3d.h"
 
 typedef struct s_wall		t_wall;
 typedef struct s_intersect	t_intersect;

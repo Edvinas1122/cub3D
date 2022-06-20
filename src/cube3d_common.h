@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d_common.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:06:58 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:17:50 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUBE3D_COMMON_H
 # define CUBE3D_COMMON_H
 # define SCREEN_WIDTH 1600
 
-# include "cube3d.h"
+# include "cub3d.h"
 
 typedef struct s_door
 {

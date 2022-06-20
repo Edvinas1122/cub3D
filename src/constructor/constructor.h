@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   constructor.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:03:09 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:17:14 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONSTRUCTOR_H
 # define CONSTRUCTOR_H
 
-# include "../cube3d.h"
+# include "../cub3d.h"
 # include "validation/validation.h"
 
 typedef struct s_vect		t_vect;

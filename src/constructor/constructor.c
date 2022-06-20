@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   constructor.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:02:58 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:03:00 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "constructor.h"
 
 /*
@@ -62,7 +74,7 @@ void	constructor(t_data *data, char **argv)
 	data->util = set_utils(data);
 	set_sprites(data, "./assets/sprite_info.ini");
 	data->player.dash_cooldown = 0;
-	data->potion.position.x = 150;
-	data->potion.position.y = 150;
+	data->potion.position.x = 486;
+	data->potion.position.y = 242;
 	data->audio = 1;
 }

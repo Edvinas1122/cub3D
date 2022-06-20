@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   control.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:04:28 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:17:09 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONTROL_H
 # define CONTROL_H
 
-# include "../cube3d.h"
+# include "../cub3d.h"
 
 typedef struct s_vect		t_vect;
 typedef struct s_color		t_color;

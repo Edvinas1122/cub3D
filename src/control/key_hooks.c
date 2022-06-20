@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:04:31 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:13:56 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "control.h"
 
 static void	*get_action_function(int keycode, t_data *data)
@@ -20,7 +32,7 @@ static void	*get_action_function(int keycode, t_data *data)
 		return (&rotate_player_right);
 	if (keycode == 48)
 		return (&pop_minimap);
-	if (keycode == 34)
+	if (keycode == 35)
 		return (&menu_pop);
 	if (keycode == 53)
 		return (&close_win);
@@ -34,8 +46,6 @@ int	player_action(int keycode, t_data *data)
 	action = get_action_function(keycode, data);
 	if (action)
 		action(data);
-	if (keycode == 35)
-		printf("\nPlayer position x: %f\nPlayer position y: %f\n", data->player.pos.x, data->player.pos.y);
 	return (0);
 }
 

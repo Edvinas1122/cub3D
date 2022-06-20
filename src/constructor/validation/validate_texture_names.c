@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_texture_names.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/20 23:12:16 by emomkus           #+#    #+#             */
+/*   Updated: 2022/06/20 23:12:59 by emomkus          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "validation.h"
 
 static int	texture_name_ends(t_map_c *tmp)
@@ -18,8 +30,6 @@ static int	texture_name_ends(t_map_c *tmp)
 		return (0);
 	return (1);
 }
-
-
 
 static int	check_for_zeros(char *check_arr)
 {
