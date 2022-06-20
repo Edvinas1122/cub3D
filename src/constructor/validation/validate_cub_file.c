@@ -43,24 +43,11 @@ static int	validate_color_numbers(char	*number)
 	return (1);
 }
 
-static int	validate_colors(t_list **file, t_map_c *tmp)
+static int	validate_colors(t_map_c *tmp)
 {
-	t_list	*node;
-
-	node = (*file)->next->next->next->next->next;
-	if (ft_strncmp(node->content, "F ", 2))
-		return (0);
-	tmp->floor = &(node->content)[2];
 	if (!validate_color_numbers(tmp->floor))
 		return (0);
-	node = node->next;
-	if (ft_strncmp(node->content, "C ", 2))
-		return (0);
-	tmp->ceiling = &(node->content)[2];
 	if (!validate_color_numbers(tmp->ceiling))
-		return (0);
-	node = node->next;
-	if (ft_strncmp(node->content, "\0\0", 2))
 		return (0);
 	return (1);
 }
@@ -87,6 +74,22 @@ int	count_doors(char **map)
 	return (count);
 }
 
+static int	figure_out_map_begin(t_list **file)
+{
+	int		i;
+	t_list	*node;
+
+	node = *file;
+	i = 0;
+	while (node && !(!ft_strncmp(node->content, "1", 1)
+			|| !ft_strncmp(node->content, " ", 1)))
+	{
+		node = node->next;
+		i++;
+	}
+	return (i);
+}
+
 /* 
 	Validates cub file for defined standart
 	Returns temporary pointers for capturing
@@ -94,17 +97,17 @@ int	count_doors(char **map)
 */
 int	validate_cub_file(t_list **file, t_map_c *tmp)
 {
-	if (!validate_texture_names(file, tmp))
+	if (!validate_info(file, tmp))
 	{
-		ft_putstr_fd("Invalid texture convention\n", 1);
+		ft_putstr_fd("Invalid info convention\n", 1);
 		return (0);
 	}
-	if (!validate_colors(file, tmp))
+	if (!validate_colors(tmp))
 	{
 		ft_putstr_fd("Invalid color convention\n", 1);
 		return (0);
 	}
-	tmp->map = list_to_array_offset(*file, 8);
+	tmp->map = list_to_array_offset(*file, figure_out_map_begin(file));
 	if (!validate_map(tmp->map))
 		return (0);
 	tmp->doors = ft_calloc(sizeof(t_door *), count_doors(tmp->map) + 1);

@@ -34,7 +34,7 @@ int		validate_cub_file(t_list **file, t_map_c *tmp);
 	validate_cub_file members
 */
 int		validate_map(char **map);
-int		validate_texture_names(t_list **file, t_map_c *tmp);
+int		validate_info(t_list **file, t_map_c *tmp);
 
 /*
 	validate_map members
