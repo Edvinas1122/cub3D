@@ -79,6 +79,6 @@ void	display_minimap(t_data *data)
 		display_bigmap_background(data->util.bigmap_background, \
 									data->video.img_matrix, data->scalefactor);
 		draw_big_map(data);
-		draw_player_big(data->video.img_matrix, data->player.pos, data->util);
+		draw_player_big(data, data->player.pos);
 	}
 }

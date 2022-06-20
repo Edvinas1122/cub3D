@@ -49,7 +49,27 @@ void	display_bigmap_background(t_texture bg, t_color ***img, double sf)
 	}
 }
 
-void	draw_player_big(t_color ***img, t_vect pos, t_utils utils)
+void	draw_player_box(t_data *data, int x, int y)
+{
+	int	size;
+	int	i;
+	int	j;
+
+	i = x;
+	size = 10 * data->util.map_scale / 25;
+	while (i < size + x)
+	{
+		j = y;
+		while (j < size + y)
+		{
+			pixel_put(data->video.img_matrix, data->util.minimap[3], i, j);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_player_big(t_data *data, t_vect pos)
 {
 	int	bmp_x;
 	int	bmp_y;
@@ -57,18 +77,16 @@ void	draw_player_big(t_color ***img, t_vect pos, t_utils utils)
 	int	draw_y;
 	int	size;
 
-	size = 10 * utils.map_scale / 25;
+	size = 10 * data->util.map_scale / 25;
 	bmp_x = pos.x / TILE_SIZE;
 	bmp_y = pos.y / TILE_SIZE;
-	draw_x = bmp_x * utils.map_scale + utils.map_offset_x;
-	draw_y = bmp_y * utils.map_scale + utils.map_offset_y;
-	draw_x += (utils.map_scale * fmod(pos.x, TILE_SIZE)) / TILE_SIZE;
-	draw_y += (utils.map_scale * fmod(pos.y, TILE_SIZE)) / TILE_SIZE;
+	draw_x = bmp_x * data->util.map_scale + data->util.map_offset_x;
+	draw_y = bmp_y * data->util.map_scale + data->util.map_offset_y;
+	draw_x += (data->util.map_scale * fmod(pos.x, TILE_SIZE)) / TILE_SIZE;
+	draw_y += (data->util.map_scale * fmod(pos.y, TILE_SIZE)) / TILE_SIZE;
 	draw_x -= size / 2;
 	draw_y -= size / 2;
-	for (int i = 0; i < size; i++)
-		for(int j = 0; j < size; j++)
-			pixel_put(img, utils.minimap[3], draw_x+i, draw_y+j);
+	draw_player_box(data, draw_x, draw_y);
 }
 
 void	draw_big_map(t_data *data)
