@@ -3,9 +3,15 @@
 void	pop_minimap(t_data *data)
 {
 	if (data->util.minimap_state == 1)
+	{
+		play_audio("./audio/paper.wav", 1);
 		data->util.minimap_state = 2;
+	}
 	else
+	{
+		play_audio("./audio/put.wav", 1);
 		data->util.minimap_state = 1;
+	}
 }
 
 void	toggle_door(t_data *data)
