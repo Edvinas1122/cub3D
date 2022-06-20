@@ -33,7 +33,7 @@ static void	set_sprite_images(t_data *data, t_list **file, int *img_ct)
 										&img.img_sl, &img.img_e);
 		printf("\n%s\n", img.img_data);
 		data->sprite_images[i].matx = create_color_matrix(\
-			data->sprite_images[i].width, data->sprite_images[i].height, &img);
+			data->sprite_images[i].height, data->sprite_images[i].width, &img);
 		data->sprite_images[i].img_header = img_header;
 		row = row->next;
 		i++;
@@ -105,7 +105,7 @@ void	set_sprites(t_data *data, char *sprite_ini)
 	file = open_sprite_ini(&data->sprite_images, sprite_ini);
 	set_sprite_images(data, file, &image_ct);
 	set_animation_sprites(data, file);
-	data->entity = set_entities(data->scalefactor ,file, image_ct);
+	data->entity = set_entities(data->scalefactor, file, image_ct);
 	data->entity_arr = ft_calloc(sizeof(t_entity *),
 			data->entity->obj_count + 1);
 	data->util.soundtrack = set_soundtrack(file);

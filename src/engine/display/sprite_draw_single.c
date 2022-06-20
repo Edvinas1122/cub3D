@@ -52,7 +52,7 @@ void	mother_ducking_drawer(t_data *data, t_draw_entity draw, double dist, \
 		if (draw.xstart + x >= 0 && draw.xstart + x < SCREEN_WIDTH && \
 			data->map.z_buffer[draw.xstart + x] > dist)
 			draw_the_mother_ducking_line(data->video.img_matrix,
-											draw, x, matx);
+				draw, x, matx);
 		x++;
 	}
 }
