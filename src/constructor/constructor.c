@@ -58,8 +58,8 @@ void	constructor(t_data *data, char **argv)
 	open_cub_file(argv[1], data);
 	data->video = set_video_window(data->mlx);
 	data->player = set_player(data->map.bit_map, TILE_SIZE);
+	data->scalefactor = (double)SCREEN_WIDTH / 1600;
 	data->util = set_utils(data);
 	set_sprites(data, "./assets/sprite_info.ini");
 	data->player.dash_cooldown = 0;
-	data->scalefactor = (double)SCREEN_WIDTH / 1600;
 }
