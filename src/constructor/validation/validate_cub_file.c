@@ -76,22 +76,6 @@ int	count_doors(char **map)
 	return (count);
 }
 
-static int	figure_out_map_begin(t_list **file)
-{
-	int		i;
-	t_list	*node;
-
-	node = *file;
-	i = 0;
-	while (node && !(!ft_strncmp(node->content, "1", 1)
-			|| !ft_strncmp(node->content, " ", 1)))
-	{
-		node = node->next;
-		i++;
-	}
-	return (i);
-}
-
 /* 
 	Validates cub file for defined standart
 	Returns temporary pointers for capturing

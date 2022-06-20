@@ -41,8 +41,6 @@ void	destructor(t_data *data)
 		free(data->util.soundtrack);
 	if (data->mlx.win)
 		mlx_destroy_window(data->mlx.ptr, data->mlx.win);
-	// if (data->mlx.ptr)
-	// 	free(data->mlx.ptr);
 	if (data->audio)
 		end_audio();
 	exit(0);
