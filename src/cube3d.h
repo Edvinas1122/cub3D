@@ -72,6 +72,12 @@ typedef struct s_keypress
 	char	key_space[2];
 }	t_keypress;
 
+typedef struct s_trigger
+{
+	t_vect	position;
+	int		status;
+}	t_trigger;
+
 /*
 	Main data stack segment
 */
@@ -90,6 +96,7 @@ typedef struct s_data
 	t_entity		*entity;
 	t_entity		**entity_arr;
 	double			scalefactor;
+	t_trigger		potion;
 }	t_data;
 
 typedef struct s_draw_sprite

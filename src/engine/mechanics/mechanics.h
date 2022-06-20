@@ -16,4 +16,5 @@ typedef struct s_mlx		t_mlx;
 
 void	set_movement_vector(t_data *data);
 void	unset_movement_vector(t_data *data);
+void	trigger_area(t_data *data);
 #endif
