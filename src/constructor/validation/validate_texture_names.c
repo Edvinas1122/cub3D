@@ -101,7 +101,7 @@ static int	texture_name_begins(t_list **file, t_map_c *tmp)
 	while (i < size)
 	{
 		value = check_for_convention(node, tmp);
-		if (value == -1)
+		if (value == -1 || check_arr[value] == 1)
 			return (0);
 		if (value != 6)
 			check_arr[value] = 1;
