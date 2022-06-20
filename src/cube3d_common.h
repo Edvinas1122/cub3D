@@ -1,6 +1,6 @@
 #ifndef CUBE3D_COMMON_H
 # define CUBE3D_COMMON_H
-# define SCREEN_WIDTH 1600
+# define SCREEN_WIDTH 800
 
 # include "cube3d.h"
 
