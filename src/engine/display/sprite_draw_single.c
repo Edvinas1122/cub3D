@@ -25,7 +25,7 @@ void	color_the_mother_ducking_pixel(t_color ***img, int x, int y, \
 }
 
 void	draw_the_mother_ducking_line(t_color ***img, t_draw_entity draw, \
-													int x, t_color ***matx, t_data *data)
+										int x, t_color ***matx)
 {
 	int	y;
 
@@ -35,7 +35,6 @@ void	draw_the_mother_ducking_line(t_color ***img, t_draw_entity draw, \
 		if (draw.ystart + y >= 0 && draw.ystart + y < SCREEN_HEIGHT)
 		{
 			draw.color = (*matx[(int)(x / draw.sf)][(int)(y / draw.sf)]);
-			draw.color = rotate_color(draw.color, data->count);
 			color_the_mother_ducking_pixel(img, x, y, draw);
 		}
 		y++;
@@ -52,7 +51,8 @@ void	mother_ducking_drawer(t_data *data, t_draw_entity draw, double dist, \
 	{
 		if (draw.xstart + x >= 0 && draw.xstart + x < SCREEN_WIDTH && \
 			data->map.z_buffer[draw.xstart + x] > dist)
-			draw_the_mother_ducking_line(data->video.img_matrix, draw, x, matx, data);
+			draw_the_mother_ducking_line(data->video.img_matrix,
+											draw, x, matx);
 		x++;
 	}
 }

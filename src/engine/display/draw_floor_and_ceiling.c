@@ -13,9 +13,9 @@ void	draw_floor_and_ceiling(t_data *data)
 	{	
 		dimfactor = get_dim_factor_2(ycount);
 		floor = dim_color(data->map.floor, dimfactor);
-		floor = rotate_color(floor, data->count);
+		floor = rotate_color(data, floor, data->count);
 		ceiling = dim_color(data->map.ceiling, dimfactor);
-		ceiling = rotate_color(ceiling, data->count);
+		ceiling = rotate_color(data, ceiling, data->count);
 		xcount = 0;
 		while (xcount < SCREEN_WIDTH)
 		{

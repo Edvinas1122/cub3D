@@ -42,7 +42,6 @@ int			file_to_heap(char *name, t_list ***file);
 */
 t_color		string_to_color(char *str);
 t_color		set_color(int a, int r, int g, int b);
-t_color		rotate_color(t_color color, double angle);
 t_color		dim_color(t_color color, double factor);
 t_color		***create_pixel_matrix(char *img_data, int width, int height);
 void		color_the_matrix(t_color ***img_matrix, int r, int g, int b);
@@ -69,4 +68,5 @@ int			check_if_solid(t_data *data, t_vect point);
 int			check_if_solid_around(t_data *data, t_vect point);
 int			check_door(t_data *data, t_vect point, int direction);
 long long	set_time(void);
+t_color		rotate_color(t_data *data, t_color color, double angle);
 #endif
