@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:02:58 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:03:00 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 11:28:40 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static t_vect	set_player_vector(char **bit_map, char *directions)
 	if (*c == 'N')
 		dir.y = -1;
 	else if (*c == 'W')
-		dir.x = 1;
+		dir.x = -1;
 	else if (*c == 'S')
 		dir.y = 1;
 	else if (*c == 'E')
-		dir.x = -1;
+		dir.x = 1;
 	return (dir);
 }
 
