@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:07:01 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:19:02 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:00:27 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc < 2)
+	if (argc != 2)
 	{
-		ft_putstr_fd("No map input", 1);
+		ft_putstr_fd("Wrong input\n", 1);
 		return (0);
 	}
 	constructor(&data, argv);
