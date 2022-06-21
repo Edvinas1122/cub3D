@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:06:45 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:17:49 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:41:04 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_mlx		t_mlx;
 /*
 	String functions
 */
-void		compare_to_str(char c, char *valid_char);
 int			compare_to_str2(char c, char *valid_char);
 t_vect		find_char_cordinates(char **map, char *c);
 char		*find_char(char **map, char *c);
@@ -45,7 +44,7 @@ char		**list_to_array_offset(t_list *lst, int i);
 void		delete_list_node(void *lst);
 void		lst_clear_2(t_list **list);
 /*
-	Parce functios
+	Parse functions
 */
 int			file_to_heap(char *name, t_list ***file);
 

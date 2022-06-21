@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:12:11 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:12:12 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:30:51 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static int	doors_enclosed_check(char **map)
 /* 
 	Validates map segment of a file for all required criteria 
 */
-// TODO: invalidate doors that aren't enclosed by walls
 int	validate_map(char **map)
 {
 	if (!valid_map_characters(map, "210NWESD "))

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:05:45 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:19:33 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:37:22 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mechanics.h"
 
 /*
-	Controls colision
+	Controls collision
 */
 static void	collisios_slide(t_data *data)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:12:19 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:13:13 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:31:07 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_video		t_video;
 typedef struct s_mlx		t_mlx;
 typedef struct s_door		t_door;
 /*
-	Temporary data, relarted to a validation process
+	Temporary data, related to a validation process
 */
 typedef struct s_map_c
 {

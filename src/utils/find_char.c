@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:06:08 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:06:09 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:38:11 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	find_char_in_row(char *row, char *c)
 
 /*
 	Finds character in an array and returns it's
-	cordinate representation.
+	coordinate representation.
 */
 t_vect	find_char_cordinates(char **map, char *c)
 {

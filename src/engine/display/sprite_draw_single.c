@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_draw_single.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:05:29 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:05:30 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:36:49 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

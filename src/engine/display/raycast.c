@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:05:19 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:05:20 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:35:51 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	raycast_constructor(t_raycast *raycast, t_data *data)
 }
 
 /*
-	Ussing raycast technique draws a display image of "walls" "ceiling" 
+	Using raycast technique draws a display image of "walls" "ceiling" 
 	"floor" in FOV loop iterates for every vertical line in screen width plane
 */
 void	render_fov_view(t_data *data)

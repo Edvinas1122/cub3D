@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kmeixner <konstantin.meixner@freenet.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:04:48 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:17:32 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:35:25 by kmeixner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,16 @@ typedef struct s_wall
 	int		txt_y;
 }	t_wall;
 
-// Konstantin comment here
 /**
- @param angle -
- @param dist_to_vert @param dist_to_hor -
- @param vert_factor @param hor_factor -
+ @param angle			angle of direction vector in relation to x axis
+ @param dist_to_vert	distance in direction of vector 
+ 						between two vertical intersections
+ @param dist_to_hor		distance in direction of vector
+						between two horizontal intersections
+ @param vert_factor 	factor to compensate dist_to_vert for
+						player position
+ @param hor_factor		factor to compensate dist_to_hor for
+						player position
 */
 typedef struct s_intersect
 {
