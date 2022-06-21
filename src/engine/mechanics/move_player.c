@@ -6,11 +6,11 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:05:39 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:05:40 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/20 23:19:45 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cube3d.h"
+#include "mechanics.h"
 
 void	move_forward(t_data *data)
 {

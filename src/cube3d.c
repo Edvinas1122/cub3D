@@ -6,11 +6,11 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:07:01 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:07:02 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/20 23:19:02 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static void	control_hooks(t_data *data)
 {

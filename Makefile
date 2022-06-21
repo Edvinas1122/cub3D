@@ -37,7 +37,7 @@ UTIL := $(addprefix utils/,$(UTIL_FILES))
 SRC_FILES	:= cube3d.c audio.c $(CONSTRUCTOR) $(ENGINE) $(CONTROL) $(UTIL)
 SRCDIR		:= src/
 SRC			:= $(addprefix $(SRCDIR),$(SRC_FILES))
-NAME		:= cube3d
+NAME		:= cub3d
 LIBFT		:= $(SRCDIR)libs/libft/libft.a
 
 ifeq ($(shell uname -s),Darwin)

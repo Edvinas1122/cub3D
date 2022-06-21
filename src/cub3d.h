@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:06:55 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:15:24 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/21 00:41:02 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # include "engine/display/display.h"
 # include "engine/mechanics/mechanics.h"
 
-# define SCREEN_WIDTH 1600
-# define SCREEN_HEIGHT 900
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 480
 # define MOVE_DISTANCE 6
 # define TILE_SIZE 100
 # define FOV 90
@@ -108,6 +108,7 @@ typedef struct s_data
 	t_entity		*entity;
 	t_entity		**entity_arr;
 	double			scalefactor;
+	int				audio;
 	t_trigger		potion;
 }	t_data;
 

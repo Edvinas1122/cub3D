@@ -6,11 +6,11 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:06:52 by emomkus           #+#    #+#             */
-/*   Updated: 2022/06/20 23:06:53 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/06/20 23:18:59 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 #ifdef BONUS
 
