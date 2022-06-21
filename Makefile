@@ -41,7 +41,7 @@ NAME		:= cub3d
 LIBFT		:= $(SRCDIR)libs/libft/libft.a
 
 ifeq ($(shell uname -s),Darwin)
-	LBMLX	:= $(SRCDIR)libs/mlx/libmlx.a
+	LBMLX	:= $(SRCDIR)libs/mlx_Darwin/libmlx.a
 	LIBS	:= -Lsrc/libs/mlx -framework OpenGL -framework AppKit
 else
 	LBMLX	:= $(SRCDIR)libs/mlx/libmlx_Linux.a
@@ -52,14 +52,17 @@ all: $(NAME)
 
 re: clean $(NAME)
 
-$(NAME): $(LIBFT) $(SRC)
+$(NAME): $(LIBFT) $(LBMLX) $(SRC)
 	$(CC) $(CFLAGS) $(SRC) $(LBMLX) $(LIBS) $(LIBFT) -o $(NAME)
 
-bonus: $(LIBFT) $(SRC)
+bonus: $(LIBFT) $(LBMLX) $(SRC)
 	$(CC) $(CFLAGS) $(AU_FLAG) $(SRC) $(LBMLX) $(LIBS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
-	make -C $(SRCDIR)libs/libft/
+	make bonus -C $(SRCDIR)libs/libft/
+
+$(LBMLX):
+	make -C $(SRCDIR)libs/mlx_Darwin/
 
 $(OBJ): $(SRC)
 	$(CC) $(CFLAGS) -c $(SRC)
@@ -67,5 +70,8 @@ $(OBJ): $(SRC)
 clean:
 	rm -f $(NAME)
 
-fclean: clean
+fclean: clean cleanlibs
 
+cleanlibs:
+	make fclean -C $(SRCDIR)libs/libft/
+	make clean -C $(SRCDIR)libs/mlx_Darwin/
