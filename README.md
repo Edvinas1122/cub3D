@@ -10,7 +10,7 @@ The gameplay itself is minimal, serving as a demonstration of ray-casting. It fe
 
 ## Game Map File Parsing
 
-The game parses a .cub file, which represents the walkable labyrinth and texture images. The file structure is as follows:
+The game parses a .cub file, which represents the walkable labyrinth, texture images, ground and ceiling color. The file structure is as follows:
 
 <img src="https://raw.githubusercontent.com/Edvinas1122/Edvinas1122/main/cub3D_42_emomkus_2.png" alt="cub3D_map_img" width="35%"/>
 
