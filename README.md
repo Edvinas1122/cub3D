@@ -4,9 +4,13 @@ Project writen in C. Research of Raycasting and handling Windowing library (inte
 
 ![Alt text](https://raw.githubusercontent.com/Edvinas1122/Edvinas1122/main/cub3D_42_emomkus.png)
 
-## Game Play
+## Gameplay
 
-Game parses .cub file which represents map walkable labyrinth and texture images which looks like this:
+The gameplay itself is minimal, serving as a demonstration of ray-casting. It features a walkable labyrinth that has a treasure at the end of the map, doors to unlock, and non-interactive animated characters.
+
+## Game Map File Parsing
+
+The game parses a .cub file, which represents the walkable labyrinth and texture images. The file structure is as follows:
 
 <img src="https://raw.githubusercontent.com/Edvinas1122/Edvinas1122/main/cub3D_42_emomkus_2.png" alt="cub3D_map_img" width="35%"/>
 
