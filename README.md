@@ -7,7 +7,8 @@ Project writen in C. Research of Raycasting and handling Windowing library (inte
 ## Game Play
 
 Game parses .cub file which represents map walkable labyrinth and texture images which looks like this:
-![Alt text](https://raw.githubusercontent.com/Edvinas1122/Edvinas1122/main/cub3D_42_emomkus_2.png)
+
+<img src="https://raw.githubusercontent.com/Edvinas1122/Edvinas1122/main/cub3D_42_emomkus_2.png" alt="cub3D_map_img" width="50%"/>
 
 ## Ray Casting
 
