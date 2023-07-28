@@ -2,7 +2,7 @@
 
 Project writen in C. Research of Raycasting and handling Windowing library (interupts, non-blocking visual loops).
 
-![Alt text](https://raw.githubusercontent.com/Edvinas1122/Edvinas1122/main/cub3D_42_emomkus.png)
+[![Watch the video](https://raw.githubusercontent.com/Edvinas1122/Edvinas1122/main/cub3D_42_emomkus.png)](https://youtu.be/8i2RFJLr1N8)
 
 ## Gameplay
 
